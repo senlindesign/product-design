@@ -1,0 +1,17 @@
+{
+  "name": "product-design",
+  "owner": {
+    "name": "senlindesign",
+    "url": "https://github.com/senlindesign"
+  },
+  "metadata": {
+    "description": "The product-design skill for Claude Code: marketing website pages built from real product design research."
+  },
+  "plugins": [
+    {
+      "name": "product-design",
+      "source": "./",
+      "description": "Marketing website pages that make real design decisions: 8 page types, 10 sections, 4 visual styles, light and dark."
+    }
+  ]
+}

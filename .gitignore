@@ -1,0 +1,19 @@
+.DS_Store
+.claude/
+
+# Local tool output
+.playwright-mcp/
+evals/runs/
+
+# Ad-hoc screenshots of validation pages (local only)
+validation/screenshots/
+
+# Image-generation working files
+Readme/
+output/
+
+# Internal: kept locally, never published
+CLAUDE.md
+docs/*.md
+research/
+validation/

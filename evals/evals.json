@@ -1,0 +1,615 @@
+{
+  "skill_name": "product-design",
+  "evals": [
+    {
+      "id": 1,
+      "name": "landing-minimal-dark-developers",
+      "smoke": false,
+      "prompt": "/product-design landing minimal dark\nPipewise — a data pipeline tool. Visitors are developers who already know the category and just want to try it. Goal: start a free trial. We have no customer quotes, logos, or usage numbers yet.",
+      "expected_output": "A short developer-focused landing page in Minimal dark: hero with a product visual, features, a direct trial CTA. No testimonials, customer logos, or stats.",
+      "files": [],
+      "expectations": [
+        "The page is short: hero, features, and a call to action, with nothing that slows a developer down",
+        "The CTA asks for a free trial",
+        "There are no testimonials, customer logos, or usage numbers",
+        "Visuals follow Minimal dark: achromatic, zero shadow, sharp 2px buttons"
+      ],
+      "checks": {
+        "page": "landing",
+        "style": "minimal",
+        "theme": "dark",
+        "archetype": [
+          "A",
+          "C"
+        ],
+        "sections_required": [
+          "nav",
+          "hero",
+          "features",
+          "cta",
+          "footer"
+        ],
+        "sections_forbidden": [
+          "social-proof",
+          "logo-wall",
+          "stats"
+        ],
+        "max_content_sections": 5,
+        "text_required": [
+          "Pipewise"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "name": "landing-minimal-light-it-directors",
+      "smoke": true,
+      "prompt": "/product-design landing minimal\nPipewise — a data pipeline tool. Visitors are IT directors who have never heard of this category and worry about security. Goal: book a demo. We have no customer testimonials yet.",
+      "expected_output": "Same product as case 1, different visitors: the page explains the problem, shows how it works, addresses security, answers questions, and asks for a demo. No testimonials.",
+      "files": [],
+      "expectations": [
+        "The page explains the problem before listing features",
+        "There is a how-it-works section and a section that addresses security",
+        "The CTA asks for a demo, not a self-serve trial",
+        "There are no testimonials or customer logos",
+        "The structure is clearly different from case 1"
+      ],
+      "checks": {
+        "page": "landing",
+        "style": "minimal",
+        "theme": "light",
+        "archetype": [
+          "A",
+          "B"
+        ],
+        "sections_required": [
+          "nav",
+          "hero",
+          "how-it-works",
+          "cta",
+          "footer"
+        ],
+        "sections_recommended": [
+          "problem",
+          "security",
+          "faq"
+        ],
+        "sections_forbidden": [
+          "social-proof"
+        ],
+        "text_required": [
+          "Pipewise",
+          "demo"
+        ],
+        "sections_must_be_sample": [
+          "logo-wall",
+          "stats"
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "name": "pricing-business-dark-agency",
+      "smoke": true,
+      "prompt": "/product-design pricing business dark\nIt's for Ledgerline, invoice automation for small creative agencies. Audience: agency owners, not finance people. Main barrier: they worry it'll be complicated to switch from spreadsheets. We have no customer testimonials yet. Plans: Starter $19/mo, Studio $49/mo, Agency $129/mo.",
+      "expected_output": "A Business-style dark pricing page with three tiers at the given prices, something that answers the switching worry, and no invented proof, annual discounts, or 'Most Popular' claims.",
+      "files": [],
+      "expectations": [
+        "Three tiers show exactly $19, $49 and $129 per month",
+        "The page addresses the worry about switching from spreadsheets",
+        "There is no billing toggle or annual discount, because no annual prices were given",
+        "No tier is labeled 'Most Popular'",
+        "Visuals follow Business dark: Plus Jakarta Sans, 8px buttons, inset-ring cards"
+      ],
+      "checks": {
+        "page": "pricing",
+        "style": "business",
+        "theme": "dark",
+        "archetype": [
+          "A"
+        ],
+        "sections_required": [
+          "nav",
+          "pricing",
+          "footer"
+        ],
+        "sections_recommended": [
+          "how-it-works",
+          "faq"
+        ],
+        "sections_forbidden": [
+          "social-proof",
+          "billing-toggle"
+        ],
+        "text_required": [
+          "Ledgerline",
+          "$19",
+          "$49",
+          "$129"
+        ],
+        "text_forbidden": [
+          "Most Popular"
+        ],
+        "regex_forbidden": [
+          "(?i)save \\d+ ?%"
+        ],
+        "sections_must_be_sample": [
+          "stats",
+          "logo-wall"
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "name": "blog-editorial-dark-expert",
+      "smoke": false,
+      "prompt": "/product-design blog editorial dark\nBlog index for Fieldnotes, the research publication of a small applied-AI lab. Use archetype B (Editorial). No newsletter section. Six articles: \"Why retrieval beats fine-tuning for most teams\" (Research), \"Evaluating agents without a leaderboard\" (Research), \"What we got wrong about context windows\" (Essays), \"A field guide to prompt caching\" (Engineering), \"Notes from shipping a voice agent\" (Engineering), \"The case for boring infrastructure\" (Essays). Featured: the retrieval article.",
+      "expected_output": "An Editorial dark blog index in archetype B: the retrieval article featured, the other five in a mixed grid, category filters, no newsletter, no pagination for six articles.",
+      "files": [],
+      "expectations": [
+        "Archetype B is used, as requested",
+        "The retrieval article is featured; all six titles appear",
+        "There is no newsletter section and no pagination",
+        "Clicking a category filter does not make the page jump",
+        "Headlines use the Editorial serif; the accent is teal"
+      ],
+      "checks": {
+        "page": "blog",
+        "style": "editorial",
+        "theme": "dark",
+        "archetype": [
+          "B"
+        ],
+        "sections_required": [
+          "nav",
+          "featured",
+          "articles",
+          "footer"
+        ],
+        "sections_forbidden": [
+          "newsletter",
+          "pagination"
+        ],
+        "text_required": [
+          "Fieldnotes",
+          "Why retrieval beats fine-tuning for most teams",
+          "The case for boring infrastructure"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "name": "landing-colorful-dark-oneliner",
+      "smoke": false,
+      "prompt": "/product-design landing colorful dark\nPatchwork — a shared moodboard app for small design studios.",
+      "expected_output": "A Colorful dark landing page built from one sentence: no questions asked, a creative-tool layout, copy inferred from the sentence, missing proof filled with tagged sample content, nothing presented as a real fact.",
+      "files": [],
+      "expectations": [
+        "No questions were asked before the page was generated",
+        "The layout suits a creative tool",
+        "The page is complete: evidence sections are present, filled with sample content marked data-sample",
+        "Every sample item is listed in the QA report",
+        "The delivery note offers the next level of detail"
+      ],
+      "checks": {
+        "page": "landing",
+        "style": "colorful",
+        "theme": "dark",
+        "archetype": [
+          "D"
+        ],
+        "sections_required": [
+          "nav",
+          "hero",
+          "cta",
+          "footer"
+        ],
+        "sections_any_of": [
+          [
+            "features",
+            "feature-showcase",
+            "how-it-works"
+          ]
+        ],
+        "text_required": [
+          "Patchwork"
+        ],
+        "sections_must_be_sample": [
+          "social-proof",
+          "logo-wall",
+          "stats"
+        ],
+        "sections_recommended": [
+          "social-proof"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "name": "about-editorial-light-bare",
+      "smoke": false,
+      "prompt": "/product-design about editorial",
+      "expected_output": "An Editorial About page generated with no information at all: default archetype, missing material filled with finished-looking sample content tagged data-sample and listed in the QA report.",
+      "files": [],
+      "expectations": [
+        "A complete page was generated without asking for the company name",
+        "Missing material (team, story, values) is filled with finished-looking sample content, marked data-sample and listed in the QA report",
+        "No sample content is presented as a real fact without data-sample",
+        "The page looks complete and polished, not empty"
+      ],
+      "checks": {
+        "page": "about",
+        "style": "editorial",
+        "theme": "light",
+        "archetype": [
+          "A"
+        ],
+        "sections_required": [
+          "nav",
+          "footer"
+        ],
+        "sections_any_of": [
+          [
+            "hero",
+            "page-header"
+          ]
+        ],
+        "sections_must_be_sample": [
+          "stats",
+          "timeline",
+          "social-proof"
+        ],
+        "sections_recommended": [
+          "team",
+          "values"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "name": "hero-business-section",
+      "smoke": true,
+      "prompt": "/product-design hero business\nFor Relay, a shared inbox for customer-support teams of 5–50 people.",
+      "expected_output": "Just a hero section in Business style, standalone: no nav or footer, a product visual of a shared inbox, no customer logos.",
+      "files": [],
+      "expectations": [
+        "Only the hero is produced — no nav, no footer",
+        "The product visual looks like a shared inbox",
+        "Buttons use Business values (16px, 12px 24px padding, 8px radius)",
+        "There are no customer logos or metrics"
+      ],
+      "checks": {
+        "page": "section",
+        "style": "business",
+        "theme": "light",
+        "sections_required": [
+          "hero"
+        ],
+        "sections_forbidden": [
+          "nav",
+          "footer",
+          "logo-wall",
+          "social-proof"
+        ],
+        "max_content_sections": 1,
+        "text_required": [
+          "Relay"
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "name": "contact-business-light-sales",
+      "smoke": false,
+      "prompt": "/product-design contact business\nNorthwind CRM. Most people who contact us want a sales demo; support questions go to our help center. Sales email: sales@northwind.example",
+      "expected_output": "A Business contact page leaning toward sales: a demo-request form, the sales email, a route to the help center for support, no invented office addresses or phone numbers.",
+      "files": [],
+      "expectations": [
+        "The page is built around requesting a demo",
+        "The sales email appears exactly as given",
+        "Support visitors are pointed to the help center",
+        "Any phone number, address, or customer logo the user did not give is marked data-sample"
+      ],
+      "checks": {
+        "page": "contact",
+        "style": "business",
+        "theme": "light",
+        "archetype": [
+          "C",
+          "B"
+        ],
+        "sections_required": [
+          "nav",
+          "contact-form",
+          "footer"
+        ],
+        "text_required": [
+          "Northwind",
+          "sales@northwind.example"
+        ],
+        "regex_forbidden": [
+          "\\+\\d{1,3}[ .-]?\\(?\\d{2,4}\\)?[ .-]\\d{3}[ .-]\\d{3,4}|\\(\\d{3}\\)\\s?\\d{3}-\\d{4}|\\b\\d{3}-\\d{3}-\\d{4}\\b"
+        ],
+        "sections_must_be_sample": [
+          "social-proof",
+          "stats",
+          "logo-wall"
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "name": "product-colorful-light-integrations",
+      "smoke": false,
+      "prompt": "/product-design product colorful\nLoomcast — async video messages for remote teams. Capabilities: screen and camera recording, automatic transcripts, threaded replies, viewer analytics. Integrates with Slack, Notion, Linear, and Google Drive. Audience: team leads evaluating tools for a 20–200 person company. No customer logos or quotes we can use yet.",
+      "expected_output": "A Colorful product page: the four capabilities shown in depth, an integrations section naming the four tools, a CTA, no invented customers.",
+      "files": [],
+      "expectations": [
+        "All four capabilities are presented",
+        "An integrations section names Slack, Notion, Linear, and Google Drive",
+        "There are no customer logos, quotes, or usage stats",
+        "Visuals follow Colorful light: serif headlines, pill buttons, scene backgrounds"
+      ],
+      "checks": {
+        "page": "product",
+        "style": "colorful",
+        "theme": "light",
+        "archetype": [
+          "A",
+          "C"
+        ],
+        "sections_required": [
+          "nav",
+          "hero",
+          "integrations",
+          "cta",
+          "footer"
+        ],
+        "sections_any_of": [
+          [
+            "features",
+            "feature-showcase"
+          ]
+        ],
+        "sections_forbidden": [
+          "social-proof",
+          "logo-wall"
+        ],
+        "text_required": [
+          "Loomcast",
+          "Slack",
+          "Notion",
+          "Linear",
+          "Google Drive"
+        ],
+        "sections_must_be_sample": [
+          "stats"
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "name": "404-minimal-dark-bare",
+      "smoke": true,
+      "prompt": "/product-design 404 minimal dark",
+      "expected_output": "A Minimal dark 404 page with the site nav kept, a clear message, and a way back. Nothing else.",
+      "files": [],
+      "expectations": [
+        "The site nav is kept as an escape route",
+        "The page says clearly that the page wasn't found and offers a way back",
+        "There is no marketing content"
+      ],
+      "checks": {
+        "page": "404",
+        "style": "minimal",
+        "theme": "dark",
+        "archetype": [
+          "A",
+          "B",
+          "C"
+        ],
+        "sections_required": [
+          "nav",
+          "error"
+        ],
+        "sections_forbidden": [
+          "social-proof",
+          "pricing",
+          "features",
+          "stats"
+        ],
+        "max_content_sections": 2
+      }
+    },
+    {
+      "id": 11,
+      "name": "downloads-editorial-light-cli",
+      "smoke": false,
+      "prompt": "/product-design downloads editorial\nTermite — an open-source terminal multiplexer. Install with `brew install termite` or `cargo install termite`. Binaries for macOS (Apple Silicon and Intel) and Linux. Audience: developers.",
+      "expected_output": "An Editorial downloads page for a developer tool: install commands with copy buttons, macOS and Linux binaries, no invented version numbers or file sizes.",
+      "files": [],
+      "expectations": [
+        "The developer-distribution layout is used",
+        "Both install commands appear exactly as given, with copy buttons",
+        "macOS and Linux are offered; Windows is not invented",
+        "No version numbers or file sizes are invented"
+      ],
+      "checks": {
+        "page": "downloads",
+        "style": "editorial",
+        "theme": "light",
+        "archetype": [
+          "C"
+        ],
+        "sections_required": [
+          "nav",
+          "footer"
+        ],
+        "sections_forbidden": [
+          "social-proof",
+          "pricing",
+          "stats"
+        ],
+        "text_required": [
+          "Termite",
+          "brew install termite",
+          "cargo install termite"
+        ],
+        "regex_forbidden": [
+          "\\b\\d+\\.\\d+\\.\\d+\\b",
+          "\\d+(\\.\\d+)? ?MB\\b",
+          "(?i)windows"
+        ],
+        "sections_any_of": [
+          [
+            "install",
+            "hero"
+          ]
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "name": "landing-business-light-brand",
+      "smoke": false,
+      "prompt": "/product-design landing business — accent #E4572E, display font Manrope.\nBrightline — payroll for restaurants with hourly staff.",
+      "expected_output": "A Business landing page carrying the user's brand: accent #E4572E and Manrope as the display font, everything else from Business.",
+      "files": [],
+      "expectations": [
+        "The accent color is exactly #E4572E",
+        "Headlines use Manrope, loaded from Google Fonts",
+        "Everything else (spacing, radius, shadows) stays Business",
+        "Evidence sections, if present, are sample content marked data-sample and listed in the QA report"
+      ],
+      "checks": {
+        "page": "landing",
+        "style": "business",
+        "theme": "light",
+        "accent": "#E4572E",
+        "display_font": "Manrope",
+        "sections_required": [
+          "nav",
+          "hero",
+          "cta",
+          "footer"
+        ],
+        "text_required": [
+          "Brightline"
+        ],
+        "sections_must_be_sample": [
+          "social-proof",
+          "logo-wall",
+          "stats"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "name": "style-matrix-minimal",
+      "smoke": false,
+      "prompt": "/product-design landing minimal\nRelay — a shared inbox for customer-support teams of 5–50 people.",
+      "expected_output": "A minimal landing page for the same brief as the other style-matrix cases; it must look unmistakably like the minimal style (hero showcase, signature details, motion personality).",
+      "files": [],
+      "expectations": [
+        "The hero uses the minimal style's Hero showcase",
+        "At least two {s} signature details are visible",
+        "The page passes the {s} Screenshot test",
+        "Side by side with the other style-matrix pages, it is clearly a different design, not a recolor"
+      ],
+      "checks": {
+        "page": "landing",
+        "style": "minimal",
+        "theme": "light",
+        "sections_required": [
+          "nav",
+          "hero",
+          "footer"
+        ],
+        "text_required": [
+          "Relay"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "name": "style-matrix-business",
+      "smoke": false,
+      "prompt": "/product-design landing business\nRelay — a shared inbox for customer-support teams of 5–50 people.",
+      "expected_output": "A business landing page for the same brief as the other style-matrix cases; it must look unmistakably like the business style (hero showcase, signature details, motion personality).",
+      "files": [],
+      "expectations": [
+        "The hero uses the business style's Hero showcase",
+        "At least two {s} signature details are visible",
+        "The page passes the {s} Screenshot test",
+        "Side by side with the other style-matrix pages, it is clearly a different design, not a recolor"
+      ],
+      "checks": {
+        "page": "landing",
+        "style": "business",
+        "theme": "light",
+        "sections_required": [
+          "nav",
+          "hero",
+          "footer"
+        ],
+        "text_required": [
+          "Relay"
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "name": "style-matrix-colorful",
+      "smoke": false,
+      "prompt": "/product-design landing colorful\nRelay — a shared inbox for customer-support teams of 5–50 people.",
+      "expected_output": "A colorful landing page for the same brief as the other style-matrix cases; it must look unmistakably like the colorful style (hero showcase, signature details, motion personality).",
+      "files": [],
+      "expectations": [
+        "The hero uses the colorful style's Hero showcase",
+        "At least two {s} signature details are visible",
+        "The page passes the {s} Screenshot test",
+        "Side by side with the other style-matrix pages, it is clearly a different design, not a recolor"
+      ],
+      "checks": {
+        "page": "landing",
+        "style": "colorful",
+        "theme": "light",
+        "sections_required": [
+          "nav",
+          "hero",
+          "footer"
+        ],
+        "text_required": [
+          "Relay"
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "name": "style-matrix-editorial",
+      "smoke": false,
+      "prompt": "/product-design landing editorial\nRelay — a shared inbox for customer-support teams of 5–50 people.",
+      "expected_output": "A editorial landing page for the same brief as the other style-matrix cases; it must look unmistakably like the editorial style (hero showcase, signature details, motion personality).",
+      "files": [],
+      "expectations": [
+        "The hero uses the editorial style's Hero showcase",
+        "At least two {s} signature details are visible",
+        "The page passes the {s} Screenshot test",
+        "Side by side with the other style-matrix pages, it is clearly a different design, not a recolor"
+      ],
+      "checks": {
+        "page": "landing",
+        "style": "editorial",
+        "theme": "light",
+        "sections_required": [
+          "nav",
+          "hero",
+          "footer"
+        ],
+        "text_required": [
+          "Relay"
+        ]
+      }
+    }
+  ]
+}
