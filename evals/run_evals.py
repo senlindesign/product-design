@@ -13,7 +13,9 @@ record of which skill files the agent read and whether it reached their end (rea
 import argparse
 import concurrent.futures as cf
 import json
+import shutil
 import subprocess
+import tempfile
 import sys
 import threading
 import time
@@ -66,7 +68,10 @@ def check(case, case_dir):
 
 def generate(case, case_dir, model, timeout):
     case_dir.mkdir(parents=True, exist_ok=True)
-    cmd = ["claude", "-p", PROMPT.format(request=case["prompt"], page_path=case_dir / "page.html"),
+    # Generate outside the repo: Claude Code treats files inside a --plugin-dir as protected and denies
+    # writes there, so the page is written to a temp dir and copied into case_dir afterwards.
+    work = Path(tempfile.mkdtemp(prefix=f"pd-eval-{case['name']}-"))
+    cmd = ["claude", "-p", PROMPT.format(request=case["prompt"], page_path=work / "page.html"),
            "--plugin-dir", str(REPO), "--add-dir", str(SKILL),
            "--allowedTools", TOOLS, "--output-format", "stream-json", "--verbose"]
     if model:
@@ -74,8 +79,14 @@ def generate(case, case_dir, model, timeout):
     start = time.time()
     meta = {"case": case["name"], "model": model or "default"}
     try:
-        proc = subprocess.run(cmd, cwd=case_dir, capture_output=True, text=True, timeout=timeout,
-                              stdin=subprocess.DEVNULL)  # an inherited stdin can block headless claude
+        try:
+            proc = subprocess.run(cmd, cwd=work, capture_output=True, text=True, timeout=timeout,
+                                  stdin=subprocess.DEVNULL)  # an inherited stdin can block headless claude
+        finally:
+            for f in work.iterdir():
+                if f.is_file():
+                    shutil.copy2(f, case_dir / f.name)
+            shutil.rmtree(work, ignore_errors=True)
         (case_dir / "claude.jsonl").write_text(proc.stdout)
         if proc.stderr.strip():
             (case_dir / "stderr.txt").write_text(proc.stderr)
@@ -84,6 +95,7 @@ def generate(case, case_dir, model, timeout):
         (case_dir / "reads.json").write_text(json.dumps(reads, indent=2))
         (case_dir / "delivery.md").write_text(res.get("result") or "")
         meta.update(cost_usd=res.get("total_cost_usd"), turns=res.get("num_turns"),
+                    models=sorted((res.get("modelUsage") or {}).keys()),
                     denials=len(res.get("permission_denials") or []), is_error=res.get("is_error"))
         if res.get("is_error"):
             meta["error"] = (res.get("result") or "claude returned an error")[:160]
@@ -224,7 +236,9 @@ def summarize(run_dir, rows):
     ran = len(rows) - skipped
     total_cost = sum(m.get("cost_usd") or 0 for _, m, _ in rows)
     skip_note = f" · {skipped} skipped (usage limit — rerun them later with --cases)" if skipped else ""
-    lines += ["", f"**{passed}/{ran} passed**{skip_note} · total cost ${total_cost:.2f}", "",
+    models = sorted({m for _, meta, _ in rows for m in meta.get("models", [])})
+    lines += ["", f"**{passed}/{ran} passed**{skip_note} · total cost ${total_cost:.2f}"
+              + (f" · models: {', '.join(models)}" if models else ""), "",
               "Details per case: `<case>/check.txt` (objective checks), `<case>/delivery.md` (QA report), `<case>/page.html`."]
     (run_dir / "summary.md").write_text("\n".join(lines) + "\n")
     summarize_reads(run_dir, rows)
