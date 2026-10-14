@@ -49,14 +49,31 @@ Logo wall:            opacity: 0.5
 
 ### Scene Colors (Light Theme)
 
-Large section backgrounds (one per content chapter). Use at most 2 distinct scene colors per page, one per content chapter. Never apply to buttons, icons, badges, or borders.
+Large section backgrounds (one per content chapter). Use **2–3 distinct scene colors per page, at least one of them warm** (`--scene-peach` or `--scene-yellow`), one per content chapter; the hero sky counts as the blue. Craft never runs a page on cool colors alone: its hero carries a yellow lined notebook and its product cards are pink, yellow, green, and blue (craft.do, Mobbin 2026-10-14). Never apply scene colors to buttons, icons, badges, or borders.
 
 ```
 --scene-blue:     #B8CAF5    Periwinkle — Write/hero scenes, feature emphasis
 --scene-green:    #9BD8A9    Sage green — brand/values scenes, social proof
 --scene-lavender: #D5ACD8    Lavender — pricing tier segmentation, personality
 --scene-peach:    #F6CB98    Warm peach — CTA warmth, conversion sections
+--scene-yellow:   #FFE48D    Notebook yellow — sampled from the lined notebook in the craft.do hero; social proof, steps, a warm chapter
 ```
+
+### Content Tints (inside product mocks only)
+
+Craft's own UI is colorful: in its "All Docs" view every document card has its own pale tint and a matching rule. Inside a `data-mock`, content items (document cards, notes, tags, calendar blocks) may each carry one of these — sampled from the craft.do hero (Mobbin, 2026-10-14). Use 3–5 different tints in a mock; the mock's chrome (sidebar, toolbar) stays `var(--bg)`.
+
+```css
+[data-mock] {
+  --tint-pink:   #FFE1F7;
+  --tint-yellow: #FFFFD9;
+  --tint-green:  #CAEBD2;
+  --tint-blue:   #DDFCFF;
+  --tint-peach:  #FDF4E4;
+}
+.pv-doc { background: var(--bg); border: 2px solid var(--tint-pink); border-radius: 12px; }   /* or fill the card with the tint */
+```
+Dark theme: use each tint at 18% over `var(--surface-1)` (`color-mix(in srgb, var(--tint-pink) 18%, var(--surface-1))`).
 
 ### Dark Theme (derived from Craft system)
 
@@ -88,6 +105,7 @@ Same hue family as light, shifted to darker, richer values. Used as section back
 --scene-green:    #1A3D22    Deep forest — green scenes in dark mode
 --scene-lavender: #3D2045    Deep plum — lavender scenes in dark mode
 --scene-peach:    #4A2E18    Deep amber — peach/warm scenes in dark mode
+--scene-yellow:   #46391A    Deep ochre — yellow scenes in dark mode (the light yellow shifted to the same depth as the other dark scenes)
 ```
 
 ### Accent Color Rules
@@ -95,7 +113,7 @@ Same hue family as light, shifted to darker, richer values. Used as section back
 - Default accent is `var(--text)` (near-black or near-white). Brand color overrides only `--accent` and `--accent-text`.
 - Scene colors (`--scene-*`) are NOT accent colors. They are background fills for section elements only.
 - **CTA buttons, nav links, and all controls stay black/white** — scene colors never touch interactive controls.
-- Chromatic color (scene backgrounds) may occupy up to 30% of total page area across 1–2 scenes. This is higher than Minimal's <10% rule because scenes are large page-level areas, not accent details.
+- Chromatic color (scene backgrounds) may occupy up to 40% of total page area across 2–3 scenes. This is higher than Minimal's <10% rule because scenes are large page-level areas, not accent details.
 - Within a scene, all text, buttons, and icons remain black/white (never colored to match the scene tint).
 
 **Absolutely Forbidden**:
@@ -421,6 +439,8 @@ A large colored background section. Choose one `--scene-*` color per section.
 }
 ```
 
+**Default scene sequence** (pick 3 distinct colors at most, one warm): hero sky (`--scene-blue`) → first feature chapter in `--scene-green` → steps or social proof in `--scene-yellow` → closing CTA in `--scene-yellow` again or on the canvas. Swap yellow for peach when the product is about money, commerce, or food. Never two adjacent scenes in the same color; keep at least one canvas (`var(--bg)`) section between scenes.
+
 All text inside `.scene` uses `var(--text)` color — scene backgrounds are light pastels in light mode, so black text has full contrast. In dark mode, scene backgrounds are dark, so use `var(--text)` (warm off-white) which also contrasts correctly.
 
 ### Card
@@ -489,7 +509,7 @@ Colorful feels like walking through a well-made picture book about software: a w
 
 ### Hero showcase (mandatory)
 
-**Composition — "Scene with paper on the table."** Signature move M4 (Framed hero stage), Colorful row: the whole hero is one `.scene` panel, inset `20px` from the viewport (`margin: 0 20px`, DNA "Viewport canvas inset 20px"), `24px` radius. The hero scene is a **sky** (`shared/atmosphere.md` Recipe 2): a vertical gradient from `--scene-blue` `#B8CAF5` (the DNA "Sky / periwinkle field", `craft.do.md` line 63) lightening toward the horizon where the product sits, a fine grain overlay, 2–3 soft **halftone-dot clouds** bleeding off the left/right edges (Recipe 3a; Paper Shaders 3b optional). **No paper-collage cutouts in the hero**: in three judged runs every cutout (zigzag, ink scrap, blob, torn sheet, notebook) read as a stray artifact or rendering leftover, not paper (2026-10-14); the sky, the clouds and the paper product sheets carry the style. Under 768px keep one cloud. Inside: centered mono label, Playfair hero claim, 75%-opacity subtitle at the 540px measure, a black pill CTA — the text occupies the middle third of the frame (DNA Layout: "hero text occupies roughly the middle third"). Below it, product-visuals **Recipe 2 (Layered cards over a backing panel)** staged as paper: a warm-white main document sheet (`var(--bg)`, `16px` inner radius, four-layer card shadow) rising from the scene's bottom edge and cut by it, plus one smaller floating sheet laid on the main sheet's right edge (Recipe 2: it overlaps only the 32px edge track, never the rows) that carries the focused state. The scene itself is the `--pv-mat` (product-visuals §2: Colorful mat = one `--scene-*`), so the hero uses 1 of the page's 2 scene colors.
+**Composition — "Scene with paper on the table."** Signature move M4 (Framed hero stage), Colorful row: the whole hero is one `.scene` panel, inset `20px` from the viewport (`margin: 0 20px`, DNA "Viewport canvas inset 20px"), `24px` radius. The hero scene is a **sky** (`shared/atmosphere.md` Recipe 2): a vertical gradient from `--scene-blue` `#B8CAF5` (the DNA "Sky / periwinkle field", `craft.do.md` line 63) lightening toward the horizon where the product sits, a fine grain overlay, 2–3 soft **halftone-dot clouds** bleeding off the left/right edges (Recipe 3a; Paper Shaders 3b optional). **One paper cutout: Craft's yellow lined notebook** (`atmosphere.md` Recipe 4 `.cut-notebook`, in `--scene-yellow` `#FFE48D`), tucked behind the product window's lower right corner and peeking ≤ 80px past it — the warm counterweight to the blue sky, exactly as in the craft.do hero. No other cutouts: the zigzag, ink scrap, blob, and torn sheet read as stray artifacts in judged runs (2026-10-14). Under 768px keep one cloud. Inside: centered mono label, Playfair hero claim, 75%-opacity subtitle at the 540px measure, a black pill CTA — the text occupies the middle third of the frame (DNA Layout: "hero text occupies roughly the middle third"). Below it, product-visuals **Recipe 2 (Layered cards over a backing panel)** staged as paper: a warm-white main document sheet (`var(--bg)`, `16px` inner radius, four-layer card shadow) rising from the scene's bottom edge and cut by it, plus one smaller floating sheet laid on the main sheet's right edge (Recipe 2: it overlaps only the 32px edge track, never the rows) that carries the focused state. The scene itself is the `--pv-mat` (product-visuals §2: Colorful mat = one `--scene-*`), so the hero uses 1 of the page's 2–3 scene colors.
 
 **Background**: page shell `var(--bg)` flat; all color and texture live inside the hero sky. The sky gradient and clouds are hero-only — later scenes stay one flat `--scene-*` color. Cutouts and clouds stay out of the centered text column; nothing moves.
 
@@ -508,6 +528,7 @@ Colorful feels like walking through a well-made picture book about software: a w
       </div>
     </div>
 
+    <div class="cut cut-notebook" aria-hidden="true"></div>
     <div class="pv pv-layers hero-paper" data-mock role="img" aria-label="Project brief document with a comment card from a teammate">
       <div class="pv-mat">
         <div class="pv-panel pv-layer-main card-paper">
@@ -523,7 +544,7 @@ Colorful feels like walking through a well-made picture book about software: a w
             <div class="pv-row" style="grid-template-columns: 1fr auto;"><span>Press list</span><span class="pv-pill is-quiet">Todo</span></div>
           </div>
         </div>
-        <div class="pv-panel pv-layer-float pv-toast card-paper">
+        <div class="pv-panel pv-layer-float pv-toast card-paper is-warm">
           <p class="pv-label">Comment · Pricing page copy</p>
           <p>"Tighten the second line, then ship."</p>
         </div>
@@ -594,6 +615,7 @@ Colorful feels like walking through a well-made picture book about software: a w
 .paper-head { display: flex; justify-content: space-between; align-items: center; padding: 0 32px 24px; }
 .paper-body .pv-kpi { padding: 0 32px 16px; margin: 0; }
 .hero-paper .pv-layer-float { padding: 24px; margin-bottom: 12%; }   /* Recipe 2 grid places it on the sheet's right edge */
+.hero-paper .is-warm { background: var(--tint-peach); }              /* §1 Content Tints: the warm sheet (craft.do "Write" scene) */
 .pv-layer-float p:last-child { margin: 8px 0 0; font-size: 16px; }   /* §2 body secondary */
 
 [data-theme="dark"] .card-paper {
@@ -616,8 +638,9 @@ Colorful feels like walking through a well-made picture book about software: a w
     .hero-scene-copy > :nth-child(4) { animation-delay: 300ms; }
     @keyframes hero-rise { from { opacity: 0; transform: translateY(32px); } }
 }
-/* Sky layers — copy from atmosphere.md: .sky-grain (R2), .ht-cloud (R3a). No cutouts (R4) in the hero.
-   Markup order inside .hero-scene: grain, clouds (all aria-hidden), copy, then the paper mock. */
+/* Sky layers — copy from atmosphere.md: .sky-grain (R2), .ht-cloud (R3a), and the one cutout .cut-notebook (R4, yellow).
+   Markup order inside .hero-scene: grain, clouds, notebook (all aria-hidden), copy, then the paper mock. */
+.hero-scene .cut-notebook { right: 6%; bottom: -60px; width: 340px; height: 300px; z-index: 1; }  /* behind the paper (z 2), lower right */
 .hero-scene-copy, .hero-paper { position: relative; z-index: 2; }
 /* Floating sheet: interaction-patterns §1.5 D (Toast slides in) — CSS + JS copied from there */
 ```
@@ -642,7 +665,7 @@ Which layout each section uses by default is set in the master `SKILL.md` Step 4
 
 - **M4 Framed hero stage** — the default hero (above). Colorful-specific: the panel is the sky `.scene` (atmosphere.md R2–R4); the mock must be dense paper, not a thin strip (M4 "wallpaper" failure mode).
 - **M2 Highlighted headline words** — set the key word in Playfair *italic* weight 400 instead of a color mark; never highlight with a scene color (scenes are rooms, not marks). *Note: italic is not loaded by the §2 font link — gap below.*
-- **M10 Poster quote** — inside the page's second scene (`--scene-green` or `--scene-peach`), one large serif quote at section-heading size on a single paper card. Only with a real quote from the user.
+- **M10 Poster quote** — inside a warm or green scene (`--scene-yellow`, `--scene-peach`, or `--scene-green`), one large serif quote at section-heading size on a single paper card. Only with a real quote from the user.
 - **M5 Bento with a lead tile** — on the default canvas: tiles are paper cards (`var(--surface-1)` on canvas, 24px radius, four-layer shadow); the lead tile may sit inside a scene. Never give each tile its own scene color.
 
 ### Drift guard
@@ -650,10 +673,10 @@ Which layout each section uses by default is set in the master `SKILL.md` Step 4
 - **Toward Minimal**: 2px buttons, zero shadow, all-sans headings, achromatic page with no scene, 180px rhythm.
 - **Toward Business**: blue-gray tinted shadows, 8px rounded rectangle buttons, sans hero with a gradient product stage, logo-wall-first trust layout.
 - **Toward Editorial**: teal accent, Cormorant headings, near-black `#161616` stage band, dark/light alternating sections.
-- **Toward generic AI**: mesh backgrounds, gradients outside the hero sky, floating colored blobs not cut as paper, scene color on buttons/icons/badges, emoji or icon tiles in pastel circles, 3+ scene colors, each card a different pastel, glassmorphism panels, full-bleed edge-to-edge color bands (losing the 20px inset), bold serif (600+).
+- **Toward generic AI**: mesh backgrounds, gradients outside the hero sky, floating colored blobs not cut as paper, scene color on buttons/icons/badges, emoji or icon tiles in pastel circles, 4+ scene colors, page-level feature cards each in a different pastel (tints belong to the product's own content inside a mock — §1 Content Tints), glassmorphism panels, full-bleed edge-to-edge color bands (losing the 20px inset), bold serif (600+).
 
 ### Screenshot test
 
-1. **The hero is a sky panel floating inside the page** (periwinkle lightening to the horizon, grain, halftone clouds at the edges, a paper product sheet rising from the bottom edge — no cutouts). Below it, **pastel rounded panels float** with a visible warm-white gutter on both sides at the top of the screenshot, and at most two distinct pastels appear in the whole page.
+1. **The hero is a sky panel floating inside the page** (periwinkle lightening to the horizon, grain, halftone clouds at the edges, a paper product sheet rising from the bottom edge — no cutouts). Below it, **pastel rounded panels float** with a visible warm-white gutter on both sides at the top of the screenshot, and two or three pastels appear in the page, at least one warm (peach or yellow); the product mocks show tinted content cards.
 2. **The biggest text is a serif at regular weight**, while every button is a black (or white, in dark) pill.
 3. **At least one product sheet visibly casts a soft, deep shadow** on a colored scene — it reads as paper resting on color, not a bordered box.

@@ -653,7 +653,7 @@ These were needed but have no role in any style file. The values used above come
 | Line-height for type at 16–28vw (M1, M14) | `0.9` / `0.8` — **not from a style file** | No style defines a line-height for type above hero size. Replace with a style role once one exists. |
 | Viewport inset for a Minimal / Business / Editorial hero panel (M4) | Not set; evidence ≈ 12px (Cursor) | Only Colorful defines an inset (`.scene` `margin: 0 20px`). |
 | Business dark band | Use `alt` | Business has no dark section role on a light page. |
-| Editorial mid-page dark band | Use `alt` | Editorial allows the dark stage for hero or closing sections only. |
+| Editorial mid-page dark band | One `.ed-band` (`data-bg="dark"`) mid-page | Editorial allows one dark band in the body besides the hero and closing stage (visual-style-editorial.md §1). |
 | Colorful highlight color (M2) | `var(--surface-2)` | Scene colors are defined as section backgrounds only; using them behind words would be a new use. |
 | Progress-line thickness (M8) | `1px` (the system's border width) | No role. |
 | Rule color on a `.section-dark` band (M7) | `color-mix(... var(--text-inverse) 15% ...)` — 15% from evidence | Minimal says borders invert to `--text-inverse` but gives no opacity. |

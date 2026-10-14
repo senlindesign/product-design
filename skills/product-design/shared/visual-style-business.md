@@ -72,8 +72,8 @@ Logo wall:            opacity: 0.45
 
 - **Default accent is the text color**: `--accent` defaults to `--text`. Output is identical to no-brand-color.
 - If the user provides a brand color, only override `--accent` and `--accent-text`.
-- **Chromatic color < 10% of visible page area**. Page shell stays warm neutral.
-- Color-tinted product stages (gradients inside UI demos) are permitted but scoped to the product demo element only.
+- **Outside product stages and mats, chromatic color < 10% of visible page area.** Page shell stays warm neutral.
+- Color lives in the hero stage and in the gradient mats behind product visuals (§8 Gradient Mats) — permitted, and repeated down the page like Calendly's.
 
 **`--accent` allowed uses (exhaustive)**:
 - ✅ Primary CTA button background (`.btn-dark`, required)
@@ -391,17 +391,33 @@ nav a:hover { opacity: 1; }
 - Inside `var(--surface-1)` section → nested element uses `var(--bg)` (**not** `var(--surface-1)`)
 - Inside a card → screenshot frame / inner panel uses `var(--bg)`
 
-### Product UI Color (Business only)
+### Product UI Color and Gradient Mats (Business only)
 
-Business pages read as Minimal when every product mock is grey on cream (three judged runs, 2026-10-14). Calendly's own product UI is blue: selected slots, primary buttons, and links inside the app. So inside `data-mock` only, Business uses one product blue from its DNA palette, and its feature/step mats take a flat pale tint of the same family:
+Business pages read as Minimal when every product mock is grey on cream (three judged runs, 2026-10-14). Calendly repeats its gradient below the hero: every feature visual, step tile, and product spotlight sits on its own gradient mat with a white UI card on top (calendly.com below the fold: the "Availability" card on a blue mat, the Callie spotlight and the How It Works tiles on a teal-to-yellow mat). So in Business:
 
 ```css
-[data-mock] { --mock-brand: #1E5EA7; }          /* calendly.com.md palette: selected states, primary buttons, links inside a mock */
-.pv { --pv-mat: #EDF6FF; }                      /* flat mat tint: #6BB1FF at 12% on white — no gradient (the mesh stays in the hero) */
-[data-theme="dark"] .pv { --pv-mat: #131C2B; }  /* dark: --surface-1 #131418 shifted toward the same blue */
+[data-mock] { --mock-brand: #1E5EA7; }   /* calendly.com.md palette: selected states, primary buttons, links inside a mock */
+
+/* Two gradient mats, sampled from calendly.com feature sections (Mobbin, 2026-10-14). Alternate them section by section. */
+.mat-sky {        /* "Availability" feature: sky blue → aqua haze → deep blue */
+    background: linear-gradient(180deg, #6AB4FF 0%, #B3EAE8 58%, #1C558F 100%);
+}
+.mat-lagoon {     /* Callie spotlight and How It Works tiles: pale blue → teal → a warm yellow band → deep teal */
+    background: linear-gradient(170deg, #C7E3FB 0%, #72DAD3 46%, #F4EFB8 68%, #295564 100%);
+}
+.mat-sky, .mat-lagoon { position: relative; isolation: isolate; }
+.mat-sky::after, .mat-lagoon::after {   /* the same fine grain as the hero stage (atmosphere.md R1) */
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .12; mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 ```
 
-Rules: the blue appears only inside mocks (a selected row's left dot, the one primary button, a link, one chart series). The page shell, buttons, and headings stay `--accent` navy. When the user gives a brand color, it replaces `--mock-brand` and tints the mat the same way.
+Rules:
+- **Where**: the mat behind a product visual — M16 feature rows, M15 step tiles, the M5 lead tile, a spotlight split. Put `.mat-sky` or `.mat-lagoon` on the `.pv-mat` (it replaces `--pv-mat`). Alternate the two down the page; never the same mat in two adjacent sections.
+- **Never** on a section background, a text card, a button, or the page shell. The section around a mat stays `var(--bg)` or `var(--surface-1)`.
+- **The UI on the mat stays white** (`#FFFFFF`, §5 nested shadow). Color comes from the mat and from `--mock-brand` inside the UI, never from tinted UI chrome.
+- **Dark theme**: keep the mats — they are product imagery, like the hero stage — but set the UI panels to `var(--bg)` with `inset 0 0 0 1px var(--surface-2)`.
+- A user brand color replaces `--mock-brand`; keep the mats unless the brand palette gives replacement hues (then rebuild both gradients from it, 3+ hues each).
 
 ### Section Backgrounds
 
@@ -612,7 +628,7 @@ Add the §1.5 shared trigger + recipe B script and the `.pv-cursor` CSS from `sh
 
 ### Signature details
 
-1. **Blue product, navy shell** — product mocks use `--mock-brand` for their selected state and primary action on a `#EDF6FF` mat (§8 Product UI Color); everything outside the mocks stays navy and warm white. This is the quickest way to tell Business from Minimal in a screenshot.
+1. **Gradient mats under every product visual** — the hero's mesh stage, then `.mat-sky` / `.mat-lagoon` alternating under each feature and step visual (§8 Gradient Mats), white UI on top, `--mock-brand` blue inside. Everything outside the mats stays navy and warm white. This is what tells Business from Minimal in a screenshot.
 2. **Nested-curve stack** — every enclosure steps down one radius: 48 → 40 → 24/16 → 8 (§4, Calendly `64/48/40/16` chain).
 ```css
 .stage { border-radius: 48px; } .stage > .panel { border-radius: 40px; }
@@ -647,19 +663,19 @@ Which layout each section uses by default is set in the master `SKILL.md` Step 4
 
 - **M4 Framed hero stage** — the default hero (above). Business adjustment: 48px radius, multi-hue mesh inside only, frosted ring around the card, mock cut by the stage bottom.
 - **M3 Product rising from the fold** — combined with M4; visual top edge must still sit above the fold at 1440 × 900 with the 120px hero top.
-- **M5 Bento with a lead tile** — tiles are `.card` (16px, §5 shadow); the lead tile uses a flat `var(--surface-1)` panel, **not** the mesh. The mesh appears once per page, in the hero stage: repeated, it reads as a stock template gradient (judge, 2026-10-14), and Calendly confines its gradient to one rounded hero.
+- **M5 Bento with a lead tile** — tiles are `.card` (16px, §5 shadow); the lead tile's visual sits on a gradient mat (§8 `.mat-sky` / `.mat-lagoon`); small tiles keep flat `var(--surface-1)` mats so the lead stands out.
 - **M11 Stat bento** — enterprise trust pages; title tile on `--surface-1`, number tiles `#FFFFFF` with §5 shadow; real numbers, or tagged sample numbers per `shared/signature-moves.md` §4 (catalog intro) — never when the user said there are none.
 
 ### Drift guard
 
 Forbidden here because it reads as another style or as generic AI:
 - **→ Minimal**: 2px buttons, zero shadow, pure grey `#141414` text, 180px rhythm, `.section-dark` black bands.
-- **→ Colorful**: pill buttons, serif display, pastel scene section backgrounds, more than one tinted stage area beyond the hero + one bento tile.
+- **→ Colorful**: pill buttons, serif display, pastel scene **section backgrounds** (Business color lives on mats behind product visuals, never on whole sections).
 - **→ Editorial**: Cormorant/serif headlines, teal accent, dark/light alternating section stage, italic emphasis.
 - **→ Generic AI**: gradient on the page shell or text, a two-stop blue → violet stage gradient, glow behind (outside) the stage, perspective grid, black `rgba(0,0,0,…)` drop shadows in light theme, colored icon circles, left-border accent stripes, every section fading up, shadows on nav/footer.
 
 ### Screenshot test
 
-1. The hero has one large 48px-rounded stage with a soft multi-hue mesh interior (sky blue, lavender/pink, mint, white glow behind the card) and white floating panels with soft blue-gray shadow; nothing else on the page is saturated.
+1. The hero has one large 48px-rounded stage with a soft multi-hue mesh interior (sky blue, lavender/pink, mint, white glow behind the card); below it, every product visual sits on a sky or lagoon gradient mat with a white UI card on top. Section backgrounds and text stay calm.
 2. The shell is warm off-white with deep navy text (not grey, not black), and raised cards visibly float with soft shadow while sections are flat.
 3. Buttons are 8px rounded rectangles in Plus Jakarta Sans — neither sharp nor pill — and section pauses are a uniform ~240px between sections.

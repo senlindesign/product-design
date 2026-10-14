@@ -94,9 +94,19 @@ The Editorial preset often uses a **dark entry + light body** structure:
 
 ```
 Entry (hero):     dark background (--bg = #161616 on dark theme, or a local dark override on light theme)
-Mid-page:         light canvas (--bg = #FAF8F5 on light theme)
-Feature sections: alternate between --bg and --surface-1
+Body:             light canvas (--bg = #FAF8F5 on light theme), feature sections alternating --bg / --surface-1
+Mid-page band:    ONE dark band (#161616) in the middle of the body — the proof (M17 / M10) or one
+                  feature showcase — so the page reads dark → light → dark → light → dark
 CTA / closing:    dark background returns (creates a framing effect)
+```
+
+**Why a mid-page band.** With dark only at the two ends, everything between them is one long light run and the rhythm goes flat (maintainer review, 2026-10-14). Editorial-tech sites break the light body once with a dark chapter: Craft's "Touch to feel the difference" band in an otherwise light page, FLORA's dark admin section. Rules: exactly one mid-page dark band; never adjacent to the hero or the closing stage (at least one light section on each side); same tokens as the stage (`#161616`, text `#DEDEDE`, cards `#1A1918` with `1px solid #2A2826`); teal stays a pinprick.
+
+```css
+.ed-band { background: #161616; color: #DEDEDE; }                                  /* the stage tokens, mid-page */
+.ed-band .label { color: #DEDEDE; }
+.ed-band .card-static, .ed-band .quote { background: #1A1918; border-color: #2A2826; }   /* §1 Dark --surface-1 / --surface-2 */
+.ed-band .pv-mat { background: #1A1918; border-color: #2A2826; }
 ```
 
 For a light-theme page with an Editorial dark-entry hero:
@@ -451,8 +461,8 @@ nav a.btn-outline { opacity: 1; color: var(--text); }
 ```
 Default sections:      var(--bg)           Most content sections
 Alternate sections:    var(--surface-1)    At most 1-2 feature sections (very subtle)
-Dark hero section:     #161616             The "stage" — entry or closing section
-                                           (even on a light-theme page, the hero can use this)
+Dark sections:         #161616             The "stage" — the hero, ONE mid-page band, and the closing section
+                                           (on a light-theme page too: the dark bands are the rhythm)
 
 Not allowed: colored section backgrounds (teal, other brand colors).
 Dark entry + light body structure is the primary contrast technique.
@@ -666,7 +676,7 @@ Motion: copy the §1.5 shared trigger and recipe A (or C) from `shared/interacti
 a.ed-link { color: var(--text); text-decoration: none; transition: color 0.15s linear; }   /* §6 color timing */
 a.ed-link:hover { color: var(--accent); }                                                    /* §1 link hover */
 ```
-5. **Dark bookends.** The dark stage returns as the closing CTA, so the page reads stage → daylight → stage (§1 Dark/Light Section Contrast: "CTA / closing: dark background returns").
+5. **Dark bookends.** The dark stage returns as the closing CTA, with one dark band mid-page, so the page reads stage → daylight → band → daylight → stage (§1 Dark/Light Section Contrast).
 ```css
 .ed-closing { background: #161616; color: #DEDEDE; padding: 128px 0; text-align: center; }   /* §3 128px after long content */
 ```
@@ -684,7 +694,7 @@ The motion is quiet and fast, like a page that answers instead of performs.
 Which layout each section uses by default is set in the master `SKILL.md` Step 4.3 *Style layout defaults* table; the notes below adjust how each move looks in this style.
 
 - **M4 Framed hero stage + M3 Product rising from the fold**, as the default hero above. Editorial row: full-bleed `#161616` stage (DNA "full-bleed dark photographic stage"), a light paper window with the 22px product-stage radius cut by the stage bottom, teal CTA.
-- **M10 Poster quote**: serif `48px` quote, `max-width: 62%`, `.label` attribution. It is bold only on the closing dark stage (Editorial allows `dark` for closing sections only). Otherwise use it on `alt` as a non-bold layout. No decorative quote glyph and no teal.
+- **M10 Poster quote**: serif `48px` quote, `max-width: 62%`, `.label` attribution. Bold on the mid-page dark band (`.ed-band`, the default home for social proof) or the closing stage; otherwise on `alt` as a non-bold layout. No decorative quote glyph and no teal.
 - **M7 Big-type list band**: on `alt` mid-page, rows in `--font-body` 24px at opacity 0.6 → 1 on hover (`0.15s linear`, §6, replacing the Minimal 0.3s), with `1px solid var(--surface-2)` rules.
 - **M1 Edge-to-edge headline**: only for manifesto, About, or 404 Brand Moment pages. Cormorant at 400. The serif at this size is the effect.
 
@@ -694,10 +704,10 @@ Forbidden, because these turn the page into another style:
 - **→ Minimal**: a black (`var(--text)`) primary button, 2px radii, zero shadow everywhere including the hero window, or 180px section rhythm. Editorial's button is a teal pill and its rhythm is 96–120px.
 - **→ Business**: soft blue-gray shadows on every card, all-sans headings, a 48px rounded product-stage panel, or a light hero with a brand-gradient mat.
 - **→ Colorful**: pastel scene backgrounds, inset `.scene` hero panels with margin, Playfair, paper-weight four-layer shadows, or more than one tinted band.
-- **→ Generic AI**: a lone input box as the hero visual, a glowing ring or teal shadow around any panel, everything centered in one column, a teal or purple gradient behind the hero, glow behind the headline text, perspective grids, gradient serif text, teal headings or icon tiles, a word-by-word headline reveal, a fake photo, or a dark band mid-page (dark is for the hero and the closing only).
+- **→ Generic AI**: a lone input box as the hero visual, a glowing ring or teal shadow around any panel, everything centered in one column, a teal or purple gradient behind the hero, glow behind the headline text, perspective grids, gradient serif text, teal headings or icon tiles, a word-by-word headline reveal, a fake photo, or more than one dark band mid-page (one band, not stripes).
 
 ### Screenshot test
 
-1. **Stage → daylight → stage**: the top roughly 900px is near-black with a left-set serif masthead, a hairline rule, and a warm paper product window cut by the stage's bottom edge (dense, legible, three columns); the body is warm off-white, and (if there is a closing CTA) the bottom returns to near-black. No other dark band appears.
+1. **Stage → daylight → stage**: the top roughly 900px is near-black with a left-set serif masthead, a hairline rule, and a warm paper product window cut by the stage's bottom edge (dense, legible, three columns); the body is warm off-white with **one** near-black band in the middle, and (if there is a closing CTA) the bottom returns to near-black: dark → light → dark → light → dark.
 2. **Serif claims, sans mechanics**: every hero and section heading is visibly a high-contrast serif, and every card heading and body line is sans; mono uppercase labels sit above the headings.
 3. **Teal is a pinprick**: teal appears only on the pill CTAs, the panel ring, citations, and links. Squint, and the page is black, cream, and charcoal with a few small teal points.

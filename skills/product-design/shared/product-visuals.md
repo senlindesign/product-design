@@ -45,7 +45,7 @@ The recipes use local custom properties (`--pv-*`). The block in §3 sets them t
 
 | Role | Minimal | Business | Colorful | Editorial |
 |---|---|---|---|---|
-| `--pv-mat`: backing panel | `var(--surface-1)` | `var(--surface-1)`. A gradient is allowed only inside the product stage (§1 Accent Color Rules): the user's brand colors when given, otherwise the default stage gradient defined in Business §10 Style Signature | one `var(--scene-*)` (§1 Scene Colors). It counts toward the page's limit of 2 scene colors | `var(--surface-1)` with `1px solid var(--surface-2)` border, or the dark stage background (§8 Section Background Switching) |
+| `--pv-mat`: backing panel | `var(--surface-1)` | a gradient mat: the hero's mesh stage (Business §10), then `.mat-sky` / `.mat-lagoon` alternating under feature and step visuals (Business §8 Gradient Mats); small bento tiles `var(--surface-1)` | one `var(--scene-*)` (§1 Scene Colors). It counts toward the page's limit of 2 scene colors | `var(--surface-1)` with `1px solid var(--surface-2)` border, or the dark stage background (§8 Section Background Switching) |
 | `--pv-r-outer`: mat and frame radius | §4 Content card | §4 Content card | §4 Scene frame | §4 Product stage |
 | `--pv-r-inner`: UI panel and card radius | §4 Feature card | §4 Feature card | §4 Inner panel | §4 Inner UI |
 | `--pv-r-control`: pills, inputs, chips | §4 Input | §4 Input/form field | §4 Control | §4 Control |

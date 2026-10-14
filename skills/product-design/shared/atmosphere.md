@@ -168,7 +168,7 @@ if (host && !reduce) {
 
 ## Recipe 4 — Paper collage cutouts (Colorful only)
 
-**When**: no longer used in the Colorful hero — in three judged runs every cutout read as a stray artifact (visual-style-colorful.md §10). Kept for a user who asks for a collage look explicitly: then 2 pieces at most, all behind the product window (`z-index` below it), clustered at the lower left and lower right; never behind the headline. **A cutout must never cover the product window** — it hides the rows the hero exists to show; it may only peek out from behind the window's edges. Colors: canvas white, ink `#030302`, peach `#F6CB98`, leaf `#9BD8A9`, lavender `#D5ACD8`, sky `#B8CAF5` (`craft.do.md`).
+**When**: the Colorful hero uses exactly one piece, the **lined notebook in `--scene-yellow` `#FFE48D`** (craft.do's warm counterweight to the sky), behind the product window's lower right corner. The other pieces read as stray artifacts in judged runs; use them only when the user asks for a collage look, 2 pieces at most, all behind the product window (`z-index` below it), clustered at the lower left and lower right; never behind the headline. **A cutout must never cover the product window** — it hides the rows the hero exists to show; it may only peek out from behind the window's edges. Colors: canvas white, ink `#030302`, peach `#F6CB98`, leaf `#9BD8A9`, lavender `#D5ACD8`, sky `#B8CAF5` (`craft.do.md`).
 
 ```css
 .collage { position: relative; height: 520px; margin-top: 96px; }
@@ -188,7 +188,7 @@ if (host && !reduce) {
   clip-path: polygon(0 50%,6% 20%,14% 34%,22% 8%,30% 26%,40% 4%,50% 22%,60% 0,70% 24%,80% 6%,90% 30%,100% 40%,96% 70%,86% 96%,74% 78%,62% 100%,50% 80%,38% 96%,26% 74%,14% 92%,4% 76%); }
 /* Lined notebook sheet — peach with leaf rules, torn top */
 .cut-notebook { right: -40px; bottom: -40px; width: 380px; height: 340px; transform: rotate(-8deg);
-  background: repeating-linear-gradient(176deg, transparent 0 30px, color-mix(in srgb, #9BD8A9 80%, #030302) 30px 31px), #F6CB98;
+  background: repeating-linear-gradient(176deg, transparent 0 30px, color-mix(in srgb, #FFE48D 70%, #030302) 30px 31px), #FFE48D;   /* craft.do notebook yellow + darker rules */
   clip-path: polygon(0 18%,8% 14%,16% 19%,24% 11%,33% 16%,42% 8%,52% 13%,62% 5%,72% 10%,82% 3%,92% 8%,100% 0,100% 100%,0 100%); }
 /* Colored blob — one scene color, irregular */
 .cut-blob { left: 0; bottom: -30px; width: 300px; height: 300px; background: color-mix(in srgb, #B8CAF5 40%, #6A79E8 60%);
