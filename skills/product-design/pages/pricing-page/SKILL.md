@@ -84,7 +84,7 @@ Based on the archetype's section list from `references/section-composition.md`, 
 - Enterprise Section → if 4+ tiers or enterprise customers exist
 - FAQ → include by default (billing, cancellation, trial questions). Omit only when the user asks. Answers that need facts the user did not give become labeled placeholders
 - Bottom CTA → only if page is long (4+ sections between header and footer)
-- Social Proof → if brief provides customer logos or testimonials, place near tier cards to reinforce trust at decision point
+- Social Proof → Archetype D always; other archetypes only when the user gave customer logos or testimonials. Place it near the tier cards to reinforce trust at the decision point. In D without given material, use sample content (master `SKILL.md` Design Rules → *Sample content*); leave it out if the user said they have none
 - Enterprise Section → if brief mentions enterprise buyers, compliance needs, or custom pricing conversations
 - How It Works / Switching → include when the brief names switching or setup effort as the main barrier (a FAQ entry alone is not enough); layout from `sections/how-it-works/SKILL.md`, placement in `references/section-composition.md` §6
 

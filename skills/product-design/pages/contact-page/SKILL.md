@@ -81,10 +81,8 @@ Based on the archetype's section list from `references/section-composition.md`, 
 **Add based on archetype and content**:
 - Contact Info → if there are real contact details to show (email, phone, address)
 - Department Cards → Archetype B only
-- Social Proof → Archetype C, real customer logos or testimonials if the user gave them, otherwise sample content (master `SKILL.md` Design Rules → *Sample content*) (fictional wordmarks, never bracket strips); leave it out if the user said they have none
-- FAQ → if common contact-related questions exist (3-4 questions max)
-- Social Proof → if brief provides customer logos and the page goal is sales conversion (Archetype C). Skip for support-focused pages
-- FAQ → if brief identifies common contact-related questions or barriers to reaching out
+- Social Proof → Archetype C, real customer logos or testimonials if the user gave them, otherwise sample content (master `SKILL.md` Design Rules → *Sample content*) (fictional wordmarks, never bracket strips); leave it out if the user said they have none. Skip it on support-focused pages
+- FAQ → if the brief names common contact-related questions or barriers to reaching out (3–4 questions max)
 
 **Remove if**:
 - Content doesn't exist to fill a section meaningfully

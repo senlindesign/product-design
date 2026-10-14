@@ -3,6 +3,12 @@
 > DNA: Craft (Light + derived Dark)
 > Tone: Editorial warmth, creative tools, consumer SaaS. Color creates rooms, not controls.
 
+> **Must use — at the end of this file, §10 Style Signature.** Read this file to the last line. Every page in this style needs:
+> 1. When the page has a hero (not 404, not a single non-hero section): the hero built from the "Hero showcase", starting from its HTML example and keeping the `.hero-scene` class (the self-check looks for it)
+> 2. At least two items from Signature details
+> 3. Motion personality and Drift guard, followed as written
+> 4. Screenshot test, run against the finished page before delivery
+
 This file is a self-contained style preset. When this preset is active, follow ALL tokens from this file. Do not mix with `shared/visual-style.md` (Minimal preset) values.
 
 ---

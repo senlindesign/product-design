@@ -2,6 +2,12 @@
 
 > Default design tokens for Light / Dark dual themes
 
+> **Must use — at the end of this file, §12 Style Signature.** Read this file to the last line. Every page in this style needs:
+> 1. When the page has a hero (not 404, not a single non-hero section): the hero built from §12.2 "Specimen Field", starting from its HTML example and keeping the `.specimen-field` class (the self-check looks for it)
+> 2. At least two items from §12.3 Signature details
+> 3. §12.4 Motion personality and §12.6 Drift guard, followed as written
+> 4. §12.7 Screenshot test, run against the finished page before delivery
+
 This file defines the default visual style for all page types. Unless the user provides explicit brand design specifications, follow the tokens and principles in this file strictly. Page-type-specific component tokens are supplemented in the corresponding Skill's `references/` directory.
 
 ---

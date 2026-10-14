@@ -430,7 +430,7 @@ Three patterns observed (round-7 data):
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 80px;      /* generous top margin — pagination is the page boundary */
+    margin-top: 58px;      /* heading-to-content gap — visual-style.md §3 (narrow: 40px) */
     font-family: var(--font-display);
     font-size: 14px;
     font-weight: 500;
@@ -476,7 +476,7 @@ When to use: when total pages > 3 and knowing total page count is useful to the 
 ```css
 .load-more {
     display: block;
-    margin: 80px auto 0;
+    margin: 58px auto 0;    /* visual-style.md §3 (narrow: 40px) */
     padding: 8px 24px;      /* slightly wider than default btn for a standalone control */
     font-family: var(--font-display);
     font-size: 14px;
@@ -501,7 +501,7 @@ When to use: editorial blogs (Archetype B) and minimal lists (Archetype C). Keep
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 80px;
+    margin-top: 58px;                  /* visual-style.md §3 (narrow: 40px) */
     border-top: 1px solid var(--surface-2);
     padding-top: 24px;
 }
@@ -624,7 +624,7 @@ All values quoted verbatim from `shared/visual-style.md`:
 | Category filters to article grid | 58px (or 0 if filters are part of the header block) |
 | Grid gutter | 24px |
 | Card internal padding | 32px |
-| Pagination margin-top | 80px |
+| Pagination / load-more margin-top | 58px (narrow: 40px) |
 | Narrow screen: section rhythm | 96px |
 | Narrow screen: hero top whitespace | 80px |
 | Narrow screen: heading to content | 40px |

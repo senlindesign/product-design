@@ -272,9 +272,9 @@ Use only when image contrast is guaranteed (editorial photography with dark area
 }
 .featured-hero--bleed .hero-overlay-text {
     position: absolute;
-    bottom: 40px;
-    left: 40px;
-    right: 40px;
+    bottom: 32px;                        /* card internal padding — visual-style.md §3 (narrow: 24px) */
+    left: 32px;
+    right: 32px;
     z-index: 1;
     color: #EDEDED;
 }

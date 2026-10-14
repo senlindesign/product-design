@@ -188,7 +188,7 @@ Three header types emerge from the research:
     grid-template-columns: 1fr 1fr;
     gap: 58px;                           /* standard title-to-content gap used for column gap */
     align-items: center;
-    padding: 128px 32px 80px;
+    padding: 128px 32px 58px;            /* 128px hero top whitespace; 58px heading-to-content before the grid — visual-style.md §3 */
 }
 
 /* Label above heading */

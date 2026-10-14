@@ -3,6 +3,12 @@
 > DNA: Calendly (Light) × Linear (Dark)
 > Tone: Warm, professional, structured. For B2B SaaS, scheduling tools, enterprise platforms.
 
+> **Must use — at the end of this file, §10 Style Signature.** Read this file to the last line. Every page in this style needs:
+> 1. When the page has a hero (not 404, not a single non-hero section): the hero built from the "Hero showcase", starting from its HTML example and keeping the `.biz-stage` class (the self-check looks for it)
+> 2. At least two items from Signature details
+> 3. Motion personality and Drift guard, followed as written
+> 4. Screenshot test, run against the finished page before delivery
+
 This file is a self-contained style preset. When this preset is active, follow ALL tokens from this file. Do not mix with `shared/visual-style.md` (Minimal preset) values.
 
 ---
@@ -592,7 +598,7 @@ Which layout each section uses by default is set in the master `SKILL.md` Step 4
 - **M4 Framed hero stage** — the default hero (above). Business adjustment: 48px radius, multi-hue mesh inside only, frosted ring around the card, mock cut by the stage bottom.
 - **M3 Product rising from the fold** — combined with M4; visual top edge must still sit above the fold at 1440 × 900 with the 120px hero top.
 - **M5 Bento with a lead tile** — tiles are `.card` (16px, §5 shadow); the lead tile may reuse a small stage (24px radius) with the gradient — counts as a product stage, keep to one per page besides the hero (*inference*: preserves "Scheduling confines its gradient to one rounded hero").
-- **M11 Stat bento** — enterprise trust pages; title tile on `--surface-1`, number tiles `#FFFFFF` with §5 shadow; only with real numbers.
+- **M11 Stat bento** — enterprise trust pages; title tile on `--surface-1`, number tiles `#FFFFFF` with §5 shadow; real numbers, or tagged sample numbers per `shared/signature-moves.md` §4 (catalog intro) — never when the user said there are none.
 
 ### Drift guard
 

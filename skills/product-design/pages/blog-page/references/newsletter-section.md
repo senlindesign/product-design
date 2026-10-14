@@ -48,7 +48,7 @@ Newsletter sections on blog pages differ from general landing-page newsletter ca
     gap: 58px;                           /* standard column gap — from visual-style.md §3 */
     align-items: center;
     border-top: 1px solid var(--surface-2);   /* divides from article grid above */
-    padding-top: 80px;
+    padding-top: 58px;                   /* heading-to-content gap — visual-style.md §3 */
 }
 
 /* Heading */
@@ -358,7 +358,7 @@ Include the privacy note if: GDPR-relevant audience (European users), enterprise
 /* Avoid unless user provides a brand color */
 .newsletter-section--dark {
     background: var(--surface-1);        /* achromatic dark band */
-    padding: 80px 32px;
+    padding: 128px 32px;                 /* large breathing space — visual-style.md §3 (narrow: 80px) */
 }
 ```
 
@@ -389,7 +389,7 @@ Privacy note top margin:              12px  (from visual-style.md §3 base scale
     .newsletter-inner {
         grid-template-columns: 1fr;
         gap: 32px;
-        padding-top: 40px;               /* 80px → 40px — from visual-style.md narrow-screen table */
+        padding-top: 40px;               /* 58px → 40px — from visual-style.md narrow-screen table */
     }
 
     /* Input + button → stacked */

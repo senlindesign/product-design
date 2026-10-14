@@ -1,6 +1,6 @@
 ---
 name: product-design
-description: Design and build marketing website pages — landing page, homepage, pricing, about, contact, product/features, blog index, 404, downloads — or a single section (hero, features, social proof, CTA, FAQ, how it works, comparison table, contact form, navigation, footer). Decides page structure from a short brief (audience, goal, barriers, available evidence), then renders it in one of 4 visual styles (Minimal, Business, Colorful, Editorial), light or dark. Use when the user asks to design, build, mock up, or redesign a website page, landing page, or homepage section.
+description: Design and build marketing website pages — landing page, homepage, pricing, about, contact, product/features, blog index, 404, downloads — or a single section (hero, features, social proof, CTA, FAQ, how it works, comparison table, contact form, navigation, footer). Decides page structure from a short brief (audience, goal, barriers, available evidence), then renders it in one of 4 visual styles (Minimal, Business, Colorful, Editorial), light or dark. Use when the user asks to design, build, mock up, or redesign a product website, marketing site, landing page, homepage, features page, or a section of one — including requests to make a page look less generic or less AI-generated.
 argument-hint: "[page-or-section] [minimal|business|colorful|editorial] [light|dark]"
 user-invocable: true
 allowed-tools: Read, Write, Edit, Glob, Bash(open:*), Bash(python3:*)
