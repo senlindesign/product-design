@@ -2,7 +2,8 @@
 """Screenshots and a narrow-screen audit for generated pages. Works on macOS and Linux.
 
   python3 evals/screens.py page.html                  # desktop 1440px + mobile 390px screenshots next to the page
-  python3 evals/screens.py page.html --mobile-audit   # also check 390px overflow, duplicated nav, menu toggle
+  python3 evals/screens.py page.html --mobile-audit   # also the layout audits: 390px overflow, duplicated nav, menu
+                                                      # toggle; 1440px covered or clipped text, hero visual below the fold
 
 Chrome is found in this order: $CHROME, Google Chrome on macOS, chrome/chromium on PATH, Playwright's Chromium.
 The mobile audit needs Node with the `playwright` package (local or global); without it the audit is skipped.
@@ -101,6 +102,34 @@ def mobile_audit(page):
     return None if data.get("unavailable") else data
 
 
+def desktop_audit(page):
+    """Run evals/desktop_audit.cjs at 1440px. Returns a dict, or None when Node/Playwright is missing."""
+    if not shutil.which("node"):
+        return None
+    proc = subprocess.run(["node", str(HERE / "desktop_audit.cjs"), str(Path(page).resolve())],
+                          capture_output=True, text=True, timeout=180, env=_node_env())
+    try:
+        data = json.loads(proc.stdout)
+    except json.JSONDecodeError:
+        return {"error": (proc.stderr or proc.stdout).strip()[-300:]}
+    return None if data.get("unavailable") else data
+
+
+FOLD_TEXT_LIMIT = 800   # the hero product's first line of text must start above this (900px fold, ~100px visible)
+
+
+def desktop_problems(data):
+    """Turn a desktop audit result into problems (empty = clean)."""
+    if not data or data.get("error"):
+        return []
+    out = [f"text covered inside a product mock: {c}" for c in data.get("covered", [])]
+    out += [f"text cut off at the left or right edge: {c}" for c in data.get("clipped", [])]
+    top = data.get("hero_first_text_top")
+    if top and top > FOLD_TEXT_LIMIT:
+        out.append(f"hero product visual starts too low: first text at {top}px (want < {FOLD_TEXT_LIMIT}px on a 900px fold)")
+    return out
+
+
 def audit_problems(data):
     """Turn an audit result into a list of human-readable problems (empty = clean)."""
     if not data or data.get("error"):
@@ -139,6 +168,9 @@ def main():
             problems = audit_problems(data)
             bad += bool(problems)
             print("  mobile audit: " + ("; ".join(problems) if problems else "clean"))
+            desk = desktop_problems(desktop_audit(page))
+            bad += bool(desk)
+            print("  desktop audit: " + ("; ".join(desk) if desk else "clean"))
     sys.exit(1 if bad else 0)
 
 

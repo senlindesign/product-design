@@ -28,7 +28,7 @@ CHECKER = SKILL / "scripts" / "check_page.py"
 CASES_FILE = REPO / "evals" / "evals.json"
 RUNS = REPO / "evals" / "runs"
 sys.path.insert(0, str(REPO / "evals"))
-from screens import audit_problems, mobile_audit  # noqa: E402
+from screens import audit_problems, desktop_audit, desktop_problems, mobile_audit  # noqa: E402
 
 PROMPT = """Use the product-design skill (invoke it with the Skill tool; its name is `product-design:product-design`) to handle the request below.
 
@@ -185,12 +185,17 @@ def mobile(case_dir, result):
     (case_dir / "mobile.json").write_text(json.dumps(data, indent=2))
     for problem in audit_problems(data):
         result.setdefault("errors", []).append({"rule": "mobile.layout", "message": problem})
+    desk = desktop_audit(page) or {}
+    (case_dir / "desktop.json").write_text(json.dumps(desk, indent=2))
+    for problem in desktop_problems(desk):
+        result.setdefault("errors", []).append({"rule": "desktop.layout", "message": problem})
     if data.get("error"):
         result.setdefault("warnings", []).append({"rule": "mobile.error", "message": data["error"][:160]})
     result["passed"] = not result.get("errors")
     (case_dir / "check.json").write_text(json.dumps(result, indent=2))
     with (case_dir / "check.txt").open("a") as f:
         f.writelines(f"ERROR mobile.layout: {p}\n" for p in audit_problems(data))
+        f.writelines(f"ERROR desktop.layout: {p}\n" for p in desktop_problems(desk))
 
 
 def judge(case, case_dir, model):

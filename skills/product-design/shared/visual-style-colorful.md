@@ -489,7 +489,7 @@ Colorful feels like walking through a well-made picture book about software: a w
 
 ### Hero showcase (mandatory)
 
-**Composition — "Scene with paper on the table."** Signature move M4 (Framed hero stage), Colorful row: the whole hero is one `.scene` panel, inset `20px` from the viewport (`margin: 0 20px`, DNA "Viewport canvas inset 20px"), `24px` radius. The hero scene is a **sky** (`shared/atmosphere.md` Recipe 2): a vertical gradient from `--scene-blue` `#B8CAF5` (the DNA "Sky / periwinkle field", `craft.do.md` line 63) lightening toward the horizon where the product sits, a fine grain overlay, 2–3 soft **halftone-dot clouds** bleeding off the left/right edges (Recipe 3a; Paper Shaders 3b optional), and the product name as a **giant faint outline wordmark** behind the product. Around a product window rising from the bottom edge, 3–5 **paper-collage cutouts** (Recipe 4: zigzag strip, torn sheet, ink scrap, lined notebook sheet in peach `#F6CB98` with leaf `#9BD8A9` rules, one colored blob) — the DNA's recorded "Cloud / paper decoration". Inside: centered mono label, Playfair hero claim, 75%-opacity subtitle at the 540px measure, a black pill CTA — the text occupies the middle third of the frame (DNA Layout: "hero text occupies roughly the middle third"). Below it, product-visuals **Recipe 2 (Layered cards over a backing panel)** staged as paper: a warm-white main document sheet (`var(--bg)`, `16px` inner radius, four-layer card shadow) rising from the scene's bottom edge and cut by it, plus one smaller floating sheet overlapping it ~20% that carries the focused state. The scene itself is the `--pv-mat` (product-visuals §2: Colorful mat = one `--scene-*`), so the hero uses 1 of the page's 2 scene colors.
+**Composition — "Scene with paper on the table."** Signature move M4 (Framed hero stage), Colorful row: the whole hero is one `.scene` panel, inset `20px` from the viewport (`margin: 0 20px`, DNA "Viewport canvas inset 20px"), `24px` radius. The hero scene is a **sky** (`shared/atmosphere.md` Recipe 2): a vertical gradient from `--scene-blue` `#B8CAF5` (the DNA "Sky / periwinkle field", `craft.do.md` line 63) lightening toward the horizon where the product sits, a fine grain overlay, 2–3 soft **halftone-dot clouds** bleeding off the left/right edges (Recipe 3a; Paper Shaders 3b optional), and the product name as a **giant faint outline wordmark** behind the product. Around a product window rising from the bottom edge, 2–3 **paper-collage cutouts** (at most one per side, each peeking ≤ 40px from behind the window, never in front of it) (Recipe 4: zigzag strip, torn sheet, ink scrap, lined notebook sheet in peach `#F6CB98` with leaf `#9BD8A9` rules, one colored blob) — the DNA's recorded "Cloud / paper decoration". Inside: centered mono label, Playfair hero claim, 75%-opacity subtitle at the 540px measure, a black pill CTA — the text occupies the middle third of the frame (DNA Layout: "hero text occupies roughly the middle third"). Below it, product-visuals **Recipe 2 (Layered cards over a backing panel)** staged as paper: a warm-white main document sheet (`var(--bg)`, `16px` inner radius, four-layer card shadow) rising from the scene's bottom edge and cut by it, plus one smaller floating sheet laid on the main sheet's right edge (Recipe 2: it overlaps only the 32px edge track, never the rows) that carries the focused state. The scene itself is the `--pv-mat` (product-visuals §2: Colorful mat = one `--scene-*`), so the hero uses 1 of the page's 2 scene colors.
 
 **Background**: page shell `var(--bg)` flat; all color and texture live inside the hero sky. The sky gradient, clouds, wordmark, and cutouts are hero-only — later scenes stay one flat `--scene-*` color. Cutouts and clouds stay out of the centered text column; nothing moves.
 
@@ -501,7 +501,7 @@ Colorful feels like walking through a well-made picture book about software: a w
     <div class="hero-scene-copy">
       <p class="label">For writing teams</p>
       <h1 class="hero-title">Docs that read like they were made by hand</h1>
-      <p class="hero-sub">[One sentence: what the product does and for whom.]</p>
+      <p class="hero-sub">Quill gives small writing teams one place to draft, review and publish, with comments that read like margin notes.</p>
       <div class="hero-actions">
         <a href="#" class="btn-dark">Start writing</a>
         <a href="#" class="btn-outline">See a sample</a>
@@ -586,13 +586,13 @@ Colorful feels like walking through a well-made picture book about software: a w
         0 3px 10px  rgba(0,0,0,.08);
 }
 .hero-paper .pv-layer-main {
-    margin: 0 auto;
     border-bottom-left-radius: 0; border-bottom-right-radius: 0;  /* cut by the scene edge */
-    padding: 32px 0 48px;                             /* §3 card padding; extra sheet below the fold */
+    padding: 32px 32px 48px 0;                        /* §3 card padding; 32px right = Recipe 2 overlap track */
 }
+.hero-paper .pv-row { padding: 0 32px; }              /* rows align with the sheet head */
 .paper-head { display: flex; justify-content: space-between; align-items: center; padding: 0 32px 24px; }
 .paper-body .pv-kpi { padding: 0 32px 16px; margin: 0; }
-.pv-layer-float { padding: 24px; right: 6%; bottom: 12%; }
+.hero-paper .pv-layer-float { padding: 24px; margin-bottom: 12%; }   /* Recipe 2 grid places it on the sheet's right edge */
 .pv-layer-float p:last-child { margin: 8px 0 0; font-size: 16px; }   /* §2 body secondary */
 
 [data-theme="dark"] .card-paper {

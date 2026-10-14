@@ -618,24 +618,24 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 
 **Composition** (from the flim.ai home hero screenshot):
 
-1. **Top band on `var(--bg)`** — a two-column split: the hero heading huge and flush left; the subtitle and CTAs in the right column, aligned to the heading's top. No centered stack. (flim: wordmark left, three-line statement + CTA right.)
-2. **Specimen field below** — a full-bleed `var(--surface-1)` band ruled with a hairline grid (lines `var(--surface-2)`), holding 5–7 product fragments scattered off-grid at varied sizes and z-positions, overlapping without shadows. Fragments at the left and right edges bleed off the viewport (flim: stills cut at both edges). This is product-visuals.md §1 Placement's "surrounds the headline" (7) pattern adapted to a field below the headline.
+1. **Top band on `var(--bg)`** — a two-column split, `7fr 5fr`: the hero heading huge and flush left, two or three lines at most; the subtitle and CTAs in the right column, aligned to the heading's top. No centered stack. (flim: wordmark left, three-line statement + CTA right.)
+2. **Specimen field below** — a full-bleed `var(--surface-1)` band ruled with a hairline grid (lines `var(--surface-2)`), holding 5–7 product fragments scattered off-grid at varied sizes and z-positions, overlapping without shadows. The focal fragment takes the middle ~52%; satellites live in the left and right gutters beside it and never sit on top of its text. Only faded schematic satellites (opacity ≤ 0.3, no readable text) may bleed off the viewport edge (flim crops film *stills* at both edges, never words); a satellite with text stays fully inside the field, at least 24px from the viewport edge — a name cut to "riya Raman" reads as a bug, not a crop. This is product-visuals.md §1 Placement's "surrounds the headline" (7) pattern adapted to a field below the headline.
 3. **One focal fragment** in the middle, sharp and fully legible: Recipe 3 (Isolated hero component) or Recipe 2 (Layered cards) from `shared/product-visuals.md`, at Recipe 3's 1–1.5× scale. All other fragments are **satellites**: small real-content cards (a status pill row, a KPI, an avatar stack, a log line, a search bar) — and any satellite that is only schematic must sit at `opacity: 0.3` or less (product-visuals.md §1 rule 1: "one sharp tile among faded ones", (7), (35)).
 4. **Framing**: every fragment uses §8 Synthetic Product Visual tokens — panels `var(--bg)` with `1px solid var(--surface-2)` border on the `var(--surface-1)` field (Surface nesting rule), radius 16px for the focal frame (content card) and 8px for satellites (feature card). No box-shadow anywhere (§5). Overlap is the only depth (flim: "film stills overlap at varied z-positions without drop shadows").
 5. **The search-bar satellite** (optional, for products with search or a command palette): the 160px pill radius from §4 — flim's own hero has exactly this pill crossing the field.
 
 **Background**: `var(--bg)` top band; `var(--surface-1)` field with the hairline grid. No gradient fills, no glow, no noise. The grid uses `linear-gradient` only to draw 1px lines in `var(--surface-2)` — it is a ruled line, not a color gradient (§1 forbids gradient fills, not rules).
 
-**Scale**: the heading uses the §2 hero size `clamp(48px, 7vw, 80px)`. The field is the visual weight of the fold — the focal fragment starts above the fold on a 1440 × 900 screen.
+**Scale**: the heading uses the §2 hero size `clamp(48px, 7vw, 80px)`. The field is the visual weight of the fold — the focal fragment's top edge sits at 55–70% of a 1440 × 900 screen, so a full card header and its first rows are visible without scrolling. That is why the top band and the field's top use the 58px step, not 128px.
 
 **Entrance motion**: satellites stagger in (card distance 24px, 100ms stagger, 0.8s `cubic-bezier(0.16, 1, 0.3, 1)` — interaction-patterns §1). The focal fragment runs **one** §1.5 recipe instead of fading (Rows stream in, Cursor click, or Typing caret, per the product).
 
 ```html
 <section data-section="hero" data-layout="split-left" data-bg="base" data-bold="true" class="hero-specimen">
   <div class="container hero-specimen-top">
-    <h1 class="hero-specimen-title">Every incident, <mark class="hl">one timeline.</mark></h1>
+    <h1 class="hero-specimen-title">Every incident, one <mark class="hl">timeline.</mark></h1>
     <div class="hero-specimen-aside">
-      <p class="hero-specimen-sub">Northwind Signal merges alerts, deploys, and chat into one ordered record your on-call can read in ten seconds.</p>
+      <p class="hero-specimen-sub">Halberd Signal merges alerts, deploys, and chat into one ordered record your on-call can read in ten seconds.</p>
       <div class="hero-specimen-ctas">
         <a href="#" class="btn-dark btn-lg">Start free</a>
         <a href="#" class="btn-outline btn-lg">Read the docs</a>
@@ -645,20 +645,20 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 
   <div class="specimen-field">
     <!-- Satellites: real content, small, scattered. Positions are % of the field. -->
-    <div class="pv specimen-sat" data-mock role="img" aria-label="Deploy status card" style="left:-2%; top:18%; width:18%">
+    <div class="pv specimen-sat" data-mock role="img" aria-label="Deploy status card" style="left:3%; top:22%; width:17%">
       <div class="pv-panel specimen-sat-card">
         <div class="pv-label">Deploy · api-gateway</div>
         <div class="pv-kpi">v2.41.3</div>
         <span class="pv-pill">Rolled back</span> <span class="pv-muted pv-mono">4m ago</span>
       </div>
     </div>
-    <div class="pv specimen-sat" data-mock role="img" aria-label="Error rate figure" style="left:22%; top:6%; width:12%">
+    <div class="pv specimen-sat" data-mock role="img" aria-label="Error rate figure" style="left:8%; top:62%; width:12%">
       <div class="pv-panel specimen-sat-card"><div class="pv-label">5xx rate</div><div class="pv-kpi">2.17<span class="pv-cents">%</span></div></div>
     </div>
-    <div class="pv specimen-sat is-faded" aria-hidden="true" style="left:74%; top:8%; width:14%">
+    <div class="pv specimen-sat is-faded" aria-hidden="true" style="right:-4%; top:8%; width:14%">
       <div class="pv-panel specimen-sat-card"><div class="pv-label">Runbook</div></div>
     </div>
-    <div class="pv specimen-sat" data-mock role="img" aria-label="On-call responders" style="right:-3%; top:44%; width:20%">
+    <div class="pv specimen-sat" data-mock role="img" aria-label="On-call responders" style="right:4%; top:40%; width:16%">
       <div class="pv-panel specimen-sat-card">
         <div class="pv-label">On call</div>
         <div><span class="pv-avatar">PR</span> <span class="pv-avatar">JK</span> <span class="pv-avatar">MO</span></div>
@@ -666,13 +666,15 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
     </div>
 
     <!-- Focal fragment: Recipe 3 (isolated component), sharp, centered -->
-    <div class="pv pv-iso specimen-focal" data-mock role="img" aria-label="Incident INC-2709 timeline in Northwind Signal">
+    <div class="pv pv-iso specimen-focal" data-mock role="img" aria-label="Incident INC-2709 timeline in Halberd Signal">
       <div class="pv-panel pv-iso-card">
         <div class="pv-label">INC-2709 · Checkout latency</div>
         <div class="pv-iso-title">p95 latency above 1.2s on /checkout</div>
         <div class="pv-row" data-stream><span class="pv-mono pv-muted">14:02</span> Alert fired — Datadog monitor 4471</div>
         <div class="pv-row" data-stream><span class="pv-mono pv-muted">14:03</span> Priya Raman acknowledged</div>
+        <div class="pv-row" data-stream><span class="pv-mono pv-muted">14:04</span> Deploy v2.41.3 linked as likely cause</div>
         <div class="pv-row is-focused" data-stream><span class="pv-mono pv-muted">14:06</span> Rollback of api-gateway v2.41.3 started</div>
+        <div class="pv-row" data-stream><span class="pv-mono pv-muted">14:11</span> p95 back to 380 ms — monitoring</div>
         <div class="pv-iso-chips"><span class="pv-pill is-strong">Critical</span><span class="pv-pill">Payments</span><span class="pv-pill is-quiet">Cycle 41</span></div>
       </div>
     </div>
@@ -685,10 +687,10 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 .hero-specimen { padding-top: 128px; padding-bottom: 0; }            /* §3 hero top; field closes the section */
 .hero-specimen-top {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);            /* heading gets the wider column: ≤ 3 lines */
     gap: 58px;                                                        /* §7 alternating rows gap */
     align-items: start;
-    padding-bottom: 128px;                                            /* §3 large breathing space */
+    padding-bottom: 58px;                                             /* §3 heading to content: keeps the field in the fold */
 }
 .hero-specimen-title {
     font-family: var(--font-display);
@@ -708,7 +710,7 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 
 .specimen-field {
     position: relative;
-    padding: 128px 32px;                                              /* §3 large breathing space; §7 side padding */
+    padding: 58px 32px 128px;                                         /* §3: 58 top keeps the focal card in the fold; 128 bottom */
     background-color: var(--surface-1);
     background-image:
         linear-gradient(var(--surface-2) 1px, transparent 1px),
@@ -717,13 +719,13 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
     overflow: hidden;             /* edge satellites bleed off the viewport */
 }
 .specimen-sat { position: absolute; z-index: 1; }
-.specimen-sat-card { padding: 16px; display: grid; gap: 8px; }        /* §3 spacing step */
+.specimen-sat-card { padding: 16px; display: grid; gap: 8px; justify-items: start; }  /* §3 spacing step; pills keep their width */
 .specimen-sat.is-faded { opacity: 0.2; }                              /* §1 weakest step; ≤ 0.3 rule */
-.specimen-focal { position: relative; z-index: 2; }                   /* focal overlaps satellites */
+.specimen-focal { position: relative; z-index: 2; width: 52%; margin: 0 auto; }  /* the middle band; satellites sit beside it */
 .specimen-focal > .pv-panel { border-radius: 16px; }                  /* §4 content card */
 .specimen-focal .pv-row { grid-template-columns: 48px 1fr; }
 
-.hl { background: var(--surface-1); color: inherit; border-radius: 0; } /* flim "Art directors." block; M2 */
+.hl { background: var(--surface-1); color: inherit; border-radius: 0; padding: 0 0.06em; box-decoration-break: clone; } /* flim "Art directors." block; M2 */
 
 @media (prefers-reduced-motion: no-preference) {
     .specimen-sat:not(.is-faded) {
@@ -736,8 +738,8 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 
 @media (max-width: 767px) {
     .hero-specimen { padding-top: 80px; }                             /* §3 narrow table */
-    .hero-specimen-top { grid-template-columns: 1fr; gap: 24px; padding-bottom: 80px; }
-    .specimen-field { padding: 80px 20px; }
+    .hero-specimen-top { grid-template-columns: 1fr; gap: 24px; padding-bottom: 40px; }
+    .specimen-field { padding: 40px 20px 80px; }                      /* §3 narrow: 58 → 40, 128 → 80 */
     .specimen-sat { display: none; }                                  /* keep only the focal fragment */
     .specimen-focal { width: 100%; }
 }
@@ -759,7 +761,7 @@ The focal fragment's rows use §1.5 A "Rows stream in" (`data-stream` already in
 
 **3. Two-voice type contrast.** Only display sizes and the 12px mono label are allowed to sit next to each other in a heading block; avoid mid-size intermediaries (no 20px kicker over a 47px heading). flim's 13-step scale is held together by locked weight 500 (Typography as Architecture). The label above a section heading is the `.label` from §8; the heading uses the §2 section scale.
 
-**4. Block highlight on one phrase.** One phrase per page (hero only) gets a flat `var(--surface-1)` block with no radius — flim's "Art directors." (`flim.ai-viewport.jpeg`). CSS: `.hl` above. Never a colored highlight, never more than one phrase.
+**4. Block highlight on one phrase.** One phrase per page (hero only) gets a flat `var(--surface-1)` block with no radius — flim's "Art directors." (`flim.ai-viewport.jpeg`). CSS: `.hl` above. Never a colored highlight, never more than one phrase, and only on one or two words that stay on one line: a block that wraps across lines reads as a stray text selection.
 
 **5. Cropped giant wordmark.** The footer ends with the product name at full width, cropped by the bottom of the page — flim's footer (`flim.ai-footer.jpeg`). Use signature-moves.md M14 CSS verbatim with `color: var(--text)`; on dark, the same token flips it to `#EDEDED`.
 

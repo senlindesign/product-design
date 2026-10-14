@@ -22,7 +22,7 @@ These rules come from the evidence. Each one names its count.
    - at least one relative time or concrete date: "2m ago", "Viewing now", "Feb 3, 2026" (43, 44, 46, 21).
 4. **Numbers are specific and non-round.** All 13 finance and analytics visuals use cents or odd values: $3,719.46 (36), $68,026.43 (37), −472.42 (12), 34:18:07 (5), "+7 ↑18%" (4). Two (41, 49) show the cents at lower opacity. This applies **inside `data-mock` only**. Page-level sample claims (stats, metrics in copy) still follow the master SKILL.md *Sample content* rule: round illustrative numbers in `data-sample` elements. A mock row is UI, not a claim.
 5. **Exactly one focused state.** 26/55 show one element in a live state: a selected row (3, 12, 36), an active tab (17, 41), an open tooltip (6, 49), highlighted text (25, 46), a focused input (43, 47), or one sharp tile among faded ones (7, 35). Not zero, not several.
-6. **Fictional, specific, coherent.** The convincing samples invent one business and fill every field for it: Acme Co (31), Wizard Coffee App (23), Coinvest (42), Flore Farms (45). The parts agree: the same incident ID INC-2709 on desktop and phone (4), the headline quoting the code token `// todo` (25), totals that match line items (36). Use the master's fictional companies (Northwind, Contoso, Fabrikam, Globex, Initech) or invent one. Never put real third-party brands in a mock: a real name reads as an integration claim.
+6. **Fictional, specific, coherent.** The convincing samples invent one business and fill every field for it: Acme Co (31), Wizard Coffee App (23), Coinvest (42), Flore Farms (45). The parts agree: the same incident ID INC-2709 on desktop and phone (4), the headline quoting the code token `// todo` (25), totals that match line items (36). Invent the business per page (master SKILL.md *Sample content*: no Northwind/Contoso/Acme-style stock names). Never put real third-party brands in a mock: a real name reads as an integration claim.
 7. **Plain UI, color from the mat or the data.** 19/55 place the UI on a colored, gradient, or image backing panel (the "mat") with the UI itself white or near-black. Color comes from the mat, chart series, status pills, avatars, or content imagery, not from tinted UI chrome (inferred across 3, 11, 30, 40, 47).
 8. **App chrome, not OS chrome.** macOS traffic lights or a custom title bar appear in 7/55, a URL bar in 2/55, and 4 of those 9 are developer tools. Most app visuals show the app's own sidebar and top bar (3, 4, 12, 17, 23, 36). Use traffic lights only for desktop and developer tools.
 9. **Crop with intent.** 12/55 bleed off one edge (fold, section, or container) and 2 more fade out at the edges (7, 35). A hero visual cut at the bottom says "there is more below" (4, 17, 36). Cut through content, never through empty padding.
@@ -175,7 +175,7 @@ Each recipe gives the structure and the CSS that adds to §3. Content examples a
 **Structure**: the app's own chrome (sidebar + top bar), one main view, one focused row or tab. No OS chrome. The hero section has no bottom padding, so the section edge cuts the visual through content.
 
 ```html
-<div class="pv pv-rise" data-mock role="img" aria-label="Northwind Ops dashboard: open orders by status">
+<div class="pv pv-rise" data-mock role="img" aria-label="Larkspur Ops dashboard: open orders by status">
   <div class="pv-mat">
     <div class="pv-panel pv-app">
       <aside class="pv-side">  <!-- workspace name + 6–8 nav labels, one active -->  </aside>
@@ -211,7 +211,7 @@ Each recipe gives the structure and the CSS that adds to §3. Content examples a
 
 **When**: a split hero or a feature row where two or three related facts tell the story better than one screen: a report with a tooltip, a desktop view with a phone alert, a chat with a code snippet. Evidence: layered cards in 11/55, e.g. (4), (5), (6), (23), (26), (33); mats in 19/55.
 
-**Structure**: one main card (table or chart) and 1–2 smaller floating cards that overlap it by about 20% (6). The floating card repeats an ID or name from the main card (4, 23). The floating card holds the focused state or the motion cue.
+**Structure**: one main card (table or chart) and one smaller floating card that **overlaps only the main card's edge** — never its rows, columns, or text. The floating card repeats an ID or name from the main card (4, 23) and holds the focused state or the motion cue. In the evidence the overlap is shallow and falls on the frame's edge or padding: Craft's toast crosses the window's left edge, Framer's caption card crosses the frame's lower-left corner. A floating card that covers the main card's status or time column was the most common visible defect in generated pages (2026-10-14 style matrix): it hides the data the hero exists to show.
 
 ```html
 <div class="pv pv-layers" data-mock role="img" aria-label="Weekly time report with an open day tooltip">
@@ -223,19 +223,21 @@ Each recipe gives the structure and the CSS that adds to §3. Content examples a
 ```
 
 ```css
-.pv-layers .pv-mat { position: relative; padding-bottom: 6%; }
-.pv-layer-main  { width: 82%; padding: 16px 0 0; }
-.pv-layer-float {
-    position: absolute;
-    right: 4%;
-    bottom: 8%;
-    width: 42%;                        /* overlaps the main card by ~20% (6) */
+/* A 3-track grid: main | 32px overlap | float. The main card reserves the overlap as right padding,
+   so the floating card can only ever cover padding. Copy verbatim; change only the 0.42fr if needed. */
+.pv-layers .pv-mat  { display: grid; grid-template-columns: minmax(0, 1fr) 32px minmax(0, 0.42fr); padding-bottom: 6%; }
+.pv-layer-main      { grid-column: 1 / 3; grid-row: 1; padding: 16px 32px 0 0; }   /* 32px = the overlap track */
+.pv-layer-float     {
+    grid-column: 2 / 4; grid-row: 1;
+    align-self: end; margin-bottom: 8%;  /* low on the right, like a note laid on the edge */
+    position: relative; z-index: 1;
     padding: 16px;
     /* + the style's floating card depth (§2); in Minimal: the border from .pv-panel only */
 }
 @media (max-width: 767px) {
-    .pv-layer-main  { width: 100%; }
-    .pv-layer-float { position: static; width: 100%; margin-top: 12px; }
+    .pv-layers .pv-mat { grid-template-columns: 1fr; }
+    .pv-layer-main     { grid-column: 1; padding-right: 0; }
+    .pv-layer-float    { grid-column: 1; grid-row: 2; margin: 12px 0 0; }   /* below the main card, never on it */
 }
 ```
 
@@ -246,7 +248,7 @@ Each recipe gives the structure and the CSS that adds to §3. Content examples a
 **Structure**: a breadcrumb or label, a title, one full sentence, 3–4 property chips, and exactly one primary action (10, 22, 30). Show it at 1–1.5× real size, about 55% of the width when centered (10).
 
 ```html
-<div class="pv pv-iso" data-mock role="img" aria-label="New issue composer in Globex Tracker">
+<div class="pv pv-iso" data-mock role="img" aria-label="New issue composer in Halberd Tracker">
   <div class="pv-mat">
     <div class="pv-panel pv-iso-card">
       <div class="pv-label">ENG › Billing</div>
@@ -379,7 +381,7 @@ The callout text uses the style's label or card heading role. Never use a left b
 <div class="pv pv-chat" data-mock role="img" aria-label="Assistant answering a renewal question with a cited source">
   <div class="pv-mat">
     <div class="pv-panel pv-chat-panel">
-      <div class="pv-msg pv-msg-user">Which Northwind accounts renew before March 14, and who owns each one?</div>
+      <div class="pv-msg pv-msg-user">Which Fernhill accounts renew before March 14, and who owns each one?</div>
       <div class="pv-msg pv-msg-ai">Three accounts renew before March 14 … <div class="pv-panel pv-artifact">
         <!-- 3 rows: account · renewal date · owner avatar --></div>
         <span class="pv-label">Source · CRM export, Feb 3</span></div>
@@ -452,11 +454,11 @@ Fill every field. Use non-round numbers, real-looking IDs, and names that differ
 | **Developer tool** | file tree: `src/`, `retry.ts`, `queue.ts`, `README.md` | code lines with real identifiers; terminal `$ globex deploy --env staging` → `✓ Deployed 3 functions in 4.7s` | "Ln 15, Col 9", "78 commits", "updated 2 days ago", commit hash `a3f9c21` | the focal code line | (21), (22), (25) |
 | **Collaboration, docs** | breadcrumb "Q3 Launch › Meeting notes"; facepile + Share | "Maya Okafor · Viewing now · Owner"; "Jonas Lindqvist · Viewed 3h ago · Can edit"; doc paragraph of real prose | "Feb 3, 2026", "2 hours ago", "Cycle 41" | one highlighted text span with a name tag | (2), (43), (46) |
 | **AI assistant** | thread title, model or mode chip, "Ask anything…" | long specific question; full answer with a 3-row table, a cited source, or a step list "Step 4 — Build the SQL query ✓" | order "#48213907", "arrives 11 AM, March 12" | the input with partly typed text | (23), (32), (33), (34) |
-| **Fintech, finance** | Accounts · Cards · Transactions · Payments · Reports | "Fabrikam Studio · −$472.42 · Aug 3"; "Office supplies · $1,385.00 (37.2%)"; "Joint savings · $30,412.88" | balances with cents dimmed: $48,382**.09**; "+$17.41 this week"; "38 transactions · average $116.23" | one selected transaction row | (12), (36), (41), (49) |
+| **Fintech, finance** | Accounts · Cards · Transactions · Payments · Reports | "Brightmoor Studio · −$472.42 · Aug 3"; "Office supplies · $1,385.00 (37.2%)"; "Joint savings · $30,412.88" | balances with cents dimmed: $48,382**.09**; "+$17.41 this week"; "38 transactions · average $116.23" | one selected transaction row | (12), (36), (41), (49) |
 | **Commerce, operations** | Orders · Products · Inventory · Customers | "Ethiopian Yirgacheffe · 46 bags · In stock"; "Sumatra Mandheling · 7 bags · Low stock"; "Order #10482 · Paid · $86.40" | "Pending orders 240 ↑2%", "Low-stock SKUs 12 ↑3" | one open order in a side panel | (12), (23) |
 | **Design tool, canvas** | layers panel, properties panel, toolbar with one active tool | a design with its own real content (a recipe card, a product listing); layer rows "Hero / Title / Button" | "E4FF97 100%", "W 375 H 812", "Saved 88 · Cooked 24" | one selected layer with handles; named cursors "Priya", "Theo" | (11), (13), (45) |
 
-People names: mix origins and lengths (Maya Okafor, Jonas Lindqvist, Priya Raman, Theo Marchetti, Dana Whitfield). Companies: Northwind, Contoso, Fabrikam, Globex, Initech, or one the agent invents for the page.
+People names: mix origins and lengths (Maya Okafor, Jonas Lindqvist, Priya Raman, Theo Marchetti, Dana Whitfield). Companies: invented per page, coined words, surnames, or places (Halberd, Larkspur, Quarry & Co, Fernhill, Brightmoor) — never the stock placeholder set (Northwind, Contoso, Fabrikam, Globex, Initech, Acme).
 
 **Never**: "Item 1", "User Name", "Lorem ipsum", "$1,000", "100%", "123", "John Doe", "Acme" next to another placeholder, empty table cells, or an input labelled "Input".
 
@@ -475,6 +477,7 @@ Check each item in the HTML or on the rendered page before delivery. Adapted fro
 7. **At least one relative time or concrete date.**
 8. **A fragment at readable size.** Mock text is 12–13px at 1×, or larger in a close-up. A full screen keeps its KPI numbers readable.
 9. **The parts agree.** Totals match their rows, the same ID appears across layered cards, and the visual shows the headline's claim.
+9a. **Nothing covers content.** No floating card, cutout, cursor, or decoration sits on top of a row, label, or number. Overlaps fall on edges and padding only. On a 390px screen layered cards stack instead of overlapping.
 10. **At most one motion cue**, and the static HTML shows its final state.
 11. **App chrome, not generic chrome.** Domain nav labels. Traffic lights only on desktop or developer tools.
 12. **Color comes from the mat, the data, or the content.** The UI panels stay `var(--bg)` or `var(--surface-*)`.

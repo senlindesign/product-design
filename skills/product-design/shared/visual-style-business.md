@@ -432,13 +432,20 @@ Business feels like dependable infrastructure with one expansive window into the
 
 ### Hero showcase (mandatory)
 
-**Composition**: `centered-stack`. Centered heading + subtitle + two buttons, then a full-container **product stage** (48px radius, §4 "Product stage panel") holding a Recipe 2 layered-cards mock (`shared/product-visuals.md` Recipe 2). The main panel rises from the stage's bottom edge and is cut by it (M3 + M4 Business row); one floating panel with the §5 nested shadow overlaps it and carries the motion cue. Radii nest per §4: stage 48px → main panel 40px → controls 8px (input radius). Inside the stage only, a **mesh gradient** (`shared/atmosphere.md` Recipe 1; §1 Accent Color Rules, "color-tinted product stages… permitted") built from the full Calendly Scheduling hero SVG palette (`#175295`, `#1E5EA7`, `#4890E3`, `#6BB1FF`, `#5DDFD7`, `#B89FFA`, `#EBB0FF`, `calendly.com.md` line 31): sky blue top-left, lavender/pink bottom-left, mint/aqua right, a white glow behind the card, fine grain. Never a two-stop blue → violet blend. The main card sits in a **frosted ring** (translucent white band, `backdrop-filter: blur(12px)`), and when the user names real integrations, 1–3 **app-icon tiles** (real logos, atmosphere.md Recipe 5) overlap the card's top-right corner. If the user supplies brand colors, keep the mesh structure (3+ hues + glow) and swap the hues.
+**Composition — "The product stage with feature tabs"** (Calendly's current home and product heroes). `centered-stack`: centered label, heading (two lines), subtitle, two buttons. Then a full-container **product stage** (48px radius, §4 "Product stage panel") with a **mesh gradient** inside it only (`shared/atmosphere.md` Recipe 1; §1 Accent Color Rules, "color-tinted product stages… permitted"), built from the Calendly Scheduling hero SVG palette (`#175295`, `#1E5EA7`, `#4890E3`, `#6BB1FF`, `#5DDFD7`, `#B89FFA`, `#EBB0FF`, `calendly.com.md` line 31): sky blue top-left, lavender/pink bottom-left, mint/aqua right, a white glow behind the card, fine grain. Never a two-stop blue → violet blend. Inside the stage, top to bottom:
 
-**Recipe choice**: Recipe 2 by default (scheduling, finance, ops, collaboration). For analytics/commerce use Recipe 1's panel inside the same stage; for developer tools use Recipe 6 inside the same stage. The stage, gradient, and nested shadow stay identical — they are the Business signature, not the recipe.
+1. **Feature tabs** — a frosted segmented control (§4 toggle radius) naming 3–4 of the product's real capabilities, one active. This is what makes the stage read as a product tour rather than a screenshot in a frame, and it is the Business signature no other style uses.
+2. **One white product card in a frosted ring**, two panes side by side: the **list** (header + 5 rows, one focused) and the **detail** of the focused row (a title, 2–3 facts, a short choice such as time slots or plan options, and the one primary action). The card rises from the stage's bottom edge and is cut by it (M3 + M4 Business row). Radii nest per §4: stage 48px → card 40px → detail pane 24px → controls 8px.
+
+**No floating card on top of the list.** A floating panel that overlaps the list hides its status and time columns — in real heroes the "detail" lives in its own pane (Calendly, Ramp) or a floating element overlaps only the card's outer edge (Craft's toast, Framer's caption). The focused state and the motion cue live in the detail pane. If the user names real integrations, 1–3 **app-icon tiles** (real logos, atmosphere.md Recipe 5) may sit on the frosted ring at the card's top-right corner, outside the card's content.
+
+**Fold**: the label, two-line heading, subtitle and buttons end around 560px; the stage starts 48px later, and the tabs plus the card header and first rows are visible on a 1440 × 900 screen.
+
+**Recipe choice**: list + detail by default (scheduling, finance, ops, CRM, support). For analytics/commerce the list pane becomes Recipe 1's KPI row + table; for developer tools it becomes Recipe 6 code with the detail pane showing checks. The stage, tabs, ring and shadow stay identical — they are the Business signature, not the recipe.
 
 **Background**: page shell `var(--bg)`, no section color, no glow, no grid. The mesh (and its glow) never leaves the stage.
 
-**Entrance**: heading block uses §6 scroll entrance (0.8s `cubic-bezier(0.16, 1, 0.3, 1)`, 32px section distance per interaction-patterns §1). The mock does not fade; it runs §1.5 B (cursor clicks the confirm button), which replaces the reveal for the stage.
+**Entrance**: heading block uses §6 scroll entrance (0.8s `cubic-bezier(0.16, 1, 0.3, 1)`, 32px section distance per interaction-patterns §1). The card does not fade; it runs §1.5 B (cursor clicks the primary action in the detail pane).
 
 ```html
 <section data-section="hero" data-layout="centered-stack" data-bg="base" data-bold="true" class="biz-hero">
@@ -446,7 +453,7 @@ Business feels like dependable infrastructure with one expansive window into the
     <div class="biz-hero-copy">
       <p class="label">Scheduling for revenue teams</p>
       <h1>Every meeting booked, routed, and ready</h1>
-      <p class="biz-hero-sub">Northwind routes inbound requests to the right rep and confirms the time before the lead goes cold.</p>
+      <p class="biz-hero-sub">Tidewell routes inbound requests to the right rep and confirms the time before the lead goes cold.</p>
       <div class="biz-hero-ctas">
         <a class="btn-dark" href="#">Start for free</a>
         <a class="btn-outline" href="#">Talk to sales</a>
@@ -454,24 +461,27 @@ Business feels like dependable infrastructure with one expansive window into the
     </div>
 
     <div class="biz-stage">
-      <div class="pv pv-layers" data-mock role="img" aria-label="Northwind routing board with a booking confirmation card">
-        <div class="pv-panel pv-layer-main">
-          <div class="pv-row" style="grid-template-columns: 1fr auto; border-top: 0">
-            <span class="pv-kpi">Inbound this week</span><span class="pv-label">Oct 6 – Oct 10</span>
+      <div class="biz-tabs" aria-hidden="true"><span class="is-on">Routing</span><span>Scheduling</span><span>Reminders</span><span>Reports</span></div>
+      <div class="biz-ring">
+        <div class="pv biz-card" data-mock role="img" aria-label="Tidewell routing list with the booking for Dev Kapoor open">
+          <div class="biz-list">
+            <div class="biz-list-head"><span class="pv-kpi">Inbound this week</span><span class="pv-label">Oct 6 – Oct 10</span></div>
+            <div class="pv-row"><span class="pv-avatar">MR</span><span>Maya Reyes · Halberd Logistics</span><span class="pv-mono pv-muted">Tue 10:30</span><span class="pv-pill is-pos">Routed</span></div>
+            <div class="pv-row is-focused"><span class="pv-avatar">DK</span><span>Dev Kapoor · Larkspur Health</span><span class="pv-mono pv-muted">Tue 14:00</span><span class="pv-pill is-att">Pending</span></div>
+            <div class="pv-row"><span class="pv-avatar">LS</span><span>Lena Sato · Quarry &amp; Co</span><span class="pv-mono pv-muted">Wed 09:15</span><span class="pv-pill is-pos">Routed</span></div>
+            <div class="pv-row"><span class="pv-avatar">JO</span><span>Jon Okafor · Brightmoor</span><span class="pv-mono pv-muted">Wed 11:45</span><span class="pv-pill is-quiet">Declined</span></div>
+            <div class="pv-row"><span class="pv-avatar">AN</span><span>Aiko Nakamura · Fernhill</span><span class="pv-mono pv-muted">Thu 16:30</span><span class="pv-pill is-pos">Routed</span></div>
           </div>
-          <div class="pv-row" style="grid-template-columns: 24px 1fr auto auto"><span class="pv-avatar">MR</span><span>Maya Reyes · Acme Logistics</span><span class="pv-mono pv-muted">Tue 10:30</span><span class="pv-pill">Routed</span></div>
-          <div class="pv-row is-focused" style="grid-template-columns: 24px 1fr auto auto"><span class="pv-avatar">DK</span><span>Dev Kapoor · Globex</span><span class="pv-mono pv-muted">Tue 14:00</span><span class="pv-pill is-strong">Pending</span></div>
-          <div class="pv-row" style="grid-template-columns: 24px 1fr auto auto"><span class="pv-avatar">LS</span><span>Lena Sato · Initech</span><span class="pv-mono pv-muted">Wed 09:15</span><span class="pv-pill">Routed</span></div>
-          <div class="pv-row" style="grid-template-columns: 24px 1fr auto auto"><span class="pv-avatar">JO</span><span>Jon Okafor · Umbrella</span><span class="pv-mono pv-muted">Wed 11:45</span><span class="pv-pill is-quiet">Declined</span></div>
-        </div>
-        <div class="pv-panel pv-layer-float biz-float">
-          <p class="pv-label">Confirm · Dev Kapoor</p>
-          <p class="pv-kpi">Tue, Oct 7 · 14:00</p>
-          <p class="pv-muted">30 min · Video call · Owner: Maya R.</p>
-          <span id="pv-confirm" class="pv-target is-focused biz-confirm">Confirm booking</span>
-          <span class="pv-cursor" data-cursor-for="pv-confirm" style="left: 70%; top: 82%" aria-hidden="true">
-            <svg viewBox="0 0 14 20"><path d="M1 1v16l4.5-4 3 6.5 2.5-1-3-6.5H14z"/></svg>
-          </span>
+          <div class="biz-detail">
+            <p class="pv-label">Confirm · Dev Kapoor</p>
+            <p class="pv-kpi">Tue, Oct 7</p>
+            <p class="pv-muted">30 min · Video call · Owner: Maya R.</p>
+            <div class="biz-slots"><span>13:30</span><span class="is-on">14:00</span><span>15:30</span></div>
+            <span id="pv-confirm" class="pv-target is-focused biz-confirm">Confirm booking</span>
+            <span class="pv-cursor" data-cursor-for="pv-confirm" style="left: 72%; top: 84%" aria-hidden="true">
+              <svg viewBox="0 0 14 20"><path d="M1 1v16l4.5-4 3 6.5 2.5-1-3-6.5H14z"/></svg>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -486,7 +496,7 @@ Business feels like dependable infrastructure with one expansive window into the
     font-family: var(--font-display);
     font-size: clamp(48px, 6vw, 72px); font-weight: 600;          /* §2 hero heading */
     letter-spacing: -0.02em; line-height: 1.1;
-    margin: 16px auto 0; max-width: 18ch;
+    margin: 16px auto 0; max-width: 20ch;                          /* two lines at 1440 */
 }
 .biz-hero-sub {
     font-family: var(--font-body); font-size: 18px; line-height: 1.6; /* §2 body text */
@@ -497,8 +507,8 @@ Business feels like dependable infrastructure with one expansive window into the
 /* The stage: 48px panel, gradient lives only here */
 .biz-stage {
     position: relative;
-    margin-top: 64px;                                              /* §3 spacing scale: large component gap */
-    padding: 64px 64px 0;                                          /* mock rises from the bottom edge (M4) */
+    margin-top: 48px;                                              /* §3 heading to content */
+    padding: 32px 48px 0;                                          /* card rises from the bottom edge (M4) */
     border-radius: 48px;                                           /* §4 product stage panel */
     overflow: hidden;
     isolation: isolate;
@@ -515,29 +525,48 @@ Business feels like dependable infrastructure with one expansive window into the
 }
 .biz-stage::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .12; mix-blend-mode: soft-light;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); } /* grain, atmosphere.md R1 */
-/* Frosted ring: wrap .pv-layer-main in <div class="frost-ring"> — see atmosphere.md Recipe 1; app tiles: Recipe 5 */
-.biz-stage .pv { --pv-r-outer: 48px; --pv-r-inner: 16px; --pv-r-control: 8px; }   /* §4 per product-visuals §2 Business column */
-.biz-stage .pv-layer-main {
-    width: 82%;
-    margin: 0 auto;
-    padding: 24px 0 0;
+
+.biz-tabs {                                                        /* frosted segmented control */
+    display: flex; gap: 4px; width: max-content; margin: 0 auto 24px; padding: 4px;
+    border-radius: 9999px;                                         /* §4 toggle */
+    background: rgba(255,255,255,.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    font-family: var(--font-display); font-size: 14px; font-weight: 500;   /* §2 navigation */
+}
+.biz-tabs span { padding: 8px 16px; border-radius: 9999px; opacity: .6; }   /* §8 .btn-sm padding */
+.biz-tabs .is-on { background: #FFFFFF; opacity: 1; box-shadow: 0 4px 5px rgba(71,103,136,.04), 0 8px 15px rgba(71,103,136,.03); }
+
+.biz-ring {                                                        /* frosted ring around the card (atmosphere.md R1) */
+    max-width: 960px; margin: 0 auto; padding: 8px 8px 0;
+    border-radius: 48px 48px 0 0;
+    background: rgba(255,255,255,.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.biz-card {
+    --pv-r-outer: 48px; --pv-r-inner: 16px; --pv-r-control: 8px;  /* §4, product-visuals §2 Business column */
+    display: grid; grid-template-columns: minmax(0, 1fr) 300px;
     background: #FFFFFF;                                           /* §8 white card on tinted stage */
-    border: 0;
     border-radius: 40px 40px 0 0;                                  /* §4 nested: 48 → 40, cut by the stage edge */
     box-shadow: 0 4px 5px rgba(71,103,136,.04), 0 8px 15px rgba(71,103,136,.03), 0 15px 30px rgba(71,103,136,.06); /* §5 nested */
+    min-height: 360px;
 }
-.biz-stage .pv-row { padding: 0 32px; }                            /* §3 card internal padding */
-.biz-float {
-    position: absolute; right: 4%; bottom: 12%; width: 36%;
-    padding: 24px;
-    background: #FFFFFF;
-    border: 0;
-    border-radius: 24px;                                           /* §4 content card */
-    box-shadow: 0 4px 5px rgba(71,103,136,.04), 0 8px 15px rgba(71,103,136,.03), 0 30px 50px rgba(71,103,136,.08); /* §5 card */
+.biz-list { padding: 32px 0 24px; }                                /* §3 card padding */
+.biz-list-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 32px 16px; }
+.biz-card .pv-row { grid-template-columns: 24px minmax(0,1fr) auto 76px; padding: 0 32px; }
+.biz-card .pv-row > :nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.biz-card .pv-pill { justify-self: start; }
+.pv-pill.is-pos { color: var(--mock-positive); border-color: color-mix(in srgb, var(--mock-positive) 30%, transparent); }  /* product-visuals §2.1 */
+.pv-pill.is-att::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--mock-attention); margin-right: 6px; }  /* §2.1: dot + text label */
+.biz-detail {
+    position: relative; margin: 16px 16px 0 0; padding: 24px;
+    background: var(--surface-1);                                  /* §8 surface nesting inside a white card */
+    border-radius: 24px 24px 0 0;                                  /* §4 content card, cut with the card */
+    display: grid; align-content: start; gap: 8px;
 }
-.biz-float > * + * { margin-top: 8px; }
+.biz-detail p { margin: 0; }
+.biz-slots { display: flex; gap: 8px; margin: 8px 0; }
+.biz-slots span { padding: 8px 12px; border-radius: 8px; background: #FFFFFF; font-family: var(--font-mono); font-size: 12px; }  /* §4 input */
+.biz-slots .is-on { box-shadow: 0 0 0 2px var(--accent); }         /* §10 detail 5: one accent ring */
 .biz-confirm {
-    display: inline-flex; margin-top: 16px; padding: 8px 16px;     /* §8 .btn-sm */
+    justify-self: start; margin-top: 8px; padding: 8px 16px;       /* §8 .btn-sm */
     font-family: var(--font-display); font-size: 14px; font-weight: 500;
     border: 1px solid var(--surface-2); border-radius: 8px;
 }
@@ -550,16 +579,20 @@ Business feels like dependable infrastructure with one expansive window into the
 
 @media (max-width: 767px) {
     .biz-hero { padding-top: 64px; padding-bottom: 64px; }        /* §3 narrow */
-    .biz-stage { padding: 40px 20px 0; border-radius: 24px; margin-top: 40px; } /* §3 narrow 64→40, 32→20; radius steps to content card */
-    .biz-stage .pv-layer-main { width: 100%; border-radius: 16px 16px 0 0; }
-    .biz-stage .pv-row { padding: 0 16px; }
-    .biz-float { position: static; width: 100%; margin: 12px 0 0; }
+    .biz-stage { padding: 24px 12px 0; border-radius: 24px; margin-top: 32px; }  /* §3 narrow 48→32; radius steps to content card */
+    .biz-tabs { max-width: 100%; overflow-x: auto; }
+    .biz-ring { border-radius: 24px 24px 0 0; padding: 6px 6px 0; }
+    .biz-card { grid-template-columns: 1fr; border-radius: 20px 20px 0 0; }
+    .biz-card .pv-row { padding: 0 16px; grid-template-columns: 24px minmax(0,1fr) 76px; }
+    .biz-card .pv-row > :nth-child(3) { display: none; }
+    .biz-list-head { padding: 0 16px 12px; }
+    .biz-detail { display: none; }                                 /* the list carries the story on a phone */
 }
 ```
 
-Add the §1.5 shared trigger + recipe B script from `shared/interaction-patterns.md` unchanged. The static markup is the final (confirmed) state.
+Add the §1.5 shared trigger + recipe B script and the `.pv-cursor` CSS from `shared/interaction-patterns.md` unchanged. The static markup is the final (confirmed) state.
 
-**Dark theme**: keep the stage, swap the depth model to Linear's. Stage background becomes `var(--surface-1)` with `box-shadow: inset 0 0 0 1px var(--surface-2)` (§5 Dark Theme Card Depth); the mesh survives only as its hue radials at `color-mix(in srgb, <hue> 45%, transparent)` over `var(--surface-1)` (drop the base color and white glow; frosted ring becomes `rgba(255,255,255,.06)`) so the stage reads as a lit window in a near-black shell — Linear's single pink gradient moment is the precedent (`linear.md`, "a single editorial moment, not a system"). Inner panels use `var(--bg)` with `inset 0 0 0 1px var(--surface-2)`; the floating card adds the elevated `0 2px 4px rgba(0,0,0,0.4)` from §5. No `#FFFFFF` panels in dark.
+**Dark theme**: keep the stage, swap the depth model to Linear's. Stage background becomes `var(--surface-1)` with `box-shadow: inset 0 0 0 1px var(--surface-2)` (§5 Dark Theme Card Depth); the mesh survives only as its hue radials at `color-mix(in srgb, <hue> 45%, transparent)` over `var(--surface-1)` (drop the base color and white glow; frosted ring becomes `rgba(255,255,255,.06)`) so the stage reads as a lit window in a near-black shell — Linear's single pink gradient moment is the precedent (`linear.md`, "a single editorial moment, not a system"). The card becomes `var(--bg)` with `inset 0 0 0 1px var(--surface-2)`, the detail pane `var(--surface-1)`, slots `var(--surface-2)`, and the active tab `var(--surface-1)`; tabs and ring use `rgba(255,255,255,.06)`. No `#FFFFFF` panels in dark.
 
 ### Signature details
 

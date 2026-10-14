@@ -48,7 +48,7 @@ Read `pages/landing-page/references/social-proof.md` and select:
 | Enterprise Testimonial List | Clients are high-profile brands (Nike/Google tier); premium tone | 3+ quotes from major brands |
 | Bento / Mosaic | Have mixed evidence types (quotes, metrics, logos) and want one dense block | 4-6 mixed tiles |
 
-Logo walls show only customers the user names. Take each logo from the sources in *Real logos only* (master `SKILL.md`): Simple Icons in one color suits a grayscale wall (`https://cdn.simpleicons.org/<slug>/<hex>`); a brand that no library has becomes a text wordmark. Never draw a logo and never show `[Company]` placeholder logos.
+A logo wall of real customers shows only customers the user names. Take each logo from the sources in *Real logos only* (master `SKILL.md`): Simple Icons in one color suits a grayscale wall (`https://cdn.simpleicons.org/<slug>/<hex>`); a brand that no library has becomes a text wordmark. Never draw a logo and never show `[Company]` placeholder logos.
 
 Stats / numbers are not a standalone pattern — they are a content type that slots into Bento / Mosaic or sits alongside a Logo Wall.
 
@@ -167,4 +167,14 @@ Provide the section code (HTML + CSS). Note which pattern was chosen and why.
 - All design knowledge is pre-distilled in the referenced files
 - Follow `shared/visual-style.md` tokens exactly — do not invent values
 - Testimonials the user didn't give are sample content (master `SKILL.md` Design Rules → *Sample content*): finished-looking quotes from fictional people, tagged `data-sample`, never presented as real
-- Logo walls without user-given customers use fictional companies (Northwind, Contoso, Fabrikam…) as text wordmarks, tagged `data-sample` — never real customer logos
+- Logo walls without user-given customers use invented companies (master `SKILL.md` *Sample content*) as **sample wordmarks**, tagged `data-sample` — never real customer logos
+- **Sample wordmarks** — a row of names in one font at one weight reads as a placeholder strip. Real walls (Granola, incident.io, Linear customers) mix letterforms because every brand is different. Give each wordmark its own treatment using only the style's fonts: vary weight (400 / 500 / 600 where loaded), case (Title, lowercase, UPPERCASE with +0.08em tracking), family (display / body / mono), and optionally one leading geometric glyph from `● ◆ ▲ ✳ ◐ ■` at 0.9em. No two adjacent wordmarks share a treatment. Height and opacity stay uniform (the style's logo-wall opacity), so the row stays calm:
+  ```html
+  <div class="logo-row" data-section="logo-wall" data-layout="logo-row" data-bg="base" data-sample>
+    <span class="wm" data-logo-source="wordmark" style="font-family:var(--font-display);font-weight:600">◆ Halberd</span>
+    <span class="wm" data-logo-source="wordmark" style="font-family:var(--font-body);text-transform:lowercase">larkspur</span>
+    <span class="wm" data-logo-source="wordmark" style="font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em">Quarry &amp; Co</span>
+    <span class="wm" data-logo-source="wordmark" style="font-family:var(--font-display);font-style:italic">Fernhill</span>
+    <span class="wm" data-logo-source="wordmark" style="font-family:var(--font-body);font-weight:500">✳ brightmoor</span>
+  </div>
+  ```

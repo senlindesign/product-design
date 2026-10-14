@@ -47,6 +47,6 @@ A change is done when all of the following pass. Report each result; don't summa
 | A reported bad output | First add a case to `evals/evals.json` that reproduces it and fails, then fix, then show it passes |
 | `check_page.py` or eval tools | Run them against a known-good page (no false positives) and a deliberately broken one (each check fires) |
 
-A run passes when every case passes the checker, including the 390px audit, and the judge reports no visible defect in the hero. Record full runs in `evals/RESULTS.md`; judge averages go to `evals/SCORES.md` automatically.
+A run passes when every case passes the checker, including the 390px and 1440px layout audits, and the judge reports no visible defect in the hero. Record full runs in `evals/RESULTS.md`; judge averages go to `evals/SCORES.md` automatically.
 
 **Environment.** The runner needs the `claude` CLI (headless, `claude -p`) and Chrome or Chromium. The 390px audit and the judge's mobile screenshot also need Node with the `playwright` package. Each generated page costs about $1–3, so the smoke set costs about $5 and the full set $20–30. Get the maintainer's budget before running more than the smoke set. A usage-limit stop is reported as SKIPPED, not FAIL; rerun those cases later and never count them as skill failures. Record the model used with every result.

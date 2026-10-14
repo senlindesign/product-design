@@ -20,7 +20,7 @@ Four core principles:
 1. **Stage the promise, daylight the proof** — The entry section (hero) may use a dark photographic or near-black stage to make the product feel present and capable. Following sections resolve to warm white — lowering visual strain while visitors examine how it works.
 2. **Editorial authority over dashboard familiarity** — Large serif headings make claims feel authored and declarative. Sans-serif handles mechanics, features, and evidence. Mono handles labels and data. This three-voice stack signals that the product has something to say, not just configure.
 3. **Chromatic restraint preserves consequence** — The teal accent (`#20808D`) is reserved for actions, links, and status cues only. When most of the page stays neutral, teal still means "do something." Distributing it across headings or backgrounds turns it into ambient noise.
-4. **Depth reserved for agency** — Shadows concentrate around interactive surfaces (hero panel, CTA, search input). Static content (pricing cards, feature descriptions) has no shadow. Depth becomes a behavioral cue: the surface that can act feels tangible.
+4. **Depth reserved for the product** — Depth concentrates on the product itself: the hero's paper window on the dark stage, and floating surfaces that can act. Static content (pricing cards, feature descriptions) has no shadow; it is ruled with hairlines instead.
 
 ---
 
@@ -80,12 +80,13 @@ Logo wall:            opacity: 0.2
 **`--accent` allowed uses (exhaustive)**:
 - ✅ Primary CTA button background (`.btn-dark`, required)
 - ✅ Nav CTA button background (optional)
-- ✅ Interactive search panel border glow (optional — hero search input)
+- ✅ Citation numerals and source numbers inside a product mock (they are links)
 - ✅ Link hover color (optional)
 - ✅ Status badge background (functional only, e.g., "Available" / "Online")
 - ❌ Section backgrounds, even at low opacity
 - ❌ Heading color or gradient text
 - ❌ Icon backgrounds or badge fills
+- ❌ Glows, glow rings, or tinted shadows of any kind
 
 ### Dark/Light Section Contrast (Editorial Pattern)
 
@@ -148,6 +149,7 @@ The dark hero is the "stage." Everything following is the "proof."
 ### Type Scale
 
 ```
+Front-page hero:  clamp(56px, 6.2vw, 96px)   weight: 400   tracking: -0.02em   line-height: 1.0   (the Style Signature hero masthead)
 Hero heading:     72px                        weight: 400   tracking: -0.02em   line-height: 1.0
 Cross-page hero:  clamp(48px, 5vw, 64px)     weight: 400   tracking: -0.02em   line-height: 1.05
 Section heading:  48px                        weight: 500   tracking: -0.02em   line-height: 1.1
@@ -212,7 +214,7 @@ Left/right padding 64px            →  20px
 ## 4. Border Radius System
 
 ```
-Hero panel:      30px   (Perplexity's hero search panel — the most elevated surface)
+Search panel:    30px   (a search or ask input when it is the centerpiece of a product mock)
 Product stage:   22px   (large content containers, outer cards)
 Panel:           16px   (mid-level content panels, feature cards)
 Inner UI:        14px   (nested windows, inner content frames)
@@ -221,7 +223,7 @@ Control:         8px    (inputs, small surfaces)
 Pill:            9999px (all CTA buttons — Perplexity uses pill actions)
 ```
 
-**Nested radius rule**: `30px` hero panel → `22px` inner floating surface → `14px` secondary nested element. Each nesting level steps one size smaller.
+**Nested radius rule**: `22px` product stage / hero window → `14px` inner UI → `8px` control. A `30px` search panel nests a `22px` floating surface. Each nesting level steps one size smaller.
 
 **Note**: Like Colorful, Editorial uses pill buttons (`9999px`). The rounded-biological geometry is consistent with the teal accent philosophy — approachable and direct.
 
@@ -231,19 +233,19 @@ Pill:            9999px (all CTA buttons — Perplexity uses pill actions)
 
 **Interactive surfaces and floating elements use layered shadows. Static content cards use no shadow.**
 
-Shadow depth is a behavioral signal: "this surface can act." Pricing cards (passive) have no shadow. The hero search panel (active) has the deepest shadow.
+Shadow depth marks the product. Pricing cards and feature cards (passive) have no shadow. The hero's paper window has the deepest shadow.
 
-### Hero Panel Shadow (highest elevation)
+### Stage Window Shadow (highest elevation — the hero window on the dark stage)
 
-For the hero search input, the central interactive product element:
 ```css
-.hero-panel {
+.ed-window {
     box-shadow:
-        0 4px 24px -2px rgba(32, 128, 141, 0.4),   /* teal glow matches accent */
-        0 0 0 1px rgba(32, 128, 141, 0.2),           /* teal ring */
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);    /* inner highlight */
+        0 0 0 1px rgba(255, 255, 255, 0.06),   /* hairline edge against #161616 */
+        0 32px 80px rgba(0, 0, 0, 0.45);       /* the window sits above the stage */
 }
 ```
+
+No tinted or glowing shadows anywhere: the earlier teal-glow hero panel read as a stock AI template and has been removed.
 
 ### Floating Surface Shadow (standard elevation)
 
@@ -473,10 +475,8 @@ For a dark hero on a light-theme page:
 When the user provides a brand color:
 1. Override `--accent` with the brand color; calculate `--accent-text`
 2. If the brand color is dark (luminance < 0.3), check contrast on dark hero sections — may need a lighter tint for the hero CTA
-3. If the brand color is teal-family, it can extend to the hero panel shadow (replacing the teal glow tint)
-4. If the brand color is warm (red, orange, amber), the teal glow tokens need to be replaced with the brand color's shadow equivalent
+3. Replace the teal everywhere it appears as a signal: CTA, citation numerals, link hover, focus outline
 
-**Replacing the teal glow**: The hero panel shadow uses `rgba(32, 128, 141, ...)` — teal-tinted. When a brand color replaces the accent, update this shadow to use the brand color's RGB values instead.
 
 ### Font Override
 
@@ -496,40 +496,69 @@ When user provides a brand sans font (for body):
 
 ### Character
 
-Editorial reads like a front page that happens to have a working product on it. There is one dark stage, then daylight. The page opens on `#161616`, where a large serif claim sits above one glowing interactive panel, and everything after that resolves to warm paper (`#FAF8F5`). That split comes from the DNA decision "Stage the promise, daylight the proof" (perplexity.ai.md, Taste DNA: the first 900px viewport is dominated by `#161616`/`#1A1918`, and the mid-page and footer go to `#FDFBFB`/`#FAF8F5`). Three voices do the hierarchy work instead of color: the serif makes claims, the sans explains mechanics, and the mono labels evidence ("Editorial Authority Over Dashboard Familiarity"). Teal is rare enough to mean "act" (DNA: about 0.1–0.2% of the sampled area). Depth goes only to the surface that can act ("Depth Is Reserved for Agency"). The result is authored and calm: dense information, few colors, and one luminous object.
+Editorial reads like a front page that happens to have a working product on it. There is one dark stage, then daylight. The page opens on `#161616`, where a large serif claim is set like a front-page headline above one paper window of the product, and everything after that resolves to warm paper (`#FAF8F5`). That split comes from the DNA decision "Stage the promise, daylight the proof" (perplexity.ai.md, Taste DNA: the first 900px viewport is dominated by `#161616`/`#1A1918`, and the mid-page and footer go to `#FDFBFB`/`#FAF8F5`). Three voices do the hierarchy work instead of color: the serif makes claims, the sans explains mechanics, and the mono labels evidence ("Editorial Authority Over Dashboard Familiarity"). Teal is rare enough to mean "act" (DNA: about 0.1–0.2% of the sampled area). Depth goes only to the product. The result is authored and calm: dense information, few colors, and one bright paper object on black.
 
 ### Hero showcase (mandatory)
 
-**Default hero: the Ask Stage.** It is a full-bleed `#161616` stage, with a centered 72px Cormorant claim, a 560px subtitle, and the teal CTA. Under them sits the elevated **hero panel**: a 30px-radius input surface with the teal glow shadow, which is the one place on the page with depth. One inner floating surface (22px radius) shows the product's answer.
+**Default hero: the Front Page.** It is a full-bleed `#161616` stage set like a newspaper front page. A masthead row holds the claim on the left (front-page size, two lines, one phrase in Cormorant *italic*) and the subtitle and CTAs on the right, aligned to the claim's last line. A hairline rule closes the masthead. Under it a **paper window** — the product in warm daylight colors (`--bg` `#FAF8F5`), dense and legible, with three columns: navigation · the main object · a **margin column** of evidence. The window is cut by the bottom of the stage. It is the one surface on the page with depth.
 
-- **Composition**: centered stack (DNA: "centered product … heroes"). Signature move M4 (Framed hero stage, Editorial row: `.hero-stage`, 30px radius, teal CTA). The panel is about 752px wide (DNA: hero interaction panel `752 × 164px`, 30px radius). The answer surface overlaps the panel below it, which is product-visuals **Recipe 7 (Chat)** staged as **Recipe 2** layering: the input is the centerpiece (Recipe 7 note: "the input uses the style's input or search-bar radius when it is the visual's centerpiece"), and the answer card floats with Floating Surface Shadow. For non-AI products, swap the answer card for a Recipe 3 isolated component with the same staging.
-- **Background**: flat `#161616` by default. The DNA stage is photographic (perplexity.ai.md: hero image `2270 × 1080`, 2.10:1). Use a photo **only if the user supplies one**: set it as `background-image` under the same `#161616` base color, and never generate or fake one. No gradient, no glow behind the text, no grid.
-- **Nested radius**: 30px panel → 22px floating answer → 14px inner rows (§4 nested radius rule).
-- **Entrance motion**: the heading, subtitle, and CTA are static (visible immediately). The panel runs interaction-patterns §1.5 **C. Typing caret** (2000ms counter duration, plays once). The answer card then enters with the §6 scroll-entrance easing. The HTML holds the final state.
+- **Why this and not a glowing input.** A lone glowing input box on a black stage is the stock look of AI product templates, and it shows no product. Real editorial-tech heroes show the product as a printed, dense artifact under a set headline: Grok (headline left, subtitle right, product window below in a framed stage), Shopify Editions (serif masthead, product page below), Granola (serif claim, the input surrounded by the user's real notes, never alone). Never build the hero around an input with nothing else in it, and never add a glow ring.
+- **Fit the window to the product.** The three columns always mean the same thing; fill them with the product's own nouns (product-visuals.md §6):
+
+  | Product | Left column | Main column | Margin column (evidence) |
+  |---|---|---|---|
+  | AI / research / search | workspace + saved questions | the question, a full answer with superscript citations, a 3–5 row result table | numbered sources with type, date, page or quote |
+  | Inbox / support / CRM | inbox views with counts | one conversation thread: customer message, teammate's internal note, draft reply | customer details, assignee, tags, history |
+  | Docs / knowledge | doc tree | the document with one highlighted passage | comments and version history |
+  | Analytics / finance | report list | a chart + 5-row table, one row focused | definitions, filters, data freshness |
+  | Developer tool | file tree | code with one focused line (Recipe 6 content, light) | PR checks, reviewers, deploy log |
+
+- **Composition**: masthead grid `7fr 4fr`, 64px column gap (§7 gutter). Claim at the §2 front-page size; subtitle at the §7 560px measure. The window starts 64px below the rule and at 50–65% of a 1440 × 900 fold. Margin column 260px (§7 margin column), left column 18%.
+- **Background**: flat `#161616`. A user-supplied photo may sit under it; never generate or fake one. No gradient, no glow, no grid behind the text.
+- **Color**: teal appears only on the CTA, the citation numerals, and source numbers. Status data inside the window uses the product-visuals §2.1 mock colors.
+- **Entrance motion**: the masthead is static (a printed statement). Inside the window, one §1.5 cue: **A Rows stream in** on the result table or thread, or **C Typing caret** on the question line. The HTML holds the final state.
 
 ```html
 <section data-section="hero" data-layout="full-bleed" data-bg="dark" data-bold="true" class="ed-stage">
   <div class="ed-stage-inner">
-    <p class="label ed-stage-label">Research assistant</p>
-    <h1 class="ed-claim">Answers you can cite.</h1>
-    <p class="ed-sub">One sentence that says what the product does, in the user's own words.</p>
-    <div class="ed-ctas">
-      <a href="#" class="btn-dark">Try it free</a>
-      <a href="#" class="btn-outline">See how it works</a>
+    <div class="ed-masthead">
+      <div>
+        <p class="label">Research assistant for procurement</p>
+        <h1 class="ed-claim">Answers your supplier data <em>can back up.</em></h1>
+      </div>
+      <div>
+        <p class="ed-sub">Ledger reads your contracts, invoices and supplier emails, then answers questions about them with a source for every line.</p>
+        <div class="ed-ctas">
+          <a href="#" class="btn-dark">Try it free</a>
+          <a href="#" class="btn-outline">See a sample answer</a>
+        </div>
+      </div>
     </div>
 
-    <div class="pv ed-ask" data-mock role="img" aria-label="A question being typed into the product, with a cited answer below">
-      <div class="ed-panel">
-        <div class="ed-panel-input"><span data-type>Which suppliers raised prices after the March tariff change?</span><span class="pv-caret"></span></div>
-        <div class="ed-panel-meta"><span class="label">Sources · 14</span><span class="ed-send" aria-hidden="true">↑</span></div>
+    <div class="pv ed-window" data-mock role="img" aria-label="Ledger answering which suppliers raised prices, with cited sources">
+      <aside class="ed-side">
+        <div class="ed-ws"><i></i>Halden Foods</div>
+        <a class="is-on">Ask</a><a>Suppliers <span class="pv-muted">41</span></a><a>Contracts <span class="pv-muted">118</span></a><a>Invoices</a>
+        <p class="label ed-group">Recent</p>
+        <a>Q3 freight surcharges</a><a>Renewals before Mar 14</a><a>Packaging spend by site</a>
+      </aside>
+      <div class="ed-main">
+        <p class="label">Ask · Today 09:42</p>
+        <p class="ed-q"><span data-type>Which suppliers raised prices after the March tariff change?</span></p>
+        <p class="ed-ans">Three of your eleven steel and packaging suppliers raised list prices within 30 days of the change<sup>1</sup>. Corvo Packaging tied its increase to the tariff by name<sup>2</sup>; the other two cite energy costs<sup>3</sup>.</p>
+        <div class="ed-table">
+          <div class="ed-tr" data-stream><span>Halvard Steel</span><span class="pv-mono is-neg">+6.2%</span><span class="pv-mono pv-muted">Mar 19</span><span class="ed-num">1</span></div>
+          <div class="ed-tr is-focused" data-stream><span>Corvo Packaging</span><span class="pv-mono is-neg">+4.0%</span><span class="pv-mono pv-muted">Mar 22</span><span class="ed-num">2</span></div>
+          <div class="ed-tr" data-stream><span>Northline Freight</span><span class="pv-mono is-neg">+2.5%</span><span class="pv-mono pv-muted">Apr 2</span><span class="ed-num">3</span></div>
+        </div>
       </div>
-      <div class="ed-answer">
-        <p class="label">Answer</p>
-        <p class="ed-answer-text">Three of your eleven suppliers raised list prices within 30 days of the change.</p>
-        <div class="ed-answer-row"><span>Halden Steel</span><span class="pv-mono">+6.2%</span><span class="ed-cite">[1]</span></div>
-        <div class="ed-answer-row"><span>Corvo Packaging</span><span class="pv-mono">+4.0%</span><span class="ed-cite">[2]</span></div>
-        <div class="ed-answer-row"><span>Northline Freight</span><span class="pv-mono">+2.5%</span><span class="ed-cite">[3]</span></div>
-      </div>
+      <aside class="ed-margin">
+        <p class="label">Sources · 14</p>
+        <div class="ed-src"><b>1</b><p><strong>Price notice — Halvard Steel</strong><span class="pv-muted">PDF · Mar 19 · p. 2</span></p></div>
+        <div class="ed-src"><b>2</b><p><strong>Email from Ana Corvo</strong><span class="pv-muted">“…in line with the new tariff schedule.”</span></p></div>
+        <div class="ed-src"><b>3</b><p><strong>Invoice #INV-20417</strong><span class="pv-muted">Northline · Apr 2</span></p></div>
+        <div class="ed-src pv-muted"><b>4</b><p><strong>Master agreement 2024</strong><span>Clause 7.3 · price review</span></p></div>
+      </aside>
     </div>
   </div>
 </section>
@@ -537,84 +566,76 @@ Editorial reads like a front page that happens to have a working product on it. 
 
 ```css
 .ed-stage {
-    background: #161616;                     /* §1 Dark Theme --bg / §8 dark hero section */
-    color: #DEDEDE;                          /* §1 Dark Theme --text */
+    background: #161616; color: #DEDEDE;     /* §1 Dark Theme --bg / --text: the stage */
     padding-top: 128px;                      /* §3 hero top whitespace */
-    padding-bottom: 96px;                    /* §3 default section padding */
-    text-align: center;
+    padding-bottom: 0;                       /* the window is cut by the stage edge */
     overflow: hidden;
 }
 .ed-stage-inner { max-width: 1440px; margin: 0 auto; padding: 0 64px; }   /* §7 main grid */
-.ed-stage .label { color: #DEDEDE; }
+.ed-stage > .ed-stage-inner > .ed-masthead .label { color: #DEDEDE; }      /* masthead label only, not the window's */
+.ed-masthead {
+    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    column-gap: 64px; align-items: end;      /* §7 grid gutter; subtitle sits on the claim's baseline row */
+    padding-bottom: 48px;                    /* §3 heading to content */
+    border-bottom: 1px solid #2A2826;        /* §1 Dark --surface-2: the masthead rule */
+}
 .ed-claim {
     font-family: var(--font-display);
-    font-size: 72px; font-weight: 400;       /* §2 hero heading */
+    font-size: clamp(56px, 6.2vw, 96px); font-weight: 400;   /* §2 front-page hero */
     letter-spacing: -0.02em; line-height: 1.0;
     margin: 24px 0 0;
 }
-.ed-sub {
-    font-family: var(--font-body); font-size: 16px; line-height: 1.6;
-    opacity: 0.6;                            /* §1 subtitle opacity */
-    max-width: 560px;                        /* §7 subtitle measure */
-    margin: 24px auto 0;                     /* §3 heading to subheading */
-}
-.ed-ctas { display: flex; gap: 16px; justify-content: center; margin-top: 40px; }  /* §3 subheading to CTA; 16px = §3 card gap */
-.ed-stage .btn-outline { color: #DEDEDE; border-color: #2A2826; }                   /* dark-surface override (§1 Dark --surface-2) */
+.ed-claim em { font-style: italic; }         /* one phrase only (M2, Editorial row) */
+.ed-sub { font-size: 16px; line-height: 1.6; opacity: 0.6; max-width: 560px; margin: 0; }  /* §2 body, §1 subtitle, §7 measure */
+.ed-ctas { display: flex; gap: 16px; margin-top: 32px; }
+.ed-stage .btn-outline { color: #DEDEDE; border-color: #2A2826; }
 .ed-stage .btn-outline:hover { border-color: #DEDEDE; }
 
-.ed-ask { max-width: 752px; margin: 64px auto 0; text-align: left; }  /* DNA panel width 752px; 64px = §3 scale */
-.ed-panel {
-    background: #1A1918;                     /* §1 Dark --surface-1 */
-    border-radius: 30px;                     /* §4 hero panel */
-    padding: 24px;
-    box-shadow:                              /* §5 Hero Panel Shadow — the only glow on the page */
-        0 4px 24px -2px rgba(32, 128, 141, 0.4),
-        0 0 0 1px rgba(32, 128, 141, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+/* The paper window: light Editorial tokens inside the dark stage */
+.ed-window {
+    --bg: #FAF8F5; --surface-1: #FDFBFB; --surface-2: #E8E4DF; --text: #27251E;   /* §1 Light Theme, scoped */
+    margin-top: 64px;                        /* §3 scale */
+    height: 60vh; min-height: 420px;         /* Recipe 1 crop: cut by the stage bottom */
+    display: grid; grid-template-columns: 18% minmax(0, 1fr) 260px;   /* §7 margin column */
+    background: var(--bg); color: var(--text);
+    border-radius: 22px 22px 0 0;            /* §4 product stage */
+    box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 32px 80px rgba(0,0,0,.45);  /* §5 Stage Window Shadow */
+    overflow: hidden; font-size: 13px;       /* product-visuals §3 mock text */
 }
-.ed-panel-input { font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
-.ed-panel-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
-.ed-send {
-    display: inline-grid; place-items: center; width: 32px; height: 32px;
-    border-radius: 9999px;                   /* §4 pill */
-    background: var(--accent); color: var(--accent-text);
-}
-.ed-answer {
-    position: relative;
-    width: 82%;                              /* Recipe 2 main-card width */
-    margin: -16px 0 0 auto;                  /* overlaps the panel edge (Recipe 2 layering) */
-    padding: 24px;
-    background: #1A1918;
-    border: 1px solid #2A2826;
-    border-radius: 22px;                     /* §4 product stage (nested step under 30px) */
-    box-shadow: 0 2px 8px rgba(0,0,0,.08), 0 8px 32px rgba(0,0,0,.08);  /* §5 Floating Surface Shadow */
-}
-.ed-answer-text { font-size: 16px; line-height: 1.6; margin: 8px 0 16px; }
-.ed-answer-row {
-    display: grid; grid-template-columns: 1fr auto 32px; gap: 12px; align-items: center;
-    min-height: 32px; padding: 0 12px;      /* product-visuals §3 row */
-    border-top: 1px solid #2A2826;
-    font-size: 13px;
-}
-.ed-answer-row:first-of-type { border-radius: 14px 14px 0 0; }   /* §4 inner UI */
-.ed-cite { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }  /* link-like citation = accent "link" use */
+.ed-window .label { color: var(--text); }    /* window labels use the light text, not the stage's */
+.ed-side { padding: 24px 16px; border-right: 1px solid var(--surface-2); display: grid; align-content: start; gap: 2px; }
+.ed-ws { display: flex; gap: 8px; align-items: center; font-weight: 500; font-size: 14px; margin-bottom: 16px; }
+.ed-ws i { width: 20px; height: 20px; border-radius: 8px; background: var(--text); }   /* §4 control */
+.ed-side a { display: flex; justify-content: space-between; padding: 6px 8px; border-radius: 8px; opacity: 0.6; }
+.ed-side a.is-on { background: var(--surface-2); opacity: 1; }
+.ed-group { margin: 16px 8px 6px; }
+.ed-main { padding: 32px 48px; overflow: hidden; }
+.ed-q { font-size: 20px; font-weight: 500; line-height: 1.3; margin: 12px 0 16px; max-width: 560px; }  /* §2 card heading */
+.ed-ans { font-size: 16px; line-height: 1.6; max-width: 600px; margin: 0; }                            /* §2 body */
+.ed-ans sup, .ed-num, .ed-src b { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }  /* §1: citations are links */
+.ed-table { margin-top: 16px; max-width: 600px; border-top: 1px solid var(--surface-2); }
+.ed-tr { display: grid; grid-template-columns: 1fr 80px 80px 24px; gap: 12px; align-items: center; min-height: 32px; border-bottom: 1px solid var(--surface-2); }
+.ed-tr.is-focused { background: var(--surface-2); margin: 0 -8px; padding: 0 8px; border-radius: 8px; }
+.is-neg { color: var(--mock-negative); }     /* product-visuals §2.1 */
+.ed-margin { padding: 32px 24px; border-left: 1px solid var(--surface-2); display: grid; align-content: start; gap: 16px; }
+.ed-src { display: grid; grid-template-columns: 24px 1fr; gap: 8px; }
+.ed-src p { margin: 0; line-height: 1.45; } .ed-src strong { display: block; font-weight: 500; }
 
-@media (prefers-reduced-motion: no-preference) {
-    .ed-answer { transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }  /* §6 scroll entrance */
-    .ed-answer.is-before { opacity: 0; transform: translateY(16px); }   /* interaction-patterns small-element distance */
-}
 @media (max-width: 767px) {
-    .ed-stage { padding-top: 80px; padding-bottom: 56px; }   /* §3 narrow: 128→80, 96→56 */
+    .ed-stage { padding-top: 80px; }                          /* §3 narrow: 128 → 80 */
     .ed-stage-inner { padding: 0 20px; }
-    .ed-claim { font-size: 48px; }                           /* §2 narrow hero */
-    .ed-ask { margin-top: 32px; }                            /* §3 narrow: 64→32 */
-    .ed-answer { width: 100%; margin-top: 12px; }            /* Recipe 2 narrow collapse */
+    .ed-masthead { grid-template-columns: 1fr; row-gap: 24px; padding-bottom: 32px; }
+    .ed-claim { font-size: 48px; }                            /* §2 narrow hero */
+    .ed-window { grid-template-columns: 1fr; margin-top: 32px; height: 420px; }
+    .ed-side, .ed-margin { display: none; }                   /* keep the main column */
+    .ed-main { padding: 24px 20px; }
+    .ed-tr { grid-template-columns: 1fr 64px 24px; } .ed-tr > :nth-child(3) { display: none; }
 }
 ```
 
-Use the typing script from interaction-patterns §1.5 C on `[data-type]`. After it finishes, remove `is-before` from `.ed-answer`. Under reduced motion, both are already in their final state.
+Motion: copy the §1.5 shared trigger and recipe A (or C) from `shared/interaction-patterns.md` unchanged. Under reduced motion everything is already in its final state.
 
-**Dark-theme note**: on a dark-theme page the stage *is* the page `--bg` (`#161616`), so it would melt into the next section. Keep the stage dark, and give the section after it `data-bg="alt"` (`var(--surface-1)` `#1A1918`) with a `1px solid var(--surface-2)` top border, so the stage→proof turn stays visible. The teal glow on the panel carries over unchanged (the accent does not flip, §1). On a light-theme page, the hardcoded `#161616`/`#DEDEDE`/`#1A1918`/`#2A2826` above are the local dark override (§1 Dark/Light Section Contrast).
+**Dark-theme page**: the stage *is* the page `--bg` (`#161616`), so give the section after it `data-bg="alt"` (`var(--surface-1)` `#1A1918`) with a `1px solid var(--surface-2)` top border, so the stage→proof turn stays visible. The window keeps its scoped light tokens in both themes: daylight inside the stage is the point. On a light-theme page, the hardcoded `#161616`/`#DEDEDE`/`#2A2826` above are the local dark override (§1 Dark/Light Section Contrast).
 
 ### Signature details
 
@@ -647,16 +668,16 @@ a.ed-link:hover { color: var(--accent); }                                       
 ### Motion personality
 
 The motion is quiet and fast, like a page that answers instead of performs.
-- **Fits**: §1.5 **C Typing caret** (hero, the default: it shows the product being asked), **A Rows stream in** (sources or results arriving), and **D Toast** (an answer is ready). Avoid B Cursor click in the hero: the panel is an input, not a button-driven UI.
+- **Fits**: §1.5 **A Rows stream in** (results, sources, or a thread arriving in the hero window — the default), **C Typing caret** (the question line, for ask/search products), and **D Toast** (an answer is ready, in feature mocks). Avoid B Cursor click in the hero: the window is read, not clicked.
 - **Timing**: hover `transform 0.15s ease-out`; color/opacity `0.15s linear`; card lift `0.2s ease-in-out`; entrance `0.8s cubic-bezier(0.16, 1, 0.3, 1)` (all §6). Typing uses the 2000ms counter duration (interaction-patterns §1). Everything plays once.
 - **Hover**: the CTA moves `translateY(-1px)` with `brightness(1.1)`; outline buttons darken their border; links go teal. Static cards do **not** lift. Only `.card-floating` (interactive) gets the `-4px` lift.
-- **Never moves**: serif headings (no word-by-word reveal; the claim is a printed statement), the hero panel's glow (no pulse), section backgrounds, and the nav.
+- **Never moves**: serif headings (no word-by-word reveal; the claim is a printed statement), the hero window (no float or tilt), section backgrounds, and the nav.
 
 ### Preferred signature moves
 
 Which layout each section uses by default is set in the master `SKILL.md` Step 4.3 *Style layout defaults* table; the notes below adjust how each move looks in this style.
 
-- **M4 Framed hero stage**, as the default hero above. Editorial row: `.hero-stage` `#161616`, 30px radius, teal CTA. Adjustment: the stage here is full-bleed (DNA "full-bleed dark photographic stage"), not inset. Put the 30px radius on the *panel*, not on the section.
+- **M4 Framed hero stage + M3 Product rising from the fold**, as the default hero above. Editorial row: full-bleed `#161616` stage (DNA "full-bleed dark photographic stage"), a light paper window with the 22px product-stage radius cut by the stage bottom, teal CTA.
 - **M10 Poster quote**: serif `48px` quote, `max-width: 62%`, `.label` attribution. It is bold only on the closing dark stage (Editorial allows `dark` for closing sections only). Otherwise use it on `alt` as a non-bold layout. No decorative quote glyph and no teal.
 - **M7 Big-type list band**: on `alt` mid-page, rows in `--font-body` 24px at opacity 0.6 → 1 on hover (`0.15s linear`, §6, replacing the Minimal 0.3s), with `1px solid var(--surface-2)` rules.
 - **M1 Edge-to-edge headline**: only for manifesto, About, or 404 Brand Moment pages. Cormorant at 400. The serif at this size is the effect.
@@ -664,13 +685,13 @@ Which layout each section uses by default is set in the master `SKILL.md` Step 4
 ### Drift guard
 
 Forbidden, because these turn the page into another style:
-- **→ Minimal**: a black (`var(--text)`) primary button, 2px radii, zero shadow everywhere including the hero panel, or 180px section rhythm. Editorial's button is a teal pill and its rhythm is 96–120px.
+- **→ Minimal**: a black (`var(--text)`) primary button, 2px radii, zero shadow everywhere including the hero window, or 180px section rhythm. Editorial's button is a teal pill and its rhythm is 96–120px.
 - **→ Business**: soft blue-gray shadows on every card, all-sans headings, a 48px rounded product-stage panel, or a light hero with a brand-gradient mat.
 - **→ Colorful**: pastel scene backgrounds, inset `.scene` hero panels with margin, Playfair, paper-weight four-layer shadows, or more than one tinted band.
-- **→ Generic AI**: a teal or purple gradient behind the hero, glow behind the headline text, perspective grids, gradient serif text, teal headings or icon tiles, a word-by-word headline reveal, a fake photo, or a dark band mid-page (dark is for the hero and the closing only).
+- **→ Generic AI**: a lone input box as the hero visual, a glowing ring or teal shadow around any panel, everything centered in one column, a teal or purple gradient behind the hero, glow behind the headline text, perspective grids, gradient serif text, teal headings or icon tiles, a word-by-word headline reveal, a fake photo, or a dark band mid-page (dark is for the hero and the closing only).
 
 ### Screenshot test
 
-1. **Stage → daylight → stage**: the top roughly 900px is near-black with one teal-ringed rounded panel, the body is warm off-white, and (if there is a closing CTA) the bottom returns to near-black. No other dark band appears.
+1. **Stage → daylight → stage**: the top roughly 900px is near-black with a left-set serif masthead, a hairline rule, and a warm paper product window cut by the stage's bottom edge (dense, legible, three columns); the body is warm off-white, and (if there is a closing CTA) the bottom returns to near-black. No other dark band appears.
 2. **Serif claims, sans mechanics**: every hero and section heading is visibly a high-contrast serif, and every card heading and body line is sans; mono uppercase labels sit above the headings.
 3. **Teal is a pinprick**: teal appears only on the pill CTAs, the panel ring, citations, and links. Squint, and the page is black, cream, and charcoal with a few small teal points.

@@ -76,6 +76,7 @@ LAYOUT_TAGS = {"centered-stack", "split-left", "split-right", "bento", "card-gri
                "full-bleed", "big-type", "big-quote", "stat-band", "logo-row", "carousel"}
 BG_ROLES = {"base", "alt", "dark", "scene"}
 SHORT_PAGES = {"pricing", "contact", "404", "downloads"}  # signature-moves.md R4: 0–1 bold sections
+STOCK_NAMES = ["Northwind", "Contoso", "Fabrikam", "Globex", "Initech", "Hooli", "Umbrella Corp", "Acme"]
 BANNED_PHRASES = ["everything you need", "revolutioniz", "revolutionary", "unlock the power", "unlock your"]
 AI_WORDS = ["supercharge", "seamless", "streamline", "empower", "elevate", "effortless", "cutting-edge",
             "next-generation", "next-gen", "unleash", "powerful", "all-in-one"]
@@ -338,6 +339,12 @@ def run_checks(path, style=None, case=None, strict=False):
         r.check(len(ai) <= 1, "copy.ai-words", f"{tag} uses {len(ai)} AI words ({', '.join(ai)}): {text!r}", "warn")
         if tag == "h1":
             r.check(len(words) <= 8, "copy.hero-length", f"hero headline has {len(words)} words; aim for 4–8: {text!r}", "warn")
+
+    # Stock placeholder names and bracket placeholders read as fake at a glance (master SKILL.md, Sample content)
+    stock = sorted({n for n in STOCK_NAMES if re.search(r"\b" + n + r"\b", full_text)})
+    r.check(not stock, "copy.stock-names", f"stock placeholder company names ({', '.join(stock)}); invent names per page", "warn")
+    brackets = sorted(set(re.findall(r"\[[A-Z][A-Za-z ]{2,40}\]", full_text)) - {"[Product]"})
+    r.check(not brackets, "copy.bracket-placeholder", f"bracket placeholders on the page: {', '.join(brackets[:5])}", "warn")
 
     # Logos: every logo states its source; drawn logos are the most visible AI tell
     if p.logos:
