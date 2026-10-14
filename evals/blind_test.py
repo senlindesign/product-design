@@ -11,12 +11,15 @@ import argparse
 import json
 import random
 import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from screens import screenshot  # noqa: E402  (finds Chrome on macOS and Linux)
+
 REPO = Path(__file__).resolve().parent.parent
 CASES_FILE = REPO / "evals" / "evals.json"
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 CRITERIA = ["looks_real", "product_visual", "layout_variety", "copy", "overall"]
 
 PROMPT = """You are a senior product designer judging two landing-page drafts for the same brief.
@@ -42,14 +45,6 @@ Judge only what you see. Reply with JSON only:
   "B": {{...same keys...}},
   "winner": "A" | "B" | "tie",
   "reason": "<one sentence>"}}"""
-
-
-def screenshot(page, out, height=6000):
-    subprocess.run([CHROME, "--headless=new", "--hide-scrollbars", "--disable-gpu",
-                    f"--window-size=1440,{height}", "--virtual-time-budget=6000",
-                    f"--screenshot={out}", page.resolve().as_uri()],
-                   capture_output=True, timeout=120)
-    return out.exists()
 
 
 def judge(brief, a, b, model):
@@ -93,7 +88,7 @@ def main():
         flip = rng.random() < 0.5
         a_src, b_src = (new, old) if flip else (old, new)
         a, b = out_dir / f"{case['name']}-A.png", out_dir / f"{case['name']}-B.png"
-        if not (screenshot(a_src, a) and screenshot(b_src, b)):
+        if not (screenshot(a_src, a, 1440, 6000) and screenshot(b_src, b, 1440, 6000)):
             print(f"  {case['name']}: screenshot failed")
             continue
         try:

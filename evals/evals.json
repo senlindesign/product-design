@@ -512,8 +512,8 @@
       "files": [],
       "expectations": [
         "The hero uses the minimal style's Hero showcase",
-        "At least two {s} signature details are visible",
-        "The page passes the {s} Screenshot test",
+        "At least two minimal signature details are visible",
+        "The page passes the minimal Screenshot test",
         "Side by side with the other style-matrix pages, it is clearly a different design, not a recolor"
       ],
       "checks": {
@@ -539,8 +539,8 @@
       "files": [],
       "expectations": [
         "The hero uses the business style's Hero showcase",
-        "At least two {s} signature details are visible",
-        "The page passes the {s} Screenshot test",
+        "At least two business signature details are visible",
+        "The page passes the business Screenshot test",
         "Side by side with the other style-matrix pages, it is clearly a different design, not a recolor"
       ],
       "checks": {
@@ -566,8 +566,8 @@
       "files": [],
       "expectations": [
         "The hero uses the colorful style's Hero showcase",
-        "At least two {s} signature details are visible",
-        "The page passes the {s} Screenshot test",
+        "At least two colorful signature details are visible",
+        "The page passes the colorful Screenshot test",
         "Side by side with the other style-matrix pages, it is clearly a different design, not a recolor"
       ],
       "checks": {
@@ -593,8 +593,8 @@
       "files": [],
       "expectations": [
         "The hero uses the editorial style's Hero showcase",
-        "At least two {s} signature details are visible",
-        "The page passes the {s} Screenshot test",
+        "At least two editorial signature details are visible",
+        "The page passes the editorial Screenshot test",
         "Side by side with the other style-matrix pages, it is clearly a different design, not a recolor"
       ],
       "checks": {
@@ -608,6 +608,128 @@
         ],
         "text_required": [
           "Relay"
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "name": "pricing-colorful-light-binary",
+      "smoke": false,
+      "prompt": "/product-design pricing colorful\nPebble — a habit tracker for people who want to build one small habit at a time. Two plans: Free ($0) and Plus ($6/mo). Plus adds unlimited habits, reminders and a yearly review.",
+      "expected_output": "A Colorful light pricing page with two plans at the given prices, in the Colorful style's own character, with no invented discounts or 'Most Popular' label.",
+      "files": [],
+      "expectations": [
+        "Two plans show exactly $0 and $6 per month",
+        "Plus lists unlimited habits, reminders and a yearly review",
+        "There is no billing toggle or annual discount, because no annual price was given",
+        "The page header carries the Colorful style's character (its type, background or a signature detail), not a Minimal header in a different palette",
+        "Visuals follow Colorful light: Playfair Display headings, pill buttons, paper shadows"
+      ],
+      "checks": {
+        "page": "pricing",
+        "style": "colorful",
+        "theme": "light",
+        "archetype": [
+          "C"
+        ],
+        "sections_required": [
+          "nav",
+          "pricing",
+          "footer"
+        ],
+        "sections_forbidden": [
+          "billing-toggle"
+        ],
+        "text_required": [
+          "Pebble",
+          "$6",
+          "yearly review"
+        ],
+        "text_forbidden": [
+          "Most Popular"
+        ],
+        "regex_forbidden": [
+          "(?i)save \\d+ ?%"
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "name": "about-business-light-team",
+      "smoke": false,
+      "prompt": "/product-design about business\nHarbor makes payroll software for restaurants. Founded in 2019 in Lisbon. Mission: paying hourly staff should be as simple as closing the till. Team: Ana Duarte (CEO), Miguel Reis (CTO), Joana Lima (Head of Customer Success). We don't publish any company numbers.",
+      "expected_output": "A Business light About page that tells Harbor's story with the given team and mission, in the Business style's own character, with no stats section.",
+      "files": [],
+      "expectations": [
+        "The mission, Lisbon and 2019 appear as given",
+        "The three team members appear with their given roles; no other people are presented as real team members",
+        "There is no stats section, because the user said there are no public numbers",
+        "The page header carries the Business style's character (its type, background or a signature detail), not a Minimal header in a different palette",
+        "Visuals follow Business light: Plus Jakarta Sans, 8px buttons, soft blue-gray card shadows"
+      ],
+      "checks": {
+        "page": "about",
+        "style": "business",
+        "theme": "light",
+        "archetype": [
+          "A",
+          "B"
+        ],
+        "sections_required": [
+          "nav",
+          "team",
+          "footer"
+        ],
+        "sections_any_of": [
+          [
+            "hero",
+            "page-header"
+          ]
+        ],
+        "sections_forbidden": [
+          "stats"
+        ],
+        "text_required": [
+          "Harbor",
+          "Lisbon",
+          "2019",
+          "Ana Duarte",
+          "Miguel Reis",
+          "Joana Lima"
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "name": "blog-minimal-dark-list",
+      "smoke": false,
+      "prompt": "/product-design blog minimal dark\nPatchbay's engineering blog. Articles: \"Why we moved our queue to Postgres\" (Infrastructure), \"Debugging a 3 a.m. memory leak\" (Debugging), \"How we test database migrations\" (Infrastructure), \"Writing error messages people can act on\" (Product), \"Our on-call handbook, published\" (Culture).",
+      "expected_output": "A Minimal dark blog index listing exactly the five given articles, with the Minimal style's own character in the header, and no pagination.",
+      "files": [],
+      "expectations": [
+        "Exactly the five given articles are listed, with their categories",
+        "There is no pagination or 'Load more', because the five articles are the whole blog",
+        "The page header carries the Minimal style's character (its type, background or a signature detail), not a Minimal header in a different palette",
+        "Visuals follow Minimal dark: DM Sans, 2px buttons, no shadows"
+      ],
+      "checks": {
+        "page": "blog",
+        "style": "minimal",
+        "theme": "dark",
+        "sections_required": [
+          "nav",
+          "articles",
+          "footer"
+        ],
+        "sections_forbidden": [
+          "pagination"
+        ],
+        "text_required": [
+          "Why we moved our queue to Postgres",
+          "Debugging a 3 a.m. memory leak",
+          "How we test database migrations",
+          "Writing error messages people can act on",
+          "Our on-call handbook, published"
         ]
       }
     }
