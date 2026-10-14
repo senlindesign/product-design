@@ -25,7 +25,7 @@ These rules come from the evidence. Each one names its count.
 6. **Fictional, specific, coherent.** The convincing samples invent one business and fill every field for it: Acme Co (31), Wizard Coffee App (23), Coinvest (42), Flore Farms (45). The parts agree: the same incident ID INC-2709 on desktop and phone (4), the headline quoting the code token `// todo` (25), totals that match line items (36). Invent the business per page (master SKILL.md *Sample content*: no Northwind/Contoso/Acme-style stock names). Never put real third-party brands in a mock: a real name reads as an integration claim.
 7. **Plain UI, color from the mat or the data.** 19/55 place the UI on a colored, gradient, or image backing panel (the "mat") with the UI itself white or near-black. Color comes from the mat, chart series, status pills, avatars, or content imagery, not from tinted UI chrome (inferred across 3, 11, 30, 40, 47).
 8. **App chrome, not OS chrome.** macOS traffic lights or a custom title bar appear in 7/55, a URL bar in 2/55, and 4 of those 9 are developer tools. Most app visuals show the app's own sidebar and top bar (3, 4, 12, 17, 23, 36). Use traffic lights only for desktop and developer tools.
-9. **Crop with intent.** 12/55 bleed off one edge (fold, section, or container) and 2 more fade out at the edges (7, 35). A hero visual cut at the bottom says "there is more below" (4, 17, 36). Cut through content, never through empty padding. So a cropped panel holds more rows than the crop shows (7–8), and the crop comes from a fixed `px` height on its container — never `vh`, which stretches on tall screens and in full-page screenshots. A list that ends above the crop leaves a white gap that reads as unfinished.
+9. **Crop with intent.** 12/55 bleed off one edge (fold, section, or container) and 2 more fade out at the edges (7, 35). A hero visual cut at the bottom says "there is more below" (4, 17, 36). Cut through content, never through empty padding, and fade the cut: put `.pv-cut` (§3) on the cropped panel so the last 56px dissolve into the mat — a row sliced mid-sentence with a hard edge reads as a rendering bug (every judged run, 2026-10-14). So a cropped panel holds more rows than the crop shows (7–8), and the crop comes from a fixed `px` height on its container — never `vh`, which stretches on tall screens and in full-page screenshots. A list that ends above the crop leaves a white gap that reads as unfinished.
 9a. **On a phone, rows wrap; they don't truncate.** At 390px a row keeps 2–3 columns (avatar, name + subject, status). Let the text column wrap to two lines rather than cutting it to "Maya Re…"; drop timestamps or secondary columns first.
 10. **Scale up, not down.** Close-ups show components at 1.5–2× real size so the text reads at page scale (18, 37, 40). Full screens shrunk to fit become illegible (1, 9).
 11. **One motion cue at most.** Visible cursor in 11/55, typing caret in 2, toast in 2, mid-process state in 3 ("Calculating…" (9), "Step 6 Complete" (23), bars mid-draw (41)). Pick one per visual. The static HTML shows the cue's final state. Animation is optional, from `interaction-patterns.md` §1.5.
@@ -140,6 +140,15 @@ Copy once per page. The values marked "Minimal default" are swapped per §2.
 }
 .pv-avatar:nth-child(3n+2) { background: var(--text); color: var(--text-inverse); }
 .pv-avatar:nth-child(3n)   { background: var(--pv-mat); border: 1px solid var(--surface-2); }
+.pv-cut {                              /* any panel cut by its frame: the last 56px dissolve, so no row is sliced */
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent);
+}
+@media (max-width: 767px) {            /* rule 9a: rows wrap, secondary columns go, nothing truncates to "Ma…" */
+    .pv { --pv-text: 12px; }
+    .pv-row { min-height: 0; padding-top: 8px; padding-bottom: 8px; }
+    .pv-row > * { white-space: normal; }
+    .pv-hide-s { display: none; }      /* put on timestamps, owners, secondary columns */
+}
 ```
 
 Floating cards add the style's floating card depth (§2). In Minimal, write **no** `box-shadow` declaration at all (the self-check flags any shadow in Minimal). Use the border only.
@@ -194,6 +203,7 @@ Each recipe gives the structure and the CSS that adds to §3. Content examples a
 .hero { padding-bottom: 0; overflow: hidden; }               /* directional property, not shorthand */
 .pv-rise { width: 72%; margin: 0 auto; max-height: 60vh; overflow: hidden; }  /* 63–78% wide (A2.1–A2.3) */
 .pv-rise .pv-mat { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.pv-rise .pv-panel { -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent); }   /* = .pv-cut */
 .pv-app  { display: grid; grid-template-columns: 22% 1fr; min-height: 400px; } /* §8 inner panel min-height */
 .pv-side { padding: 16px 12px; border-right: 1px solid var(--surface-2); }
 .pv-main { padding: 24px; }                                    /* §8 inner panel padding */

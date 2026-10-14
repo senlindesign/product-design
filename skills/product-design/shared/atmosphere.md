@@ -168,7 +168,7 @@ if (host && !reduce) {
 
 ## Recipe 4 — Paper collage cutouts (Colorful only)
 
-**When**: around the Colorful hero product window, as if paper scraps were laid on the table behind it. At most 2 pieces in the Colorful hero (the notebook sheet and the torn sheet — see visual-style-colorful.md), all behind the product window (`z-index` below it), clustered at the lower left and lower right; never behind the headline. **A cutout must never cover the product window** — it hides the rows the hero exists to show; it may only peek out from behind the window's edges. Colors: canvas white, ink `#030302`, peach `#F6CB98`, leaf `#9BD8A9`, lavender `#D5ACD8`, sky `#B8CAF5` (`craft.do.md`).
+**When**: no longer used in the Colorful hero — in three judged runs every cutout read as a stray artifact (visual-style-colorful.md §10). Kept for a user who asks for a collage look explicitly: then 2 pieces at most, all behind the product window (`z-index` below it), clustered at the lower left and lower right; never behind the headline. **A cutout must never cover the product window** — it hides the rows the hero exists to show; it may only peek out from behind the window's edges. Colors: canvas white, ink `#030302`, peach `#F6CB98`, leaf `#9BD8A9`, lavender `#D5ACD8`, sky `#B8CAF5` (`craft.do.md`).
 
 ```css
 .collage { position: relative; height: 520px; margin-top: 96px; }

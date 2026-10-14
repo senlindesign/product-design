@@ -606,6 +606,7 @@ Editorial reads like a front page that happens to have a working product on it. 
     border-radius: 22px 22px 0 0;            /* §4 product stage */
     box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 32px 80px rgba(0,0,0,.45);  /* §5 Stage Window Shadow */
     overflow: hidden; font-size: 13px;       /* product-visuals §3 mock text */
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent);   /* product-visuals .pv-cut: the stage edge dissolves the window */
 }
 .ed-window .label { color: var(--text); }    /* window labels use the light text, not the stage's */
 .ed-side { padding: 24px 16px; border-right: 1px solid var(--surface-2); display: grid; align-content: start; gap: 2px; }

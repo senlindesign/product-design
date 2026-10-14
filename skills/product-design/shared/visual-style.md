@@ -619,7 +619,7 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 **Composition** (from the flim.ai home hero screenshot):
 
 1. **Top band on `var(--bg)`** — a two-column split, `7fr 5fr`: the hero heading huge and flush left, two or three lines at most; the subtitle and CTAs in the right column, aligned to the heading's top. No centered stack. (flim: wordmark left, three-line statement + CTA right.)
-2. **Specimen field below** — a full-bleed `var(--surface-1)` band ruled with a hairline grid (lines `var(--surface-2)`), holding 5–7 product fragments scattered off-grid at varied sizes and z-positions, overlapping without shadows. The focal fragment takes the middle ~60% (large enough to read as the product, not a widget); satellites live in the left and right gutters beside it and never sit on top of its text. Only faded schematic satellites (opacity ≤ 0.3, no readable text) may bleed off the viewport edge (flim crops film *stills* at both edges, never words); a satellite with text stays fully inside the field, at least 24px from the viewport edge — a name cut to "riya Raman" reads as a bug, not a crop. This is product-visuals.md §1 Placement's "surrounds the headline" (7) pattern adapted to a field below the headline.
+2. **Specimen field below** — a full-bleed `var(--surface-1)` band ruled with a hairline grid (lines `var(--surface-2)`), holding **one focal fragment and exactly two satellites**, one in each side gutter at different heights, overlapping nothing and casting no shadow. The focal fragment takes the middle ~60% (large enough to read as the product, not a widget). Each satellite is a small real-content card at full contrast — a status, a KPI, an avatar stack — at least 200px wide, fully inside the field and at least 24px from the viewport edge. More, smaller, or faded satellites read as "animation leftovers" (three judged runs, 2026-10-14); a name cut by the viewport ("riya Raman") reads as a bug. This is product-visuals.md §1 Placement's "surrounds the headline" (7) pattern adapted to a field below the headline.
 3. **One focal fragment** in the middle, sharp and fully legible: Recipe 3 (Isolated hero component) or Recipe 2 (Layered cards) from `shared/product-visuals.md`, at Recipe 3's 1–1.5× scale. All other fragments are **satellites**: small real-content cards (a status pill row, a KPI, an avatar stack, a log line, a search bar) — and any satellite that is only schematic must sit at `opacity: 0.3` or less (product-visuals.md §1 rule 1: "one sharp tile among faded ones", (7), (35)).
 4. **Framing**: every fragment uses §8 Synthetic Product Visual tokens — panels `var(--bg)` with `1px solid var(--surface-2)` border on the `var(--surface-1)` field (Surface nesting rule), radius 16px for the focal frame (content card) and 8px for satellites (feature card). No box-shadow anywhere (§5). Overlap is the only depth (flim: "film stills overlap at varied z-positions without drop shadows").
 5. **The search-bar satellite** (optional, for products with search or a command palette): the 160px pill radius from §4 — flim's own hero has exactly this pill crossing the field.
@@ -645,20 +645,14 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 
   <div class="specimen-field">
     <!-- Satellites: real content, small, scattered. Positions are % of the field. -->
-    <div class="pv specimen-sat" data-mock role="img" aria-label="Deploy status card" style="left:3%; top:22%; width:15%">
+    <div class="pv specimen-sat" data-mock role="img" aria-label="Deploy status card" style="left:3%; top:24%; width:16%">
       <div class="pv-panel specimen-sat-card">
         <div class="pv-label">Deploy · api-gateway</div>
         <div class="pv-kpi">v2.41.3</div>
         <span class="pv-pill">Rolled back</span> <span class="pv-muted pv-mono">4m ago</span>
       </div>
     </div>
-    <div class="pv specimen-sat" data-mock role="img" aria-label="Error rate figure" style="left:6%; top:64%; width:12%">
-      <div class="pv-panel specimen-sat-card"><div class="pv-label">5xx rate</div><div class="pv-kpi">2.17<span class="pv-cents">%</span></div></div>
-    </div>
-    <div class="pv specimen-sat is-faded" aria-hidden="true" style="right:-4%; top:8%; width:14%">
-      <div class="pv-panel specimen-sat-card"><div class="pv-label">Runbook</div></div>
-    </div>
-    <div class="pv specimen-sat" data-mock role="img" aria-label="On-call responders" style="right:4%; top:40%; width:14%">
+    <div class="pv specimen-sat" data-mock role="img" aria-label="On-call responders" style="right:3%; top:46%; width:16%">
       <div class="pv-panel specimen-sat-card">
         <div class="pv-label">On call</div>
         <div><span class="pv-avatar">PR</span> <span class="pv-avatar">JK</span> <span class="pv-avatar">MO</span></div>
@@ -719,8 +713,8 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
     overflow: hidden;             /* edge satellites bleed off the viewport */
 }
 .specimen-sat { position: absolute; z-index: 1; }
+.specimen-sat { min-width: 200px; --pv-text: 14px; }
 .specimen-sat-card { padding: 16px; display: grid; gap: 8px; justify-items: start; }  /* §3 spacing step; pills keep their width */
-.specimen-sat.is-faded { opacity: 0.2; }                              /* §1 weakest step; ≤ 0.3 rule */
 .specimen-focal { position: relative; z-index: 2; width: 60%; margin: 0 auto; }  /* the middle band; satellites sit beside it */
 .specimen-focal > .pv-panel { border-radius: 16px; }                  /* §4 content card */
 .specimen-focal .pv-row { grid-template-columns: 48px 1fr; }
@@ -728,11 +722,10 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 .hl { background: var(--surface-1); color: inherit; border-radius: 0; padding: 0 0.06em; box-decoration-break: clone; } /* flim "Art directors." block; M2 */
 
 @media (prefers-reduced-motion: no-preference) {
-    .specimen-sat:not(.is-faded) {
+    .specimen-sat {
         animation: specimen-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;   /* interaction-patterns §1 */
     }
     .specimen-sat:nth-of-type(2) { animation-delay: 100ms; }               /* §1 card stagger */
-    .specimen-sat:nth-of-type(4) { animation-delay: 200ms; }
     @keyframes specimen-in { from { opacity: 0; transform: translateY(24px); } } /* §1 card distance */
 }
 
@@ -796,5 +789,5 @@ Forbidden in Minimal because it reads as another style:
 ### 12.7 Screenshot test
 
 1. **Two voices only**: the screenshot shows huge 500-weight display type and tiny uppercase mono labels, with no bold weight and no serif anywhere.
-2. **The grid is visible and the product hangs on it**: the hero has a ruled `surface-1` field with sharp, legible product fragments — overlapping, edge-cropped, and casting no shadow.
+2. **The grid is visible and the product hangs on it**: the hero has a ruled `surface-1` field with one sharp, legible product fragment and two small full-contrast satellites beside it, casting no shadow.
 3. **Grayscale survives**: convert the screenshot to grayscale and nothing changes except inside `data-mock` status pills/charts and (if given) the brand CTA; the page shell has zero hue.

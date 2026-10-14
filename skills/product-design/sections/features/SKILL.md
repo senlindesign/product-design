@@ -31,8 +31,8 @@ Do NOT use for:
 
 **Defaults if not provided**:
 - Theme → Light
-- Pattern → for a product with a UI, 2–3 **M16 feature rows** (`shared/signature-moves.md`: product fragment at 7/12 width, alternating sides) for the main features; an Equal Grid only for a short "also included" list after them. An equal grid of icon cards as the *only* features section is the most recognisable template layout
-- Feature count → 2–3 main features (rows) + up to 6 secondary (grid)
+- Pattern → for a product with a UI, 2 **M16 feature rows** (`shared/signature-moves.md`: product fragment at 7/12 width, alternating sides) for the main features; an Equal Grid only for a short "also included" list after them. An equal grid of icon cards as the *only* features section is the most recognisable template layout
+- Feature count → 2 main features (rows) + up to 6 secondary (grid)
 - Visual element → a product fragment per main feature; icons only in the secondary grid
 - Brand color → none (`--accent` = `--text`)
 - Display font → the active style's display font (Minimal: DM Sans)

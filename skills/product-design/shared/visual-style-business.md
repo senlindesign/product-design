@@ -391,6 +391,18 @@ nav a:hover { opacity: 1; }
 - Inside `var(--surface-1)` section → nested element uses `var(--bg)` (**not** `var(--surface-1)`)
 - Inside a card → screenshot frame / inner panel uses `var(--bg)`
 
+### Product UI Color (Business only)
+
+Business pages read as Minimal when every product mock is grey on cream (three judged runs, 2026-10-14). Calendly's own product UI is blue: selected slots, primary buttons, and links inside the app. So inside `data-mock` only, Business uses one product blue from its DNA palette, and its feature/step mats take a flat pale tint of the same family:
+
+```css
+[data-mock] { --mock-brand: #1E5EA7; }          /* calendly.com.md palette: selected states, primary buttons, links inside a mock */
+.pv { --pv-mat: #EDF6FF; }                      /* flat mat tint: #6BB1FF at 12% on white — no gradient (the mesh stays in the hero) */
+[data-theme="dark"] .pv { --pv-mat: #131C2B; }  /* dark: --surface-1 #131418 shifted toward the same blue */
+```
+
+Rules: the blue appears only inside mocks (a selected row's left dot, the one primary button, a link, one chart series). The page shell, buttons, and headings stay `--accent` navy. When the user gives a brand color, it replaces `--mock-brand` and tints the mat the same way.
+
 ### Section Backgrounds
 
 ```
@@ -549,6 +561,7 @@ Business feels like dependable infrastructure with one expansive window into the
     background: #FFFFFF;                                           /* §8 white card on tinted stage */
     border-radius: 40px 40px 0 0;                                  /* §4 nested: 48 → 40, cut by the stage edge */
     box-shadow: 0 4px 5px rgba(71,103,136,.04), 0 8px 15px rgba(71,103,136,.03), 0 15px 30px rgba(71,103,136,.06); /* §5 nested */
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent);   /* product-visuals .pv-cut */
 }
 .biz-list { padding: 32px 0 24px; }                                /* §3 card padding */
 .biz-list-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 32px 16px; }
@@ -566,13 +579,13 @@ Business feels like dependable infrastructure with one expansive window into the
 .biz-detail p { margin: 0; }
 .biz-slots { display: flex; gap: 8px; margin: 8px 0; }
 .biz-slots span { padding: 8px 12px; border-radius: 8px; background: #FFFFFF; font-family: var(--font-mono); font-size: 12px; }  /* §4 input */
-.biz-slots .is-on { box-shadow: 0 0 0 2px var(--accent); }         /* §10 detail 5: one accent ring */
+.biz-slots .is-on { box-shadow: 0 0 0 2px var(--mock-brand); }     /* §8 Product UI blue */
 .biz-confirm {
     justify-self: start; margin-top: 8px; padding: 8px 16px;       /* §8 .btn-sm */
     font-family: var(--font-display); font-size: 14px; font-weight: 500;
     border: 1px solid var(--surface-2); border-radius: 8px;
 }
-.biz-confirm.is-focused { background: var(--accent); color: var(--accent-text); border-color: transparent; }
+.biz-confirm.is-focused { background: var(--mock-brand); color: #FFFFFF; border-color: transparent; }   /* §8 Product UI blue */
 
 @media (prefers-reduced-motion: no-preference) {
     .biz-hero-copy { transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -599,26 +612,27 @@ Add the §1.5 shared trigger + recipe B script and the `.pv-cursor` CSS from `sh
 
 ### Signature details
 
-1. **Nested-curve stack** — every enclosure steps down one radius: 48 → 40 → 24/16 → 8 (§4, Calendly `64/48/40/16` chain).
+1. **Blue product, navy shell** — product mocks use `--mock-brand` for their selected state and primary action on a `#EDF6FF` mat (§8 Product UI Color); everything outside the mocks stays navy and warm white. This is the quickest way to tell Business from Minimal in a screenshot.
+2. **Nested-curve stack** — every enclosure steps down one radius: 48 → 40 → 24/16 → 8 (§4, Calendly `64/48/40/16` chain).
 ```css
 .stage { border-radius: 48px; } .stage > .panel { border-radius: 40px; }
 .panel .card { border-radius: 16px; } .panel .control { border-radius: 8px; }
 ```
-2. **Blue-tinted three-layer shadow on raised objects only** — cards and floating panels, never nav/footer/sections (§5).
+3. **Blue-tinted three-layer shadow on raised objects only** — cards and floating panels, never nav/footer/sections (§5).
 ```css
 .card-white { box-shadow: 0 4px 5px rgba(71,103,136,.04), 0 8px 15px rgba(71,103,136,.03), 0 30px 50px rgba(71,103,136,.08); }
 ```
-3. **White card on warm surface** — the soft-emphasis section (`--surface-1`) holds `#FFFFFF` 24px cards; the two warm neutrals plus pure white are the whole shell palette (§8).
+4. **White card on warm surface** — the soft-emphasis section (`--surface-1`) holds `#FFFFFF` 24px cards; the two warm neutrals plus pure white are the whole shell palette (§8).
 ```css
 [data-bg="alt"] { background: var(--surface-1); }
 [data-bg="alt"] .card-white { background: #FFFFFF; border-radius: 24px; }
 ```
-4. **Centered promise, left-aligned operations** — section headers that state a promise are centered; any list, price, or comparison below starts from a left edge (Calendly taste decision 3).
+5. **Centered promise, left-aligned operations** — section headers that state a promise are centered; any list, price, or comparison below starts from a left edge (Calendly taste decision 3).
 ```css
 .section-head { text-align: center; max-width: 540px; margin: 0 auto 48px; }
 .section-body { text-align: left; }
 ```
-5. **One accent ring on the chosen thing** — the selected tier or recommended option gets an `--accent` ring, nothing else (§1 allowed uses, §9).
+6. **One accent ring on the chosen thing** — the selected tier or recommended option gets an `--accent` ring, nothing else (§1 allowed uses, §9).
 ```css
 .tier.is-selected { box-shadow: 0 0 0 2px var(--accent), 0 30px 50px rgba(71,103,136,.08); }
 ```

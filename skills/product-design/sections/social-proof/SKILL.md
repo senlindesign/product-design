@@ -178,3 +178,12 @@ Provide the section code (HTML + CSS). Note which pattern was chosen and why.
     <span class="wm" data-logo-source="wordmark" style="font-family:var(--font-body);font-weight:500">✳ brightmoor</span>
   </div>
   ```
+  ```css
+  /* Exactly 5 wordmarks. One row on desktop, 3 + 2 on phones: never a lone 6th name, never sideways overflow. */
+  .logo-row { display: grid; grid-template-columns: repeat(5, auto); justify-content: space-between; align-items: center; gap: 24px; }
+  .logo-row .wm { font-size: 18px; white-space: nowrap; color: var(--text); opacity: 0.45; }   /* style §1 logo-wall step (Colorful 0.5) */
+  @media (max-width: 767px) {
+    .logo-row { grid-template-columns: repeat(3, minmax(0, 1fr)); justify-content: stretch; justify-items: center; row-gap: 20px; }
+    .logo-row .wm { font-size: 15px; }
+  }
+  ```
