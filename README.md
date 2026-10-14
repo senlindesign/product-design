@@ -34,7 +34,7 @@ We studied 400+ pages of real, shipped products through the [Mobbin](https://mob
 Minimal, Business, Colorful, and Editorial are complete design systems, each extracted from a real product site. Each style has its own signature hero, its own textures and details, and its own motion. The same page in two styles is two different designs, not a recolor.
 
 **3. A hero that stops the scroll.**
-Every page leads with a product showcase built for its style: a mesh-gradient stage with floating app icons, a sky with halftone clouds and paper cutouts, a dark stage with a glowing panel, or a precise specimen grid. The product inside is full of real-looking content — names, statuses, numbers — never grey placeholder boxes.
+Every page leads with a product showcase built for its style: a mesh-gradient stage with feature tabs, a sky with halftone clouds and a paper product sheet, a newspaper-style dark front page, or a precise specimen grid. The product inside is full of real-looking content — names, statuses, numbers — never grey placeholder boxes.
 
 **4. The whole site, section by section.**
 8 page types and 10 sections cover what a product site needs. Ask for a full landing page or only a pricing table, an FAQ, or a footer.
@@ -69,9 +69,9 @@ Before delivery the skill checks its own page: layout rhythm, style fidelity, re
 | Style | Character | Signature hero |
 | --- | --- | --- |
 | **Minimal** (default) | Black, white, and gray; no shadows; sharp edges; much space | A hairline-grid "specimen field" with a focal product view and scattered real-content cards |
-| **Business** | Warm and trustworthy; soft shadows; rounded corners | A rounded product stage in a multi-hue mesh gradient, with real app icons floating at its edge |
-| **Colorful** | Playful and crafted; serif headlines; paper-like cards | A sky with grain and halftone clouds; the product window rises among paper cutouts |
-| **Editorial** | Authored and calm; large serif; one teal accent | A full-bleed dark stage with a large serif claim and a glowing, elevated product panel |
+| **Business** | Warm and trustworthy; soft shadows; rounded corners | A rounded product stage in a multi-hue mesh gradient, with feature tabs that turn it into a product tour; gradient mats under every product visual below |
+| **Colorful** | Playful and crafted; serif headlines; paper-like cards | A sky with grain and halftone clouds; a paper product sheet rises from its edge; warm pastel scenes below |
+| **Editorial** | Authored and calm; large serif; one teal accent | A dark "front page": serif masthead, hairline rule, and a paper product window with a margin column of evidence |
 
 Each style has a light theme and a dark theme and works with every page type. Each was extracted from a real product site with [Taste Lab](https://github.com/senlindesign/taste-skill), a skill that measures a site's style into exact values (colors, type scale, spacing, radius, shadow) and the design principles behind them.
 
@@ -192,7 +192,7 @@ Each page type has 3 or 4 archetypes. An archetype is a layout for one kind of p
 ### Built into every page
 
 - **Real product showcases**: 8 recipes (layered cards, a product rising from the fold, a bento of UI tiles, a code window, an AI chat, and more), filled with real-looking content.
-- **Signature moves**: 14 bold layouts seen on real sites, such as edge-to-edge headlines, a bento with a lead tile, sticky chapter tabs, and a poster quote. Each page uses one or two.
+- **Signature moves**: 17 bold layouts seen on real sites, such as edge-to-edge headlines, a bento with a lead tile, step tiles with product, and a quote wall. Each page uses one or two.
 - **Atmosphere**: mesh gradients, grain, halftone dots, and paper collage, from the style's own palette.
 - **Motion that shows the product**: rows stream in, a cursor clicks, a reply types itself, a chart draws — all respect "reduce motion".
 - **Real logos only**: integration, customer, and platform logos come from icon libraries, never drawn by the AI.
