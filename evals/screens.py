@@ -19,7 +19,6 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 MAC_CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 DESKTOP = (1440, 6000)
-MOBILE = (390, 2532)  # three iPhone-height screens
 
 
 def find_chrome():
@@ -52,13 +51,29 @@ def screenshot(page, out, width=DESKTOP[0], height=DESKTOP[1]):
     return out.exists()
 
 
+def mobile_screenshot(page, out):
+    """390px screenshot through Playwright. Chrome's CLI clamps the window to ~500px, so a 390px CLI
+    screenshot is a crop of a wider layout and shows overflow that isn't there. Returns False without
+    Node + Playwright."""
+    if not shutil.which("node"):
+        return False
+    out = Path(out)
+    out.unlink(missing_ok=True)
+    subprocess.run(["node", str(HERE / "mobile_audit.cjs"), str(Path(page).resolve()), str(out.resolve())],
+                   capture_output=True, text=True, timeout=120, env=_node_env())
+    return out.exists()
+
+
 def shoot_both(page, out_dir=None):
-    """Desktop and mobile screenshots: <stem>-desktop.png and <stem>-mobile.png."""
+    """Desktop and mobile screenshots: <stem>-desktop.png and <stem>-mobile.png.
+    Returns (None, None) when either fails, including when there is no way to render a true 390px layout."""
     page = Path(page)
     out_dir = Path(out_dir or page.parent)
     desk, mob = out_dir / f"{page.stem}-desktop.png", out_dir / f"{page.stem}-mobile.png"
-    ok = screenshot(page, desk, *DESKTOP) and screenshot(page, mob, *MOBILE)
-    return (desk, mob) if ok else (None, None)
+    if not mobile_screenshot(page, mob):
+        print("  mobile screenshot needs node + playwright (Chrome's CLI can't render 390px)", file=sys.stderr)
+        return None, None
+    return (desk, mob) if screenshot(page, desk, *DESKTOP) else (None, None)
 
 
 def _node_env():

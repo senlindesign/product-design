@@ -6,6 +6,20 @@ Entries record the rules as they were on that date. Some have changed since. Exa
 
 Screenshot-judge scores (`evals/judge_pages.py`) are logged separately in `evals/SCORES.md`.
 
+## 2026-10-14 — style matrix (cases 13–16) with the screenshot judge, first cloud run
+
+- **Change under test**: `AGENTS.md`, must-use boxes at the top of each style file, blog off-scale values, evidence-rule sweep; new eval tooling (390px audit, screenshot judge, read tracking)
+- **Generation model**: `claude-sonnet-5-5` (the headless default in this environment, not opus). **Judge**: opus
+- **Result**: **4/4 pass** the checker and the 390px audit. Judge overall: Minimal 6 · Business 7 · Colorful 7 · Editorial 5 (`evals/SCORES.md`)
+- **Infrastructure found on the way**: (1) the first run produced no pages because Claude Code now denies writes inside a `--plugin-dir`, so the runner generates in a temp dir; (2) Chrome's CLI can't render below ~500px, so 390px screenshots were crops of a wider layout and the first judge pass reported overflow on every page. Mobile screenshots now come from Playwright and the bad scores were discarded
+- **Visible defects the judge and a human look agree on**:
+  - Minimal: the Specimen Field still starts ~690px down, a satellite card is cut off by the left viewport edge, and the highlight block behind the headline reads as a stray selection
+  - Editorial: the hero visual is only a reply composer with near-invisible draft text over empty dark space. The desktop shot runs with motion on, so part of this may be a typing animation caught mid-way
+  - Business and Colorful: a floating card covers the status column of the hero inbox list, and the hero frame crops the last row. The judge says Business reads close to Minimal
+  - All four: the logo strip uses the stock sample names (Northwind, Contoso…), which the judge reads as fake. Editorial footer shows `[Careers]` and `[Company legal name]`
+- **Files read** (`reads.md`): every case read its own style file to the last line; `signature-moves.md` and `copy.md` 4/4, `product-visuals.md` 3/4. `interaction-patterns.md` (1,325 lines) was opened in 3/4 cases and never read to the end. That's expected, since it is read selectively, but it shows which sections were reached. `shared/atmosphere.md` was opened in only 1 of the 3 cases whose hero showcase uses it
+- **Cost**: $3.93 (the failed run) + $3.17 generation + about $2 judge and audits
+
 ## 2026-10-08/09 — after Steps 1–4 (sample content, real logos, product visuals, signature moves, copy, motion)
 
 - **Change under test**: sample-content rule + claims check; real logos only; `shared/product-visuals.md`, `shared/signature-moves.md`, `shared/copy.md`, Product-Serving Motion; rhythm/copy/logo checks in the checker

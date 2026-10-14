@@ -1,12 +1,14 @@
 // Narrow-screen audit for a generated page, run by evals/screens.py.
 // Opens the page at 390px and reports sideways overflow, duplicated navigation, and whether the mobile menu opens.
 // Prints JSON. Prints {"unavailable": true} when the playwright package can't be loaded.
+// Usage: node mobile_audit.cjs <page.html> [screenshot.png]  (the screenshot is the first three 390px screens)
 let chromium;
 try { ({ chromium } = require("playwright")); } catch (e) {
   try { ({ chromium } = require("playwright-core")); } catch (e2) { console.log(JSON.stringify({ unavailable: true })); process.exit(0); }
 }
 
 const page_path = process.argv[2];
+const shot_path = process.argv[3];
 
 const VISIBLE = `(el) => {
   const s = getComputedStyle(el), r = el.getBoundingClientRect();
@@ -21,6 +23,12 @@ const VISIBLE = `(el) => {
   const page = await ctx.newPage();
   await page.goto("file://" + page_path, { waitUntil: "load" });
   await page.waitForTimeout(500);
+  if (shot_path) {
+    // Taken before the audit clicks the menu toggle. Chrome's CLI can't render below ~500px wide, so mobile
+    // screenshots must come from here.
+    const h = await page.evaluate(() => document.documentElement.scrollHeight);
+    await page.screenshot({ path: shot_path, fullPage: true, clip: { x: 0, y: 0, width: 390, height: Math.min(2532, h) } });
+  }
 
   const before = await page.evaluate((VISIBLE_SRC) => {
     const visible = eval(VISIBLE_SRC);
