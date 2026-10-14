@@ -1008,7 +1008,7 @@ function initMobileNav() {
 - `position: fixed` + `z-index: 999` — the menu must overlap page content.
 - Return focus to the toggle on Escape close — accessibility requirement.
 - `aria-label="Open menu"` — screen readers cannot see the visual hamburger bars.
-- **Separate menu panel** (the backdrop-filter fix above): give it its own class (`.nav-panel`), never `.nav-links` — the desktop `.nav-links { display: flex }` rule overrides the `hidden` attribute and shows a second link row under the nav on desktop. Add `[hidden] { display: none !important; }` once per page as a guard.
+- **Separate menu panel** (the backdrop-filter fix above): give it its own class (`.nav-panel`), never `.nav-links` — the desktop `.nav-links { display: flex }` rule overrides the `hidden` attribute and shows a second link row under the nav on desktop. Add `[hidden] { display: none !important; }` once per page as a guard. Hide the panel **outside** the media query too — `.nav-panel { display: none; }` at every width, then `.nav-panel.nav-open { display: flex; }` inside `@media (max-width: 767px)`. A panel styled only inside the media query shows as a bare link row on desktop.
 
 ---
 
