@@ -498,7 +498,7 @@ Business feels like dependable infrastructure with one expansive window into the
     font-family: var(--font-display);
     font-size: clamp(48px, 6vw, 72px); font-weight: 600;          /* §2 hero heading */
     letter-spacing: -0.02em; line-height: 1.1;
-    margin: 16px auto 0; max-width: 20ch;                          /* two lines at 1440 */
+    margin: 16px auto 0; max-width: 24ch; text-wrap: balance;      /* two lines at 1440 for a 4–8 word headline; never a one-word last line */
 }
 .biz-hero-sub {
     font-family: var(--font-body); font-size: 18px; line-height: 1.6; /* §2 body text */

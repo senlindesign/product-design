@@ -6,6 +6,15 @@ Entries record the rules as they were on that date. Some have changed since. Exa
 
 Screenshot-judge scores (`evals/judge_pages.py`) are logged separately in `evals/SCORES.md`.
 
+## 2026-10-14 (later) — style upgrade, two passes, judged with honest screenshots
+
+- **Change under test**: rebuilt Editorial hero (front-page masthead + paper product window, no glow input), Business hero (feature tabs + list/detail card), Minimal field raised into the fold, Recipe 2 overlaps limited to a 32px edge track, invented sample company names and varied sample wordmarks, logo-wall opacity 0.45, crops through content, trimmed Colorful decorations
+- **Measurement fix**: desktop screenshots were taken in a 1440×6000 window, which inflates `vh` units; the judge saw a 60vh hero window as ~3,500px of blank panel. Screenshots now come from a real 1440×900 viewport. The pre-upgrade run was re-judged the same way for a fair baseline
+- **Generation model**: `claude-sonnet-5-5`. **Judge**: opus
+- **Result**: 4/4 pass the checker and both layout audits (no covered or clipped text). Judge overall, before → after: Minimal 6 → 7 · Business 7 → 7 · Colorful 6 → 6 · Editorial 5 → 7; product visual 5.8 → 6.8; listed defects 33 → 27. Re-judging the same pages moves single criteria by about ±0.5, so treat 1-point changes per page as signal only when they repeat
+- **Still open** (judge and a human look agree): middle sections are sparse or repeat the same two-column layout in every style; a single quote on a large empty band; Business is still close to Minimal below the hero; Colorful's remaining paper cutouts look arbitrary; mobile tables wrap or truncate awkwardly
+- **Cost**: about $3 generation + $2 judging per round, two rounds
+
 ## 2026-10-14 — style matrix (cases 13–16) with the screenshot judge, first cloud run
 
 - **Change under test**: `AGENTS.md`, must-use boxes at the top of each style file, blog off-scale values, evidence-rule sweep; new eval tooling (390px audit, screenshot judge, read tracking)
