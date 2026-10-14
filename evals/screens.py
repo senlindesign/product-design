@@ -65,6 +65,17 @@ def mobile_screenshot(page, out):
     return out.exists()
 
 
+def desktop_screenshot(page, out):
+    """Full-page 1440px screenshot from a real 900px viewport through Playwright (vh units stay honest).
+    Falls back to Chrome's CLI, whose tall window inflates vh-based heights."""
+    out = Path(out)
+    out.unlink(missing_ok=True)
+    if shutil.which("node"):
+        subprocess.run(["node", str(HERE / "desktop_audit.cjs"), str(Path(page).resolve()), str(out.resolve())],
+                       capture_output=True, text=True, timeout=180, env=_node_env())
+    return out.exists() or screenshot(page, out, *DESKTOP)
+
+
 def shoot_both(page, out_dir=None):
     """Desktop and mobile screenshots: <stem>-desktop.png and <stem>-mobile.png.
     Returns (None, None) when either fails, including when there is no way to render a true 390px layout."""
@@ -74,7 +85,7 @@ def shoot_both(page, out_dir=None):
     if not mobile_screenshot(page, mob):
         print("  mobile screenshot needs node + playwright (Chrome's CLI can't render 390px)", file=sys.stderr)
         return None, None
-    return (desk, mob) if screenshot(page, desk, *DESKTOP) else (None, None)
+    return (desk, mob) if desktop_screenshot(page, desk) else (None, None)
 
 
 def _node_env():

@@ -44,7 +44,7 @@ Primary text:         opacity: 1
 Subtitle/description: opacity: 0.6
 Auxiliary/label:      opacity: 0.45
 Weakest (copyright):  opacity: 0.25
-Logo wall:            opacity: 0.2
+Logo wall:            opacity: 0.45
 ```
 
 ### Dark Theme (Perplexity hero-black DNA)
@@ -65,7 +65,7 @@ Primary text:         opacity: 1
 Subtitle/description: opacity: 0.6
 Auxiliary/label:      opacity: 0.45
 Weakest (copyright):  opacity: 0.25
-Logo wall:            opacity: 0.2
+Logo wall:            opacity: 0.45
 ```
 
 ### Accent Color Rules
@@ -371,6 +371,11 @@ nav {
 [data-theme="dark"] nav {
     background: rgba(22, 22, 22, 0.88);
 }
+/* A page that opens on the dark stage (the Style Signature hero) uses the stage's nav in either theme,
+   so the first screen is one dark piece instead of a cream bar on black (Grok, Perplexity). */
+body:has(.ed-stage) nav { background: rgba(22, 22, 22, 0.88); }
+body:has(.ed-stage) nav a { color: #DEDEDE; }
+body:has(.ed-stage) nav a.btn-dark { color: var(--accent-text); }
 nav > .container {
     max-width: 1440px;
     margin: 0 auto;
@@ -595,7 +600,7 @@ Editorial reads like a front page that happens to have a working product on it. 
 .ed-window {
     --bg: #FAF8F5; --surface-1: #FDFBFB; --surface-2: #E8E4DF; --text: #27251E;   /* §1 Light Theme, scoped */
     margin-top: 64px;                        /* §3 scale */
-    height: 60vh; min-height: 420px;         /* Recipe 1 crop: cut by the stage bottom */
+    height: 540px;                           /* Recipe 1 crop at 60% of a 900px fold; px, not vh — vh breaks on tall or short screens */
     display: grid; grid-template-columns: 18% minmax(0, 1fr) 260px;   /* §7 margin column */
     background: var(--bg); color: var(--text);
     border-radius: 22px 22px 0 0;            /* §4 product stage */
@@ -626,7 +631,7 @@ Editorial reads like a front page that happens to have a working product on it. 
     .ed-stage-inner { padding: 0 20px; }
     .ed-masthead { grid-template-columns: 1fr; row-gap: 24px; padding-bottom: 32px; }
     .ed-claim { font-size: 48px; }                            /* §2 narrow hero */
-    .ed-window { grid-template-columns: 1fr; margin-top: 32px; height: 420px; }
+    .ed-window { grid-template-columns: 1fr; margin-top: 32px; height: 480px; }
     .ed-side, .ed-margin { display: none; }                   /* keep the main column */
     .ed-main { padding: 24px 20px; }
     .ed-tr { grid-template-columns: 1fr 64px 24px; } .ed-tr > :nth-child(3) { display: none; }

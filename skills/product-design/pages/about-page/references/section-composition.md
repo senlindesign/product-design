@@ -212,7 +212,7 @@ Two-column (text occupies ~60-70% width) or single-column centered text.
 
 **When to include**: Archetype A and C, only when notable investors exist.
 
-Reuse the Landing page social proof logo wall pattern from `pages/landing-page/references/social-proof.md`. Same implementation: flex row, `58px` gap, logo text at `16px` / `opacity: 0.15`.
+Reuse the Landing page social proof logo wall pattern from `pages/landing-page/references/social-proof.md`. Same implementation: flex row, `58px` gap, logo text at `16px` / `opacity` = the style's logo-wall step (Minimal 0.45).
 
 **Heading options**: "Backed by" (Webflow pattern) / "Our investors" / "Supported by"
 

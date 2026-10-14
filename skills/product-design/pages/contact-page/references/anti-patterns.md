@@ -109,7 +109,7 @@ If both must be shown, de-emphasize the general form as an "Other inquiries" ent
 **Problem**: Archetype C (Sales-Focused) page has only a large form, with no trust signals on the left side or surrounding area.
 **Why it's wrong**: A sales form asks users to provide detailed information (company, role, size), which requires trust. 75% of Sales-Focused samples display customer logos, testimonials, or quantified data alongside the form. A demo form without trust signals looks like a blank bureaucratic collection form.
 **Correct approach**: Left-right split; the left side includes at least one of the following —
-- Customer logo wall (3–6 logos, opacity 0.15)
+- Customer logo wall (3–6 logos, the style's logo-wall opacity)
 - Quantified data ("X users", "Y% improvement")
 - 1 testimonial (with name and company)
 - G2 / award badges

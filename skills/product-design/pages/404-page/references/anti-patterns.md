@@ -89,7 +89,7 @@
 **Problem**: A display-sized "404" numeral (>= 100px) and a text heading both appear at full opacity, creating two competing focal points.
 **Why it's wrong**: When both elements are at full contrast, the user's eye bounces between them with no clear hierarchy. Evidence: SpaceXAI uses a numeral at ~0.11 opacity (approximately #E5E5E5 on white), Biograph at ~0.10-0.15 on dark, Parker at ~0.06 — all demote the numeral to near-background contrast when a heading is also present.
 **Correct approach**: If both numeral and heading exist, choose one hierarchy:
-- **Numeral as texture**: opacity 0.10-0.15 (system logo-wall tier from `shared/visual-style.md` section 1), heading at full opacity
+- **Numeral as texture**: opacity 0.10-0.15 (texture tier, below the weakest text step 0.2 in `shared/visual-style.md` section 1), heading at full opacity
 - **Numeral as heading**: numeral at full opacity, no separate text heading (Vercel, Butter, Slash pattern — the numeral replaces the heading)
 **Checklist item**: If numeral and heading coexist, is the numeral at reduced opacity (0.10-0.15)?
 

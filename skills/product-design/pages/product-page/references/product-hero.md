@@ -170,7 +170,7 @@
 Both CTA buttons use `.btn-lg` (padding 12px 24px, font-size 16px) for visual balance under the hero heading. The secondary CTA often uses demo-oriented language ("Request a demo", "Book a demo", "Watch demo") instead of the Landing page's "Learn more."
 
 **Variants**:
-- **With logo bar below** (Vanta): Grayscale customer logos immediately below the 2-col hero, within the same section. Uses the standard logo wall pattern (flex, opacity 0.15)
+- **With logo bar below** (Vanta): Grayscale customer logos immediately below the 2-col hero, within the same section. Uses the standard logo wall pattern (flex, the style's logo-wall opacity)
 - **Video shows a person** (Vanta, Kajabi): Video thumbnail is a testimonial/presenter, not a product screenshot. Adds human credibility. Combine with a separate product screenshot elsewhere on the page
 
 **When not to use**:

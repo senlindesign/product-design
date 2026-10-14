@@ -140,7 +140,7 @@
 ### 3.1 Logo Wall as Integration Section
 
 **Problem**: The integration section is just a logo grid (like a social proof logo wall) without descriptions or individual cards.
-**Why it's wrong**: Evidence: 5/8 integration observations show individual cards with names and descriptions, not just logos. The integration section and the social proof logo wall serve different purposes: the logo wall says "trusted by these companies" (brand logos, grayscale, `opacity: 0.15`); the integration section says "connects with these tools" (tool logos, full detail, cards with descriptions).
+**Why it's wrong**: Evidence: 5/8 integration observations show individual cards with names and descriptions, not just logos. The integration section and the social proof logo wall serve different purposes: the logo wall says "trusted by these companies" (brand logos, grayscale, logo-wall opacity); the integration section says "connects with these tools" (tool logos, full detail, cards with descriptions).
 **Correct approach**: Integration section uses cards: tool logo + name + 1-sentence description. 3-6 featured integrations. Full-color logos (not grayscale). Optional "View all integrations" link for the full directory.
 
 ```css

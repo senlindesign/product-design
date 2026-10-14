@@ -2,6 +2,7 @@
 // At 1440px it reports: text inside a product mock that another element covers, text cut off at the left or right
 // (by the viewport or a clipping ancestor), and where the hero's product visual starts relative to the 900px fold.
 // Prints JSON. Prints {"unavailable": true} when the playwright package can't be loaded.
+// Usage: node desktop_audit.cjs <page.html> [screenshot.png]  (full page at a real 1440×900 viewport, up to 6000px)
 let chromium;
 try { ({ chromium } = require("playwright")); } catch (e) {
   try { ({ chromium } = require("playwright-core")); } catch (e2) { console.log(JSON.stringify({ unavailable: true })); process.exit(0); }
@@ -14,6 +15,12 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   const page = await ctx.newPage();
   await page.goto("file://" + process.argv[2], { waitUntil: "load" });
   await page.waitForTimeout(500);
+  if (process.argv[3]) {
+    // A tall *window* would inflate every vh unit (a 60vh panel becomes 3600px), so screenshot the full page
+    // from a real 900px viewport instead.
+    const ph = await page.evaluate(() => document.documentElement.scrollHeight);
+    await page.screenshot({ path: process.argv[3], fullPage: true, clip: { x: 0, y: 0, width: 1440, height: Math.min(6000, ph) } });
+  }
 
   // Fold position first, at the real 900px viewport.
   const fold = await page.evaluate(() => {

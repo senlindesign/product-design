@@ -208,7 +208,7 @@ The best-observed sections (Miro, Harvest) explicitly address **both** audiences
 }
 ```
 
-**Distinction from social-proof logo walls**: Social-proof logos use opacity 0.15 and communicate "these companies trust us." Integration logos use higher opacity (0.5 hover to 1) and communicate "we connect with these tools." Do not combine them into one section.
+**Distinction from social-proof logo walls**: Social-proof logos are a static grayscale row at the style's logo-wall opacity and communicate "these companies trust us." Integration logos sit in cards with names and descriptions (0.5 → 1 on hover) and communicate "we connect with these tools." Do not combine them into one section.
 
 **When not to use**:
 - Fewer than 6 integrations (too sparse; use Pattern 1 card grid)

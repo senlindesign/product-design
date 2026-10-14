@@ -44,7 +44,7 @@ Primary text:         opacity: 1
 Subtitle/description: opacity: 0.75    (slightly less reduced — warm backgrounds need less contrast)
 Auxiliary/label:      opacity: 0.5
 Weakest (copyright):  opacity: 0.35
-Logo wall:            opacity: 0.25
+Logo wall:            opacity: 0.5
 ```
 
 ### Scene Colors (Light Theme)
@@ -76,7 +76,7 @@ Primary text:         opacity: 1
 Subtitle/description: opacity: 0.75
 Auxiliary/label:      opacity: 0.5
 Weakest (copyright):  opacity: 0.35
-Logo wall:            opacity: 0.25
+Logo wall:            opacity: 0.5
 ```
 
 ### Scene Colors (Dark Theme)
@@ -489,9 +489,9 @@ Colorful feels like walking through a well-made picture book about software: a w
 
 ### Hero showcase (mandatory)
 
-**Composition — "Scene with paper on the table."** Signature move M4 (Framed hero stage), Colorful row: the whole hero is one `.scene` panel, inset `20px` from the viewport (`margin: 0 20px`, DNA "Viewport canvas inset 20px"), `24px` radius. The hero scene is a **sky** (`shared/atmosphere.md` Recipe 2): a vertical gradient from `--scene-blue` `#B8CAF5` (the DNA "Sky / periwinkle field", `craft.do.md` line 63) lightening toward the horizon where the product sits, a fine grain overlay, 2–3 soft **halftone-dot clouds** bleeding off the left/right edges (Recipe 3a; Paper Shaders 3b optional), and the product name as a **giant faint outline wordmark** behind the product. Around a product window rising from the bottom edge, 2–3 **paper-collage cutouts** (at most one per side, each peeking ≤ 40px from behind the window, never in front of it) (Recipe 4: zigzag strip, torn sheet, ink scrap, lined notebook sheet in peach `#F6CB98` with leaf `#9BD8A9` rules, one colored blob) — the DNA's recorded "Cloud / paper decoration". Inside: centered mono label, Playfair hero claim, 75%-opacity subtitle at the 540px measure, a black pill CTA — the text occupies the middle third of the frame (DNA Layout: "hero text occupies roughly the middle third"). Below it, product-visuals **Recipe 2 (Layered cards over a backing panel)** staged as paper: a warm-white main document sheet (`var(--bg)`, `16px` inner radius, four-layer card shadow) rising from the scene's bottom edge and cut by it, plus one smaller floating sheet laid on the main sheet's right edge (Recipe 2: it overlaps only the 32px edge track, never the rows) that carries the focused state. The scene itself is the `--pv-mat` (product-visuals §2: Colorful mat = one `--scene-*`), so the hero uses 1 of the page's 2 scene colors.
+**Composition — "Scene with paper on the table."** Signature move M4 (Framed hero stage), Colorful row: the whole hero is one `.scene` panel, inset `20px` from the viewport (`margin: 0 20px`, DNA "Viewport canvas inset 20px"), `24px` radius. The hero scene is a **sky** (`shared/atmosphere.md` Recipe 2): a vertical gradient from `--scene-blue` `#B8CAF5` (the DNA "Sky / periwinkle field", `craft.do.md` line 63) lightening toward the horizon where the product sits, a fine grain overlay, 2–3 soft **halftone-dot clouds** bleeding off the left/right edges (Recipe 3a; Paper Shaders 3b optional). Around a product window rising from the bottom edge, at most 2 **paper-collage cutouts**, one per side, each peeking ≤ 40px from behind the window and never in front of it: the **lined notebook sheet** (peach `#F6CB98`, leaf `#9BD8A9` rules) and the **torn white sheet** from Recipe 4 — the DNA's recorded "Cloud / paper decoration". Do not use the black ink scrap, the zigzag strip, the colored blob, or the giant outline wordmark in the hero: in two judged runs they read as stray artifacts and muddy watermarks, not paper (2026-10-14). Under 768px drop the cutouts and keep one cloud. Inside: centered mono label, Playfair hero claim, 75%-opacity subtitle at the 540px measure, a black pill CTA — the text occupies the middle third of the frame (DNA Layout: "hero text occupies roughly the middle third"). Below it, product-visuals **Recipe 2 (Layered cards over a backing panel)** staged as paper: a warm-white main document sheet (`var(--bg)`, `16px` inner radius, four-layer card shadow) rising from the scene's bottom edge and cut by it, plus one smaller floating sheet laid on the main sheet's right edge (Recipe 2: it overlaps only the 32px edge track, never the rows) that carries the focused state. The scene itself is the `--pv-mat` (product-visuals §2: Colorful mat = one `--scene-*`), so the hero uses 1 of the page's 2 scene colors.
 
-**Background**: page shell `var(--bg)` flat; all color and texture live inside the hero sky. The sky gradient, clouds, wordmark, and cutouts are hero-only — later scenes stay one flat `--scene-*` color. Cutouts and clouds stay out of the centered text column; nothing moves.
+**Background**: page shell `var(--bg)` flat; all color and texture live inside the hero sky. The sky gradient, clouds, and cutouts are hero-only — later scenes stay one flat `--scene-*` color. Cutouts and clouds stay out of the centered text column; nothing moves.
 
 **Entrance**: the text block uses interaction-patterns §2 scroll entrance tokens (0.8s `cubic-bezier(0.16, 1, 0.3, 1)`, 32px). The mock uses §1.5 **D. Toast slides in** on the floating sheet (300ms after load, hero trigger) — the main sheet is static, the floating paper arrives. One motion cue only.
 
@@ -615,14 +615,14 @@ Colorful feels like walking through a well-made picture book about software: a w
     .hero-scene-copy > :nth-child(4) { animation-delay: 300ms; }
     @keyframes hero-rise { from { opacity: 0; transform: translateY(32px); } }
 }
-/* Sky layers — copy from atmosphere.md: .sky-grain (R2), .ht-cloud (R3a), .wordmark (R2), .collage + .cut-* (R4).
-   Markup order inside .hero-scene: grain, clouds, wordmark (all aria-hidden), copy, then the paper mock
+/* Sky layers — copy from atmosphere.md: .sky-grain (R2), .ht-cloud (R3a), .collage + .cut-notebook / .cut-torn (R4).
+   Markup order inside .hero-scene: grain, clouds (all aria-hidden), copy, then the paper mock
    wrapped in .collage with cutouts before it so they sit behind the product window (z-index). */
 .hero-scene-copy, .hero-paper { position: relative; z-index: 2; }
 /* Floating sheet: interaction-patterns §1.5 D (Toast slides in) — CSS + JS copied from there */
 ```
 
-**Dark theme**: the sky uses the deep variant (`--scene-blue: #1E3258`) lightening to `color-mix(in srgb, #1E3258 70%, #F0EDE8)` at the horizon; halftone clouds drop to `rgba(255,255,255,.25)` dots, the wordmark stroke to `rgba(240,237,232,.14)`, and the white cutouts become `var(--surface-1)`; text stays `var(--text)` (warm off-white). Paper sheets step up to `var(--surface-1)` with the heavier dark shadow — a `var(--bg)` sheet on a deep navy scene reads as a hole, not paper. The pill CTA inverts via `--accent`.
+**Dark theme**: the sky uses the deep variant (`--scene-blue: #1E3258`) lightening to `color-mix(in srgb, #1E3258 70%, #F0EDE8)` at the horizon; halftone clouds drop to `rgba(255,255,255,.25)` dots, and the white cutouts become `var(--surface-1)`; text stays `var(--text)` (warm off-white). Paper sheets step up to `var(--surface-1)` with the heavier dark shadow — a `var(--bg)` sheet on a deep navy scene reads as a hole, not paper. The pill CTA inverts via `--accent`.
 
 ### Signature details
 

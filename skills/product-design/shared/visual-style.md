@@ -43,7 +43,7 @@ Primary text:         color: #141414; opacity: 1
 Subtitle/description: color: #141414; opacity: 0.5
 Auxiliary/label:      color: #141414; opacity: 0.4
 Weakest (copyright):  color: #141414; opacity: 0.2
-Logo wall:            color: #141414; opacity: 0.15
+Logo wall:            color: #141414; opacity: 0.45 (raised from 0.15 on 2026-10-14: real logo walls on Mobbin — Granola, incident.io, Mercury — are clearly legible; at 0.15 sample wordmarks read as placeholders)
 ```
 
 ### Dark Theme
@@ -64,7 +64,7 @@ Primary text:         color: #EDEDED; opacity: 1
 Subtitle/description: color: #EDEDED; opacity: 0.5
 Auxiliary/label:      color: #EDEDED; opacity: 0.4
 Weakest (copyright):  color: #EDEDED; opacity: 0.2
-Logo wall:            color: #EDEDED; opacity: 0.15
+Logo wall:            color: #EDEDED; opacity: 0.45
 ```
 
 ### Accent Color Rules
@@ -488,7 +488,7 @@ Row height:     28–32px per data row (enough for 12px text + padding)
     font-size: 16px;
     font-weight: 500;
     color: var(--text);
-    opacity: 0.15;
+    opacity: 0.45;
 }
 ```
 
@@ -619,7 +619,7 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 **Composition** (from the flim.ai home hero screenshot):
 
 1. **Top band on `var(--bg)`** — a two-column split, `7fr 5fr`: the hero heading huge and flush left, two or three lines at most; the subtitle and CTAs in the right column, aligned to the heading's top. No centered stack. (flim: wordmark left, three-line statement + CTA right.)
-2. **Specimen field below** — a full-bleed `var(--surface-1)` band ruled with a hairline grid (lines `var(--surface-2)`), holding 5–7 product fragments scattered off-grid at varied sizes and z-positions, overlapping without shadows. The focal fragment takes the middle ~52%; satellites live in the left and right gutters beside it and never sit on top of its text. Only faded schematic satellites (opacity ≤ 0.3, no readable text) may bleed off the viewport edge (flim crops film *stills* at both edges, never words); a satellite with text stays fully inside the field, at least 24px from the viewport edge — a name cut to "riya Raman" reads as a bug, not a crop. This is product-visuals.md §1 Placement's "surrounds the headline" (7) pattern adapted to a field below the headline.
+2. **Specimen field below** — a full-bleed `var(--surface-1)` band ruled with a hairline grid (lines `var(--surface-2)`), holding 5–7 product fragments scattered off-grid at varied sizes and z-positions, overlapping without shadows. The focal fragment takes the middle ~60% (large enough to read as the product, not a widget); satellites live in the left and right gutters beside it and never sit on top of its text. Only faded schematic satellites (opacity ≤ 0.3, no readable text) may bleed off the viewport edge (flim crops film *stills* at both edges, never words); a satellite with text stays fully inside the field, at least 24px from the viewport edge — a name cut to "riya Raman" reads as a bug, not a crop. This is product-visuals.md §1 Placement's "surrounds the headline" (7) pattern adapted to a field below the headline.
 3. **One focal fragment** in the middle, sharp and fully legible: Recipe 3 (Isolated hero component) or Recipe 2 (Layered cards) from `shared/product-visuals.md`, at Recipe 3's 1–1.5× scale. All other fragments are **satellites**: small real-content cards (a status pill row, a KPI, an avatar stack, a log line, a search bar) — and any satellite that is only schematic must sit at `opacity: 0.3` or less (product-visuals.md §1 rule 1: "one sharp tile among faded ones", (7), (35)).
 4. **Framing**: every fragment uses §8 Synthetic Product Visual tokens — panels `var(--bg)` with `1px solid var(--surface-2)` border on the `var(--surface-1)` field (Surface nesting rule), radius 16px for the focal frame (content card) and 8px for satellites (feature card). No box-shadow anywhere (§5). Overlap is the only depth (flim: "film stills overlap at varied z-positions without drop shadows").
 5. **The search-bar satellite** (optional, for products with search or a command palette): the 160px pill radius from §4 — flim's own hero has exactly this pill crossing the field.
@@ -633,7 +633,7 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 ```html
 <section data-section="hero" data-layout="split-left" data-bg="base" data-bold="true" class="hero-specimen">
   <div class="container hero-specimen-top">
-    <h1 class="hero-specimen-title">Every incident, one <mark class="hl">timeline.</mark></h1>
+    <h1 class="hero-specimen-title">Every incident, one timeline.</h1>
     <div class="hero-specimen-aside">
       <p class="hero-specimen-sub">Halberd Signal merges alerts, deploys, and chat into one ordered record your on-call can read in ten seconds.</p>
       <div class="hero-specimen-ctas">
@@ -645,20 +645,20 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 
   <div class="specimen-field">
     <!-- Satellites: real content, small, scattered. Positions are % of the field. -->
-    <div class="pv specimen-sat" data-mock role="img" aria-label="Deploy status card" style="left:3%; top:22%; width:17%">
+    <div class="pv specimen-sat" data-mock role="img" aria-label="Deploy status card" style="left:3%; top:22%; width:15%">
       <div class="pv-panel specimen-sat-card">
         <div class="pv-label">Deploy · api-gateway</div>
         <div class="pv-kpi">v2.41.3</div>
         <span class="pv-pill">Rolled back</span> <span class="pv-muted pv-mono">4m ago</span>
       </div>
     </div>
-    <div class="pv specimen-sat" data-mock role="img" aria-label="Error rate figure" style="left:8%; top:62%; width:12%">
+    <div class="pv specimen-sat" data-mock role="img" aria-label="Error rate figure" style="left:6%; top:64%; width:12%">
       <div class="pv-panel specimen-sat-card"><div class="pv-label">5xx rate</div><div class="pv-kpi">2.17<span class="pv-cents">%</span></div></div>
     </div>
     <div class="pv specimen-sat is-faded" aria-hidden="true" style="right:-4%; top:8%; width:14%">
       <div class="pv-panel specimen-sat-card"><div class="pv-label">Runbook</div></div>
     </div>
-    <div class="pv specimen-sat" data-mock role="img" aria-label="On-call responders" style="right:4%; top:40%; width:16%">
+    <div class="pv specimen-sat" data-mock role="img" aria-label="On-call responders" style="right:4%; top:40%; width:14%">
       <div class="pv-panel specimen-sat-card">
         <div class="pv-label">On call</div>
         <div><span class="pv-avatar">PR</span> <span class="pv-avatar">JK</span> <span class="pv-avatar">MO</span></div>
@@ -721,7 +721,7 @@ Minimal is a **gallery wall for the product**: white walls, black type, and the 
 .specimen-sat { position: absolute; z-index: 1; }
 .specimen-sat-card { padding: 16px; display: grid; gap: 8px; justify-items: start; }  /* §3 spacing step; pills keep their width */
 .specimen-sat.is-faded { opacity: 0.2; }                              /* §1 weakest step; ≤ 0.3 rule */
-.specimen-focal { position: relative; z-index: 2; width: 52%; margin: 0 auto; }  /* the middle band; satellites sit beside it */
+.specimen-focal { position: relative; z-index: 2; width: 60%; margin: 0 auto; }  /* the middle band; satellites sit beside it */
 .specimen-focal > .pv-panel { border-radius: 16px; }                  /* §4 content card */
 .specimen-focal .pv-row { grid-template-columns: 48px 1fr; }
 
@@ -761,7 +761,7 @@ The focal fragment's rows use §1.5 A "Rows stream in" (`data-stream` already in
 
 **3. Two-voice type contrast.** Only display sizes and the 12px mono label are allowed to sit next to each other in a heading block; avoid mid-size intermediaries (no 20px kicker over a 47px heading). flim's 13-step scale is held together by locked weight 500 (Typography as Architecture). The label above a section heading is the `.label` from §8; the heading uses the §2 section scale.
 
-**4. Block highlight on one phrase.** One phrase per page (hero only) gets a flat `var(--surface-1)` block with no radius — flim's "Art directors." (`flim.ai-viewport.jpeg`). CSS: `.hl` above. Never a colored highlight, never more than one phrase, and only on one or two words that stay on one line: a block that wraps across lines reads as a stray text selection.
+**4. Block highlight on one phrase** — *off by default*. In two judged runs the grey block read as a stray text selection, so use it only when the user asks for an accent, or for a one-word phrase that is clearly a label. One phrase per page (hero only) gets a flat `var(--surface-1)` block with no radius — flim's "Art directors." (`flim.ai-viewport.jpeg`). CSS: `.hl` above. Never a colored highlight, never more than one phrase, and only on one or two words that stay on one line: a block that wraps across lines reads as a stray text selection.
 
 **5. Cropped giant wordmark.** The footer ends with the product name at full width, cropped by the bottom of the page — flim's footer (`flim.ai-footer.jpeg`). Use signature-moves.md M14 CSS verbatim with `color: var(--text)`; on dark, the same token flips it to `#EDEDED`.
 

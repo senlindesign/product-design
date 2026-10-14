@@ -184,7 +184,7 @@
     font-size: 16px;
     font-weight: 500;
     color: var(--text);
-    opacity: 0.15;                         /* standard logo wall opacity */
+    opacity: 0.45;                         /* logo wall opacity — visual-style.md §1 */
 }
 ```
 

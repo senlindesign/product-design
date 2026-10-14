@@ -84,7 +84,7 @@ The numeral is the most recognized signal that a page is a 404 error. It is visi
     letter-spacing: -0.02em;
     line-height: 1;
     color: var(--text);
-    opacity: 0.08;                        /* between footer wordmark 0.05–0.10 and logo-wall 0.15 */
+    opacity: 0.08;                        /* between footer wordmark 0.05–0.10 and the faintest text step 0.2 */
     position: absolute;
     top: 50%;
     left: 50%;

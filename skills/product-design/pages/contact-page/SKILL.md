@@ -170,7 +170,7 @@ Dept card:       bg var(--surface-1) / radius 8px / padding 32px
                  icon: 40px / opacity 0.5 / gap 24px between cards
 Dept card CTA:   primary (Sales) = .btn-dark / others = .btn-outline
 
-Social proof:    customer logos: opacity 0.15 / gap 58px / grayscale
+Social proof:    customer logos: opacity 0.45 / gap 58px / grayscale
                  testimonial quote: 16px / weight 500 / line-height 1.6 (no italic — not in design system)
 ```
 

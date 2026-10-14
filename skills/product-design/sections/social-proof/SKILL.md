@@ -72,7 +72,7 @@ Read the active style file first (`shared/visual-style.md` for Minimal, the defa
 Section padding:        128px 32px (top/bottom, left/right)
 Label:                  mono 12px / 400 / uppercase / +0.72px tracking / opacity 0.3
 Label --> logos gap:     32px
-Logo text placeholders: 16px / display font / weight 500 / opacity 0.15
+Logo text placeholders: 16px / display font / weight 500 / opacity 0.45 (sample wordmarks vary their treatment — see below)
 Logo horizontal gap:    58px
 Logo vertical align:    center
 ```
@@ -106,7 +106,7 @@ Title --> content gap:  58px
 
 **Logo Wall** (top to bottom):
 1. [Optional] Label — "TRUSTED BY TEAMS AT" / "POWERING" / "LOVED BY" in mono 12px uppercase, opacity 0.3
-2. Logo row(s) — all logos monochrome, opacity 0.15, horizontally centered, equal size
+2. Logo row(s) — all logos monochrome, opacity 0.45 (the style's logo-wall step), horizontally centered, equal size, one row of 5 on desktop (`justify-content: space-between`, no wrap) and a 3 + 2 grid under 768px
 
 **Testimonial Cards** (top to bottom):
 1. [Optional] Section label — mono 12px uppercase, opacity 0.4
@@ -122,7 +122,7 @@ Title --> content gap:  58px
 3. 2-3 Testimonial cards below
 
 **Rules**:
-- All logos must be monochrome — use text placeholders at opacity 0.15 if no SVG assets
+- All logos must be monochrome — use text wordmarks at the style's logo-wall opacity (Minimal 0.45) if no SVG assets
 - No box-shadow on any element
 - Testimonial background and section background must differ by one step: card on `var(--bg)` if section is `var(--surface-1)`, or card on `var(--surface-1)` if section is `var(--bg)`
 - Attribution always in mono font, never in display font
@@ -143,7 +143,7 @@ Reference: `shared/interaction-patterns.md`
 Visual values in this checklist assume Minimal. With another style active, check against the active style file instead.
 
 - [ ] No fabricated testimonials or fake company names?
-- [ ] Logo placeholders at opacity 0.15 (not higher)?
+- [ ] Logo wordmarks at the style's logo-wall opacity (Minimal 0.45), one row of 5 on desktop, no orphan on a second line?
 - [ ] Attribution uses mono font at 11px / uppercase / opacity 0.35?
 - [ ] Quote text at 16px / weight 500 / line-height 1.6?
 - [ ] Card padding is 32px with 16px border-radius?

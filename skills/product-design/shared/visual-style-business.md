@@ -44,7 +44,7 @@ Primary text:         opacity: 1
 Subtitle/description: opacity: 0.5
 Auxiliary/label:      opacity: 0.4
 Weakest (copyright):  opacity: 0.2
-Logo wall:            opacity: 0.15
+Logo wall:            opacity: 0.45
 ```
 
 ### Dark Theme (Linear DNA)
@@ -65,7 +65,7 @@ Primary text:         opacity: 1
 Subtitle/description: opacity: 0.5
 Auxiliary/label:      opacity: 0.4
 Weakest (copyright):  opacity: 0.2
-Logo wall:            opacity: 0.15
+Logo wall:            opacity: 0.45
 ```
 
 ### Accent Color Rules
@@ -471,6 +471,8 @@ Business feels like dependable infrastructure with one expansive window into the
             <div class="pv-row"><span class="pv-avatar">LS</span><span>Lena Sato · Quarry &amp; Co</span><span class="pv-mono pv-muted">Wed 09:15</span><span class="pv-pill is-pos">Routed</span></div>
             <div class="pv-row"><span class="pv-avatar">JO</span><span>Jon Okafor · Brightmoor</span><span class="pv-mono pv-muted">Wed 11:45</span><span class="pv-pill is-quiet">Declined</span></div>
             <div class="pv-row"><span class="pv-avatar">AN</span><span>Aiko Nakamura · Fernhill</span><span class="pv-mono pv-muted">Thu 16:30</span><span class="pv-pill is-pos">Routed</span></div>
+            <div class="pv-row"><span class="pv-avatar">RB</span><span>Rosa Bianchi · Tallow Studio</span><span class="pv-mono pv-muted">Fri 08:45</span><span class="pv-pill is-pos">Routed</span></div>
+            <div class="pv-row"><span class="pv-avatar">KW</span><span>Kofi Mensah · Saltmarsh</span><span class="pv-mono pv-muted">Fri 13:00</span><span class="pv-pill is-quiet">Rescheduled</span></div>
           </div>
           <div class="biz-detail">
             <p class="pv-label">Confirm · Dev Kapoor</p>
@@ -509,6 +511,7 @@ Business feels like dependable infrastructure with one expansive window into the
     position: relative;
     margin-top: 48px;                                              /* §3 heading to content */
     padding: 32px 48px 0;                                          /* card rises from the bottom edge (M4) */
+    height: 560px;                                                 /* the stage edge cuts the card through rows, never below them */
     border-radius: 48px;                                           /* §4 product stage panel */
     overflow: hidden;
     isolation: isolate;
@@ -546,7 +549,6 @@ Business feels like dependable infrastructure with one expansive window into the
     background: #FFFFFF;                                           /* §8 white card on tinted stage */
     border-radius: 40px 40px 0 0;                                  /* §4 nested: 48 → 40, cut by the stage edge */
     box-shadow: 0 4px 5px rgba(71,103,136,.04), 0 8px 15px rgba(71,103,136,.03), 0 15px 30px rgba(71,103,136,.06); /* §5 nested */
-    min-height: 360px;
 }
 .biz-list { padding: 32px 0 24px; }                                /* §3 card padding */
 .biz-list-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 32px 16px; }
@@ -579,11 +581,12 @@ Business feels like dependable infrastructure with one expansive window into the
 
 @media (max-width: 767px) {
     .biz-hero { padding-top: 64px; padding-bottom: 64px; }        /* §3 narrow */
-    .biz-stage { padding: 24px 12px 0; border-radius: 24px; margin-top: 32px; }  /* §3 narrow 48→32; radius steps to content card */
+    .biz-stage { padding: 24px 12px 0; border-radius: 24px; margin-top: 32px; height: 480px; }  /* §3 narrow 48→32; radius steps to content card */
     .biz-tabs { max-width: 100%; overflow-x: auto; }
     .biz-ring { border-radius: 24px 24px 0 0; padding: 6px 6px 0; }
     .biz-card { grid-template-columns: 1fr; border-radius: 20px 20px 0 0; }
-    .biz-card .pv-row { padding: 0 16px; grid-template-columns: 24px minmax(0,1fr) 76px; }
+    .biz-card .pv-row { padding: 8px 16px; grid-template-columns: 24px minmax(0,1fr) auto; align-items: start; }
+    .biz-card .pv-row > :nth-child(2) { white-space: normal; line-height: 1.35; }   /* wrap to two lines, don't truncate to "Maya Re…" */
     .biz-card .pv-row > :nth-child(3) { display: none; }
     .biz-list-head { padding: 0 16px 12px; }
     .biz-detail { display: none; }                                 /* the list carries the story on a phone */
@@ -630,7 +633,7 @@ Which layout each section uses by default is set in the master `SKILL.md` Step 4
 
 - **M4 Framed hero stage** — the default hero (above). Business adjustment: 48px radius, multi-hue mesh inside only, frosted ring around the card, mock cut by the stage bottom.
 - **M3 Product rising from the fold** — combined with M4; visual top edge must still sit above the fold at 1440 × 900 with the 120px hero top.
-- **M5 Bento with a lead tile** — tiles are `.card` (16px, §5 shadow); the lead tile may reuse a small stage (24px radius) with the gradient — counts as a product stage, keep to one per page besides the hero (*inference*: preserves "Scheduling confines its gradient to one rounded hero").
+- **M5 Bento with a lead tile** — tiles are `.card` (16px, §5 shadow); the lead tile uses a flat `var(--surface-1)` panel, **not** the mesh. The mesh appears once per page, in the hero stage: repeated, it reads as a stock template gradient (judge, 2026-10-14), and Calendly confines its gradient to one rounded hero.
 - **M11 Stat bento** — enterprise trust pages; title tile on `--surface-1`, number tiles `#FFFFFF` with §5 shadow; real numbers, or tagged sample numbers per `shared/signature-moves.md` §4 (catalog intro) — never when the user said there are none.
 
 ### Drift guard

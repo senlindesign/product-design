@@ -253,7 +253,7 @@ The following sections reuse existing Skill knowledge without modification:
 
 | Section | Source file | Notes |
 |---------|------------|-------|
-| Logo Wall | `pages/landing-page/references/social-proof.md` | Same logo wall pattern; grayscale, `opacity: 0.15` |
+| Logo Wall | `pages/landing-page/references/social-proof.md` | Same logo wall pattern; grayscale, the style's logo-wall opacity |
 | Social Proof | `pages/landing-page/references/social-proof.md` | Customer quotes pattern |
 | FAQ | `pages/landing-page/references/faq.md` | Same accordion pattern |
 | Navigation | `shared/navigation.md` | Shared component |
