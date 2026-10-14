@@ -2,6 +2,10 @@
 
 One entry per full run. Newest first. Raw outputs live in `evals/runs/` (git-ignored).
 
+Entries record the rules as they were on that date. Some have changed since. Example: the 2026-10-04 Contact fix ("social proof only with real logos/testimonials") was replaced on 2026-10-08 by the sample-content rule: missing evidence is filled with tagged sample content unless the user says they have none. The skill files are authoritative.
+
+Screenshot-judge scores (`evals/judge_pages.py`) are logged separately in `evals/SCORES.md`.
+
 ## 2026-10-08/09 — after Steps 1–4 (sample content, real logos, product visuals, signature moves, copy, motion)
 
 - **Change under test**: sample-content rule + claims check; real logos only; `shared/product-visuals.md`, `shared/signature-moves.md`, `shared/copy.md`, Product-Serving Motion; rhythm/copy/logo checks in the checker

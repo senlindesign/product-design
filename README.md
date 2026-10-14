@@ -206,7 +206,7 @@ Each page type has 3 or 4 archetypes. An archetype is a layout for one kind of p
 - **Patterns with reasons.** Each pattern tells when it applies, how to build it, and when to skip it. A common pattern is not always a correct pattern.
 - **A second agent checked the work.** A separate agent compared each knowledge file with the research records and fixed the contradictions it found before they got into the skill.
 - **Styles from real sites.** [Taste Lab](https://github.com/senlindesign/taste-skill) measured each style on a real product site. The values came first; the principles explain the values.
-- **A golden test set.** 16 fixed requests together cover all 8 page types, all 4 styles, and both themes. A script checks each result, and a second model audits every page for invented claims. See [`evals/`](evals/).
+- **A golden test set.** 19 fixed requests together cover all 8 page types, all 4 styles, and both themes. A script checks each result, including a 390px narrow-screen pass, a second model audits every page for invented claims, and a screenshot judge scores how real each page looks. See [`evals/`](evals/).
 - **Blind tests.** New versions of the skill are compared with old ones in blind A/B tests, judged on realism, product showcase, layout variety, and copy.
 
 ---
@@ -221,7 +221,7 @@ skills/product-design/     the skill — install this folder
 ├── scripts/               the page self-check
 └── shared/                4 styles, product showcases, signature moves, atmosphere, copy, motion
 
-evals/                     golden test set, page checker, claims audit, blind test
+evals/                     golden test set, page checker, claims audit, screenshot judge, blind test
 ```
 
 ## License
