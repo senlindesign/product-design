@@ -6,6 +6,8 @@
 
 ## Pattern 1: Horizontal Three Steps (Most Common)
 
+> For a product with a UI, build this pattern as **M15 Step tiles with product** (`shared/signature-moves.md`): each step gets a product fragment on a fixed-height mat, caption below. Text-only steps are for services with nothing to show.
+
 **When to use**:
 - Product usage flow can be summarized in 3 simple steps
 - Each step description is short (1–2 sentences)

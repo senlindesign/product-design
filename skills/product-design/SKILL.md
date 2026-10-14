@@ -199,10 +199,10 @@ Everything not provided becomes tagged sample content (Design Rules → *Sample 
      | Section role | Minimal | Business | Colorful | Editorial |
      |---|---|---|---|---|
      | Hero | Specimen Field (§12.2) | Framed product stage, M4 + M3 (§10) | Scene panel, M4 (§10) | Full-bleed dark stage, M4 (§10) |
-     | Features | Numbered specimen rows: `split-left` / `split-right` alternating, mono index numbers, one product fragment per row | M5 bento, lead tile as a small gradient stage | Scene chapters: one major feature per `split-left` / `split-right` section, alternating sides, the second chapter inside a scene | M7 big-type list or M8 sticky chapter tabs (`walkthrough`), with the 260px margin column |
-     | Steps / how it works | `list` with index rules | M9 step rail (`split-left`) | `card-grid` of paper cards | `list` in the margin-column layout |
-     | Proof | `logo-row` in mono labels; quote as plain `big-quote` | M11 stat bento or shadowed testimonial cards | M10 poster quote in the second scene | M10 poster quote on `alt` |
-     | Closing | `centered-stack` CTA + M14 wordmark footer | `centered-stack` CTA | CTA inside a scene | Dark stage CTA |
+     | Features | M16 feature rows: `split-left` / `split-right` alternating, mono index labels (`01 · Ownership`), the product fragment at 7/12 width on a `surface-1` mat | M5 bento (flat `surface-1` lead tile — the mesh stays in the hero), then 1–2 M16 rows on `alt` | Scene chapters: M16 rows, one major feature per `split-left` / `split-right` section, the second chapter inside a scene | 260px margin column with the section heading; M16 rows (or M8 sticky chapter tabs) in the wide column |
+     | Steps / how it works | M15 step tiles, `surface-1` mats, mono step numbers | M15 step tiles as shadowed `.card`s (M9 step rail when the product turns inputs into an output) | M15 step tiles: paper panels on one scene mat | M15 step tiles as ruled `.card-static`s in the margin-column layout |
+     | Proof | `logo-row` (varied sample wordmarks); quotes as M17 quote wall, or M10 for one real quote | M17 quote wall of `#FFFFFF` shadowed cards on `alt`, or M11 stat bento with real numbers | M17 or M10 inside the second scene | M17 ruled cards on `alt`, or M10 poster quote on `alt` |
+     | Closing | Left-aligned CTA (large heading, buttons below — Twingate, Notion); M14 wordmark footer only for a short-named consumer or creative brand | `centered-stack` CTA | CTA inside a scene | Dark stage CTA |
 
      Then apply R2–R6. If a default would repeat the previous section's layout, take the next row's layout or swap split sides.
    - If the page has a product visual (hero, features, bento), read `shared/product-visuals.md` and pick a recipe for each visual. No grey skeleton bars or empty boxes as a main visual.

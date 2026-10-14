@@ -31,7 +31,7 @@ Do NOT use for:
 
 **Defaults if not provided**:
 - Theme → Light
-- Pattern → Horizontal Steps (most common, 75% of observed products)
+- Pattern → Horizontal + Screenshots, built as **M15 Step tiles with product** (`shared/signature-moves.md`) for any product with a UI. Text-only Horizontal Steps (the most common in the original sample, 75%) only for services with no UI to show — in judged runs text-only steps read as the sparsest section on the page
 - Step count → 3
 - Numbering style → zero-padded (01, 02, 03)
 - Brand color → none (`--accent` = `--text`)
@@ -44,7 +44,7 @@ Read `pages/landing-page/references/how-it-works.md` and select:
 | Pattern | Best When |
 |---------|-----------|
 | Horizontal Steps | 3 short steps (1-2 sentences each); sufficient desktop width for side-by-side |
-| Horizontal + Screenshots | Steps map to visible product UI; screenshots make the abstract concrete |
+| Horizontal + Screenshots | **Default for software.** Steps map to visible product UI; build as M15 — one product fragment per step on a fixed-height mat, caption below |
 | Horizontal + CTA | The next step after the flow is an action (signup, install) |
 | Vertical List | Step descriptions are longer (3+ sentences); steps have sequential dependency; screenshots per step |
 

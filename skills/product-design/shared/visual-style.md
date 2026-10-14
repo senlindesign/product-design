@@ -763,7 +763,7 @@ The focal fragment's rows use §1.5 A "Rows stream in" (`data-stream` already in
 
 **4. Block highlight on one phrase** — *off by default*. In two judged runs the grey block read as a stray text selection, so use it only when the user asks for an accent, or for a one-word phrase that is clearly a label. One phrase per page (hero only) gets a flat `var(--surface-1)` block with no radius — flim's "Art directors." (`flim.ai-viewport.jpeg`). CSS: `.hl` above. Never a colored highlight, never more than one phrase, and only on one or two words that stay on one line: a block that wraps across lines reads as a stray text selection.
 
-**5. Cropped giant wordmark.** The footer ends with the product name at full width, cropped by the bottom of the page — flim's footer (`flim.ai-footer.jpeg`). Use signature-moves.md M14 CSS verbatim with `color: var(--text)`; on dark, the same token flips it to `#EDEDED`.
+**5. Cropped giant wordmark** — *only for a short-named consumer or creative brand* (signature-moves §5 Step 5; on SaaS pages judges read it as oversized and disconnected). The footer ends with the product name at full width, cropped by the bottom of the page — flim's footer (`flim.ai-footer.jpeg`). Use signature-moves.md M14 CSS verbatim with `color: var(--text)`; on dark, the same token flips it to `#EDEDED`.
 
 ### 12.4 Motion personality
 
@@ -778,7 +778,7 @@ Minimal motion is **mechanical and brief**: things arrive and stop; nothing floa
 
 Which layout each section uses by default is set in the master `SKILL.md` Step 4.3 *Style layout defaults* table; the notes below adjust how each move looks in this style.
 
-- **M14 Giant wordmark footer** — the most flim-specific move. Adjustment: weight 500, `var(--text)`, sits after the copyright line exactly as in `flim.ai-footer.jpeg`; still skip it for names > 8 characters.
+- **M14 Giant wordmark footer** — the most flim-specific move, for consumer and creative brands only. Adjustment: weight 500, `var(--text)`, sits after the copyright line exactly as in `flim.ai-footer.jpeg`; still skip it for names > 8 characters.
 - **M1 Edge-to-edge headline** — alternative hero for brand moments, About manifestos, and 404 C; flim's hero wordmark at 125.2px is the precedent. Adjustment: weight 500 only, `var(--text)`, no field below — pair with one mono label line.
 - **M7 Big-type list band** — on `.section-dark` (light theme only). Adjustment: list items in display 500, row rules from the M7 recipe; numbering with detail 2's `.index-num`.
 - **M5 Bento with a lead tile** — the default features layout; tiles `var(--surface-1)` 8px, zero shadow, fragments on `var(--bg)` panels.

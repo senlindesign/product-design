@@ -114,7 +114,7 @@ A bold section still uses the style's tokens. Boldness comes from **scale, crop,
 
 ## 4. Catalog
 
-Fourteen moves. Moves **M1–M9 and M14 need no assets** — an offline agent can build them with a synthetic product visual (`shared/product-visuals.md`, frame tokens in the style file's §8) and the user's own words. **M10–M13 need real material** (a quote, numbers, a comparison, a content set). If the user gave none, M10, M11, and M13 may be filled with **sample content** per the master's *Sample content* rule (tagged `data-sample`, listed in the QA report) — except an About timeline (M13), which never gets invented dates. **M12 never uses sample content**: without a sourced comparison, pick another move. If the user said they *don't have* that material, do not use the move.
+Seventeen moves. Moves **M1–M9, M14, M15 and M16 need no assets** — an offline agent can build them with a synthetic product visual (`shared/product-visuals.md`, frame tokens in the style file's §8) and the user's own words. **M10–M13 need real material** (a quote, numbers, a comparison, a content set). If the user gave none, M10, M11, and M13 may be filled with **sample content** per the master's *Sample content* rule (tagged `data-sample`, listed in the QA report) — except an About timeline (M13), which never gets invented dates. **M12 never uses sample content**: without a sourced comparison, pick another move. If the user said they *don't have* that material, do not use the move.
 
 Every CSS block below uses CSS variables and style roles only. Before using them, declare these role variables on `:root`, **quoting** the active style file:
 
@@ -131,6 +131,9 @@ Every CSS block below uses CSS variables and style roles only. Before using them
 | `--gap-card` | §3 Card gap | `20px` (bento) | `24px` | `24px` | `16px` |
 | `--r-card` | §4 Feature card / panel | `8px` | `16px` | `16px` (inner panel) | `16px` (panel) |
 | `--r-frame` | §4 Content card / frame | `16px` | `24px` | `24px` (scene frame) | `22px` (product stage) |
+| `--fw-feature` | §2 Feature heading weight | `500` | `500` | `400` | `500` |
+| `--gap-head` | §3 Section internal (heading to content) | `58px` | `48px` | `48px` | `48px` |
+| `--gap-rows` | §3 Space between rows inside one section | `128px` (feature row spacing) | `120px` (section padding) | `120px` (section padding) | `96px` (section padding) |
 
 On narrow screens (< 768px) use the style's narrow-screen table for all spacing; the moves below say how their layout collapses.
 
@@ -489,6 +492,112 @@ These moves were observed but need commissioned assets or suit only one genre. U
 
 ---
 
+### M15 · Step tiles with product
+
+`data-layout="card-grid"` · no assets
+
+**When it fits:** How It Works / getting-started sections with 3 (or 4) steps — the default step layout in every style. *Evidence:* FLORA (three tall tiles, each step's UI filling the tile, the step name set large over it), Mews (three pink mats, each holding a product fragment, numbered caption below), Braintrust (three lilac mats with a real product card each — a job brief, a candidate match, a task list — caption below). The weak versions in the same result set are text-only: Clay, Givingli, PayPal Careers ("01 / 02 / 03" with a title and nothing to look at). Generated pages fell into the weak version in all four styles (2026-10-14 style matrix).
+
+**Build:** three equal tiles. Each tile = a mat (`--pv-mat`) of fixed height holding **one product fragment for that step**, cut by the tile's bottom edge, then the caption below the tile: mono step number, card-heading title, one sentence. The fragment shows the *result* of the step in the product's own UI (the connected address, the routing rule, the closed thread), with the product-visuals content minimums at small scale: 2–4 rows, one status, one proper noun.
+```html
+<div class="steps">
+  <div class="step">
+    <div class="pv step-visual" data-mock role="img" aria-label="Email channel connected in settings">
+      <div class="pv-mat"><div class="pv-panel">…2–4 rows of the step's real UI…</div></div>
+    </div>
+    <div class="step-text"><span class="step-num">01</span><h3>Forward your support address</h3><p>Every email becomes a conversation in the shared inbox.</p></div>
+  </div>
+  <!-- 2 more .step -->
+</div>
+```
+```css
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-card); }
+.step { display: grid; grid-template-rows: auto 1fr; }
+.step-visual { --pv-text: 13px; height: 240px; overflow: hidden; border-radius: var(--r-frame); }
+.step-visual .pv-mat { height: 100%; padding: 28px 28px 0; box-sizing: border-box; }
+.step-visual .pv-panel { border-bottom-left-radius: 0; border-bottom-right-radius: 0; min-height: 100%; }
+.step-text { padding: 24px 4px 0; }
+.step-text .step-num { font-family: var(--font-mono); font-size: 12px; letter-spacing: .72px; opacity: .4; }
+.step-text h3 { font-family: var(--ff-card); font-size: var(--fs-card); font-weight: 500; margin: 8px 0 0; letter-spacing: -0.01em; }
+.step-text p { font-size: 16px; line-height: 1.6; opacity: var(--op-sub); margin: 8px 0 0; }
+@media (max-width: 767px) { .steps { grid-template-columns: 1fr; gap: 40px; } }
+```
+Fixed `px` height on the visual, never `vh`. On an `alt` section the mat steps to `var(--bg)` and panels to `var(--surface-1)` (product-visuals §2).
+**Styles:** all four — Minimal mats `var(--surface-1)`; Business `.card` tiles with the §5 shadow; Colorful paper panels on one `--scene-*` mat (the page's second scene); Editorial ruled `.card-static` tiles. Counts as the page's one equal-card grid (R6).
+**Failure modes:** a one-line chip as the step's visual; three identical fragments; text-only steps.
+
+---
+
+### M16 · Feature row with a full mat
+
+`data-layout="split-left"` / `"split-right"` · no assets
+
+**When it fits:** the main features of a landing or product page, two or three rows alternating sides. *Evidence:* the realism rule "scale up, not down" (product-visuals.md §1 rule 10: close-ups at 1.5–2×; full screens shrunk to fit become illegible) and the 2026-10-14 style matrix, where every style placed a ~250px card in a wide column and the judge read it as a thumbnail.
+
+**Build:** text column `5fr`, visual column `7fr`. The visual is a mat that fills its column, padded `40px` with the panel rising from the mat's bottom edge (Recipe 1 cut), mock text one step up (`--pv-text: 14px`, rows 36px). A list mock shows **6 rows and at most 3 columns** (avatar · name + subject · status) so nothing wraps. Text column: mono label with the row number, feature heading, one paragraph, optionally 2–3 ruled points.
+```html
+<div class="frow">                      <!-- add .is-flipped for the next row -->
+  <div class="frow-text"><p class="label">01 · Ownership</p><h3>One owner per thread, visible to everyone</h3><p>…</p>
+    <ul class="frow-points"><li>…</li><li>…</li></ul></div>
+  <div class="pv frow-visual" data-mock role="img" aria-label="…"><div class="pv-mat"><div class="pv-panel">
+    <div class="frow-head"><span class="pv-kpi">Support · Open</span><span class="pv-label">14 open</span></div>
+    <!-- 6 .pv-row, grid-template-columns: 28px minmax(0,1fr) 84px -->
+  </div></div></div>
+</div>
+```
+```css
+.frow { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap-head); align-items: center; }
+.frow.is-flipped { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.frow.is-flipped .frow-text { order: 2; }
+.frow + .frow { margin-top: var(--gap-rows); }
+.frow-text h3 { font-family: var(--ff-feature); font-size: var(--fs-feature); font-weight: var(--fw-feature); letter-spacing: -0.02em; line-height: 1.2; margin: 16px 0 0; }
+.frow-text p { font-size: 18px; line-height: 1.6; opacity: var(--op-sub); margin: 16px 0 0; max-width: 440px; }
+.frow-points { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 12px; font-size: 16px; }
+.frow-points li { padding-top: 12px; border-top: 1px solid var(--surface-2); }
+.frow-visual { --pv-text: 14px; --pv-row: 36px; }           /* 1.1x mock text: the feature visual reads at page scale */
+.frow-visual .pv-mat { padding: 40px 40px 0; }                 /* the panel rises from the mat's bottom edge */
+.frow-visual .pv-panel { width: 100%; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 0; }
+.frow-visual .pv-panel > .pv-row:last-child { border-bottom: 0; }
+.frow-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 12px; }
+@media (max-width: 767px) {
+  .frow, .frow.is-flipped { grid-template-columns: 1fr; gap: 32px; } .frow.is-flipped .frow-text { order: 0; }
+  .frow + .frow { margin-top: 80px; }
+  .frow-visual .pv-mat { padding: 24px 20px 0; }
+}
+```
+**Styles:** all four. Business may put two M16 rows after its M5 bento; Colorful places each row inside a `.scene` (scene chapters); Editorial uses the 260px margin column for the section heading and M16 rows in the wide column.
+**Failure modes:** a 4–5 column table that wraps every row; a mat with an empty band above the panel; the same mock in two rows.
+
+---
+
+### M17 · Quote wall
+
+`data-layout="bento"` · **needs quotes** (sample quotes allowed, tagged)
+
+**When it fits:** social proof when there are 2–3 quotes, or when quotes are sample content. *Evidence:* Hex (six quote cards, each under a customer wordmark), Customer.io (three quotes in a row), Intercom (a mosaic mixing quotes and customer marks), Unify (one quote next to a portrait). A single sentence alone on a full-width band — what generated pages produced — read as "sparse" to the judge in three styles; real single-quote sections anchor the quote with a portrait or brand mark, and this skill never invents photos.
+
+**Build:** three figures, the first wider (`1.4fr 1fr 1fr`) with its quote at feature-heading size; each figure ends with the person (name + role) and the company as a **sample wordmark** (`sections/social-proof/SKILL.md` *Sample wordmarks*). One real quote from the user → M10 instead.
+```html
+<div class="quotes" data-sample>
+  <figure class="quote is-lead"><blockquote>…</blockquote><figcaption><span class="who">Helen Marsh<span>Head of Support</span></span><span class="wm" data-logo-source="wordmark">◆ Larkspur</span></figcaption></figure>
+  <figure class="quote">…</figure><figure class="quote">…</figure>
+</div>
+```
+```css
+.quotes { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap-card); align-items: stretch; }
+.quote { margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding: 32px; background: var(--surface-1); border-radius: var(--r-card); }
+.quote blockquote { margin: 0; font-family: var(--font-display); font-size: 18px; line-height: 1.5; font-weight: var(--fw-display); }
+.quote.is-lead blockquote { font-size: var(--fs-feature); line-height: 1.3; letter-spacing: -0.01em; }
+.quote figcaption { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.quote .who { font-size: 14px; } .quote .who span { display: block; opacity: .5; }
+.quote .wm { font-size: 15px; opacity: .6; white-space: nowrap; }
+@media (max-width: 767px) { .quotes { grid-template-columns: 1fr; } .quote.is-lead blockquote { font-size: 22px; } }
+```
+**Styles:** all four — Minimal `var(--surface-1)` cards, no glyph; Business `#FFFFFF` cards with the §5 shadow on an `alt` band; Colorful paper cards inside a scene; Editorial `.card-static` ruled cards.
+**Failure modes:** one quote alone on a band; star ratings; invented photos.
+
+---
+
 ## 5. Selection guide
 
 Choose the page's moves **after** the page skill picks the archetype and section list, and **before** writing any section.
@@ -519,6 +628,8 @@ Choose the page's moves **after** the page skill picks the archetype and section
 | 5+ articles / stories / reports | M13 Edge-bleeding carousel |
 
 If two signals tie, pick the move that sits where the brief's main **barrier** is answered (Step 2 of the master: complexity → M8/M9; trust → M10/M11).
+
+**Step 2b — Default layouts for the common sections (not bold).** Unless a Step 2 move takes the section: main features → 2–3 **M16** rows alternating sides (Business may lead with M5, then M16); How It Works → **M15** step tiles; social proof → **M10** for one real quote, **M17** for 2–3 quotes or sample quotes. These replace text-only steps, thumbnail-sized feature mocks, and a lone quote on a band — the three sparse sections the 2026-10-14 judged run found in every style.
 
 **Step 3 — Use non-bold versions elsewhere for variety.** M5 without a big mock, M7 on an `alt` background, and M10 on `base` are good *non-bold* layouts that help R2 and R6.
 
