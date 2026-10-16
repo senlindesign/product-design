@@ -1,10 +1,10 @@
 [English](README.md) | [中文](README.zh-CN.md)
 
-# Product Design
+# Proof
 
-![Product Design](docs/images/cover.png)
+![Proof — a product design skill](docs/images/cover.png)
 
-### Best Practices, Encoded
+### A product design skill
 
 [![Made for Claude Code](https://img.shields.io/badge/Made%20for-Claude%20Code-blueviolet?style=flat-square&logo=anthropic)](https://docs.anthropic.com/en/docs/claude-code)
 [![Made for Codex](https://img.shields.io/badge/Made%20for-Codex-000000?style=flat-square&logo=openai)](https://openai.com/index/introducing-codex/)
@@ -16,10 +16,10 @@
 
 **Product pages that look shipped, not generated — built from patterns in 400+ real product pages.**
 
-Product Design is a skill for Claude Code and Codex. Tell it which page you need. It builds a complete, responsive page with a real-looking product showcase, a distinct visual style, and motion that shows your product at work. The first draft looks like a shipped product, not an AI template.
+Proof is a product design skill for Claude Code and Codex. Tell it which page you need. It builds a complete, responsive page with a real-looking product showcase, a distinct visual style, and motion that shows your product at work. The first draft looks like a shipped product, not an AI template.
 
 ```bash
-/product-design landing
+/proof landing
 ```
 
 
@@ -77,9 +77,13 @@ Each style has a light theme and a dark theme and works with every page type. Ea
 
 ---
 
-## Why "Product Design"
+## Why "Proof"
 
-Most design skills decide only how a page looks. This skill works through all five layers of product design, from Jesse James Garrett's *The Elements of User Experience*.
+In printing, a *proof* is the first copy off the press: close enough to the final product to ship, and the moment for last adjustments. That is the goal here: a first draft good enough to ship, which you then adjust in minutes. A proof is also evidence, and every pattern in this skill comes from a real, shipped product page.
+
+### Five layers of product design
+
+Most design skills decide only how a page looks. Proof works through all five layers of product design, from Jesse James Garrett's *The Elements of User Experience*.
 
 | Layer | What the skill decides |
 | --- | --- |
@@ -103,16 +107,16 @@ So one product can get two different pages:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/senlindesign/product-design.git
+   git clone https://github.com/senlindesign/proof.git
    ```
 
 2. Copy the skill folder into your skills folder:
 
    ```bash
-   cp -R product-design/skills/product-design ~/.claude/skills/
+   cp -R proof/skills/proof ~/.claude/skills/
    ```
 
-3. In any project, type `/product-design`.
+3. In any project, type `/proof`.
 
 ### Claude Code plugin
 
@@ -121,29 +125,29 @@ The plugin version updates with `/plugin update`.
 1. Add the marketplace and install the plugin:
 
    ```bash
-   /plugin marketplace add senlindesign/product-design
-   /plugin install product-design@product-design
+   /plugin marketplace add senlindesign/proof
+   /plugin install proof@proof
    ```
 
-2. Type `/product-design:product-design`. Claude Code puts the plugin name before each plugin skill.
+2. Type `/proof:proof`. Claude Code puts the plugin name before each plugin skill.
 
 ### Codex
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/senlindesign/product-design.git
+   git clone https://github.com/senlindesign/proof.git
    ```
 
 2. Copy the skill folder into the Codex skills folder:
 
    ```bash
-   cp -R product-design/skills/product-design ~/.codex/skills/
+   cp -R proof/skills/proof ~/.codex/skills/
    ```
 
 ### Other agents
 
-For Cursor, Windsurf, or another agent that reads files: tell the agent to read `skills/product-design/SKILL.md`.
+For Cursor, Windsurf, or another agent that reads files: tell the agent to read `skills/proof/SKILL.md`.
 
 The skill needs no build step and no dependencies. If Python 3 is installed, the skill checks each page before it gives the page to you.
 
@@ -153,14 +157,14 @@ The skill needs no build step and no dependencies. If Python 3 is installed, the
 
 | You want | Type |
 | --- | --- |
-| A landing page now | `/product-design landing` |
-| A page in a specific style and theme | `/product-design pricing editorial dark` |
-| One section only | `/product-design hero colorful` |
-| A page that fits your product | `/product-design landing — Patchwork, a shared moodboard for design studios` |
+| A landing page now | `/proof landing` |
+| A page in a specific style and theme | `/proof pricing editorial dark` |
+| One section only | `/proof hero colorful` |
+| A page that fits your product | `/proof landing — Patchwork, a shared moodboard for design studios` |
 | A page for your audience | Add four facts: who visits, what they must do, what worries them, and what real material you have. You can also paste a PRD or a brand guide. |
-| Your brand | `/product-design landing business — accent #E4572E, display font Manrope` |
-| Full control | `/product-design blog editorial dark — archetype B, no newsletter, as a Next.js page in this project` |
-| Help to decide | Type only `/product-design`. The skill asks one round of questions. Then it builds the page. |
+| Your brand | `/proof landing business — accent #E4572E, display font Manrope` |
+| Full control | `/proof blog editorial dark — archetype B, no newsletter, as a Next.js page in this project` |
+| Help to decide | Type only `/proof`. The skill asks one round of questions. Then it builds the page. |
 
 The default output is one HTML file. Open it in a browser. If you ask, the skill writes code for your project's stack instead.
 
@@ -214,7 +218,7 @@ Each page type has 3 or 4 archetypes. An archetype is a layout for one kind of p
 ## Repository layout
 
 ```txt
-skills/product-design/     the skill — install this folder
+skills/proof/              the skill — install this folder
 ├── SKILL.md               entry point
 ├── pages/                 8 page types, each with its knowledge files
 ├── sections/              10 sections

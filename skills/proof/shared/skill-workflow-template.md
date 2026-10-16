@@ -1,6 +1,6 @@
 # Skill Workflow Template — Shared Across Page Types
 
-> Shared workflow skeleton for all Product Design Skills. Each SKILL.md references this template and supplements it with page-type-specific content.
+> Shared workflow skeleton for all Proof page skills. Each SKILL.md references this template and supplements it with page-type-specific content.
 
 ---
 

@@ -1,6 +1,6 @@
 # Evals
 
-A golden test set and an automatic checker for the product-design skill. Use them to find out whether a change made the skill better or quietly broke something.
+A golden test set and an automatic checker for the Proof skill. Use them to find out whether a change made the skill better or quietly broke something.
 
 ## What's here
 
@@ -12,7 +12,7 @@ A golden test set and an automatic checker for the product-design skill. Use the
 | `judge_pages.py` | Screenshot judge: scores each page 1–10 on looks real, product visual, layout variety, copy, mobile, overall, and lists visible defects. Logs run averages to `SCORES.md`. |
 | `audit_claims.py` | LLM claims audit (Haiku): lists claims on the page that the request doesn't support. Run automatically by `run_evals.py`. |
 | `blind_test.py` | Blind A/B between two runs of the same cases: which version looks less AI-made. |
-| `../skills/product-design/scripts/check_page.py` | The checker. The skill also runs it on its own output before delivering (Step 4.7 of `SKILL.md`). |
+| `../skills/proof/scripts/check_page.py` | The checker. The skill also runs it on its own output before delivering (Step 4.7 of `SKILL.md`). |
 
 ## Run
 
@@ -34,7 +34,7 @@ Each run writes to `evals/runs/<timestamp>-<model>/` (git-ignored): a `summary.m
 ## When to run
 
 - **Any change** to `SKILL.md`, a page or section skill, or a style file → smoke set.
-- **After editing a style file** → `python3 skills/product-design/scripts/check_page.py --selftest` first. It confirms the values the checker expects still appear in the style files, and that the section names match `SKILL.md`.
+- **After editing a style file** → `python3 skills/proof/scripts/check_page.py --selftest` first. It confirms the values the checker expects still appear in the style files, and that the section names match `SKILL.md`.
 - **Any change that affects how pages look** (style files, `shared/` craft files, hero or section layouts) → also the style matrix (cases 13–16) with `--judge opus`, and look at the screenshots yourself.
 - **Before a release** → full set, then the same set on smaller models to see where quality drops.
 - **Fixing a reported bad output** → first add a case that reproduces it and fails, then fix the skill, then confirm the case passes. Every fixed bug becomes a permanent test.

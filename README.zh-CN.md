@@ -1,10 +1,10 @@
 [English](README.md) | [中文](README.zh-CN.md)
 
-# Product Design
+# Proof
 
-![Product Design](docs/images/cover.png)
+![Proof — 产品设计技能](docs/images/cover.png)
 
-### 把最佳实践写成代码
+### 一个产品设计技能
 
 [![Made for Claude Code](https://img.shields.io/badge/Made%20for-Claude%20Code-blueviolet?style=flat-square&logo=anthropic)](https://docs.anthropic.com/en/docs/claude-code)
 [![Made for Codex](https://img.shields.io/badge/Made%20for-Codex-000000?style=flat-square&logo=openai)](https://openai.com/index/introducing-codex/)
@@ -16,10 +16,10 @@
 
 **做出来的页面像真实上线的产品，不像 AI 生成的。所有做法都来自 400 多个真实产品页面。**
 
-Product Design 是一个技能，可以在 Claude Code 和 Codex 里用。告诉它你要哪个页面，它就做出一个完整的响应式页面：首屏有真实感的产品展示，有鲜明的视觉风格，动效展示的是产品在工作的样子。第一稿看上去就像一个已经上线的产品，不像 AI 模板。
+Proof 是一个产品设计技能，可以在 Claude Code 和 Codex 里用。告诉它你要哪个页面，它就做出一个完整的响应式页面：首屏有真实感的产品展示，有鲜明的视觉风格，动效展示的是产品在工作的样子。第一稿看上去就像一个已经上线的产品，不像 AI 模板。
 
 ```bash
-/product-design landing
+/proof landing
 ```
 
 
@@ -77,9 +77,13 @@ Minimal、Business、Colorful、Editorial 都是完整的设计系统，每种�
 
 ---
 
-## 为什么叫 Product Design
+## 为什么叫 Proof
 
-大多数设计技能只决定页面长什么样。这个技能按产品设计的五个层次来做，出自 Jesse James Garrett 的《用户体验要素》。
+在印刷里，proof（校样）是正式印刷前的第一份样张：已经足够接近成品，可以直接用，也是做最后调整的那一步。这个技能想做到的就是这样：第一稿就能用，你再花几分钟微调。proof 还有“证据”的意思，这个技能里的每一个做法，都来自真实上线的产品页面。
+
+### 产品设计的五个层次
+
+大多数设计技能只决定页面长什么样。Proof 按产品设计的五个层次来做，出自 Jesse James Garrett 的《用户体验要素》。
 
 | 层次 | 它决定什么 |
 | --- | --- |
@@ -103,16 +107,16 @@ Minimal、Business、Colorful、Editorial 都是完整的设计系统，每种�
 1. 克隆仓库：
 
    ```bash
-   git clone https://github.com/senlindesign/product-design.git
+   git clone https://github.com/senlindesign/proof.git
    ```
 
 2. 把技能文件夹复制到你的技能目录：
 
    ```bash
-   cp -R product-design/skills/product-design ~/.claude/skills/
+   cp -R proof/skills/proof ~/.claude/skills/
    ```
 
-3. 在任意项目里输入 `/product-design`。
+3. 在任意项目里输入 `/proof`。
 
 ### Claude Code 插件
 
@@ -121,29 +125,29 @@ Minimal、Business、Colorful、Editorial 都是完整的设计系统，每种�
 1. 添加 marketplace，再安装插件：
 
    ```bash
-   /plugin marketplace add senlindesign/product-design
-   /plugin install product-design@product-design
+   /plugin marketplace add senlindesign/proof
+   /plugin install proof@proof
    ```
 
-2. 输入 `/product-design:product-design`。Claude Code 会在插件技能前面加上插件名。
+2. 输入 `/proof:proof`。Claude Code 会在插件技能前面加上插件名。
 
 ### Codex
 
 1. 克隆仓库：
 
    ```bash
-   git clone https://github.com/senlindesign/product-design.git
+   git clone https://github.com/senlindesign/proof.git
    ```
 
 2. 把技能文件夹复制到 Codex 的技能目录：
 
    ```bash
-   cp -R product-design/skills/product-design ~/.codex/skills/
+   cp -R proof/skills/proof ~/.codex/skills/
    ```
 
 ### 其他 Agent
 
-Cursor、Windsurf，或者其他能读文件的 Agent：让它读 `skills/product-design/SKILL.md`。
+Cursor、Windsurf，或者其他能读文件的 Agent：让它读 `skills/proof/SKILL.md`。
 
 这个技能不用构建，没有依赖。如果装了 Python 3，它交付前会检查每个页面。
 
@@ -153,14 +157,14 @@ Cursor、Windsurf，或者其他能读文件的 Agent：让它读 `skills/produc
 
 | 你想要 | 输入 |
 | --- | --- |
-| 马上要一个落地页 | `/product-design landing` |
-| 指定风格和深浅色的页面 | `/product-design pricing editorial dark` |
-| 只要一个区块 | `/product-design hero colorful` |
-| 贴合你产品的页面 | `/product-design landing — Patchwork，给设计工作室用的共享灵感板` |
+| 马上要一个落地页 | `/proof landing` |
+| 指定风格和深浅色的页面 | `/proof pricing editorial dark` |
+| 只要一个区块 | `/proof hero colorful` |
+| 贴合你产品的页面 | `/proof landing — Patchwork，给设计工作室用的共享灵感板` |
 | 按你的用户来设计的页面 | 补充四件事：谁会来，要让他们做什么，他们担心什么，你有哪些真实素材。也可以直接贴 PRD 或品牌规范。 |
-| 用上你的品牌 | `/product-design landing business — 主色 #E4572E，标题字体 Manrope` |
-| 全部自己定 | `/product-design blog editorial dark — 用 archetype B，不要订阅区块，做成这个项目里的 Next.js 页面` |
-| 还没想好 | 只输入 `/product-design`。它会问一轮问题，然后做出页面。 |
+| 用上你的品牌 | `/proof landing business — 主色 #E4572E，标题字体 Manrope` |
+| 全部自己定 | `/proof blog editorial dark — 用 archetype B，不要订阅区块，做成这个项目里的 Next.js 页面` |
+| 还没想好 | 只输入 `/proof`。它会问一轮问题，然后做出页面。 |
 
 默认输出一个 HTML 文件，用浏览器打开就能看。如果你需要，它也可以按你项目的技术栈写代码。
 
@@ -214,7 +218,7 @@ Cursor、Windsurf，或者其他能读文件的 Agent：让它读 `skills/produc
 ## 仓库结构
 
 ```txt
-skills/product-design/     技能本体，安装的就是这个文件夹
+skills/proof/              技能本体，安装的就是这个文件夹
 ├── SKILL.md               入口
 ├── pages/                 8 种页面类型，各带一组知识文件
 ├── sections/              10 个区块

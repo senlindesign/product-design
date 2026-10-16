@@ -14,7 +14,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 CASES_FILE = REPO / "evals" / "evals.json"
-CHECKER = REPO / "skills" / "product-design" / "scripts" / "check_page.py"
+CHECKER = REPO / "skills" / "proof" / "scripts" / "check_page.py"
 
 PROMPT = """You audit a generated marketing page for invented facts.
 

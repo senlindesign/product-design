@@ -20,3 +20,6 @@ validation/
 
 # Python bytecode
 __pycache__/
+
+# Showcase pages (local)
+showcase/

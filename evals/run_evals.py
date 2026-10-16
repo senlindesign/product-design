@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the product-design golden test set through headless Claude Code, then check every page.
+"""Run the Proof golden test set through headless Claude Code, then check every page.
 
   python3 evals/run_evals.py                      # smoke set, default model
   python3 evals/run_evals.py --cases all          # full set
@@ -23,14 +23,14 @@ from datetime import datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-SKILL = REPO / "skills" / "product-design"
+SKILL = REPO / "skills" / "proof"
 CHECKER = SKILL / "scripts" / "check_page.py"
 CASES_FILE = REPO / "evals" / "evals.json"
 RUNS = REPO / "evals" / "runs"
 sys.path.insert(0, str(REPO / "evals"))
 from screens import audit_problems, desktop_audit, desktop_problems, mobile_audit  # noqa: E402
 
-PROMPT = """Use the product-design skill (invoke it with the Skill tool; its name is `product-design:product-design`) to handle the request below.
+PROMPT = """Use the Proof skill (invoke it with the Skill tool; its name is `proof:proof`) to handle the request below.
 
 This is a non-interactive evaluation run:
 - Never ask questions. Follow the route the skill prescribes for this request.
@@ -70,7 +70,7 @@ def generate(case, case_dir, model, timeout):
     case_dir.mkdir(parents=True, exist_ok=True)
     # Generate outside the repo: Claude Code treats files inside a --plugin-dir as protected and denies
     # writes there, so the page is written to a temp dir and copied into case_dir afterwards.
-    work = Path(tempfile.mkdtemp(prefix=f"pd-eval-{case['name']}-"))
+    work = Path(tempfile.mkdtemp(prefix=f"proof-eval-{case['name']}-"))
     cmd = ["claude", "-p", PROMPT.format(request=case["prompt"], page_path=work / "page.html"),
            "--plugin-dir", str(REPO), "--add-dir", str(SKILL),
            "--allowedTools", TOOLS, "--output-format", "stream-json", "--verbose"]

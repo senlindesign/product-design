@@ -1,10 +1,10 @@
 # Working on this repo
 
-Rules for anyone, human or agent, who changes the product-design skill. Each one comes from a mistake that reached a generated page at least once.
+Rules for anyone, human or agent, who changes the Proof skill. Each one comes from a mistake that reached a generated page at least once.
 
 ## What lives where
 
-- `skills/product-design/` is the skill: the only folder loaded at runtime and copied on install. Files in it must never reference anything outside it.
+- `skills/proof/` is the skill: the only folder loaded at runtime and copied on install. Files in it must never reference anything outside it.
   - `SKILL.md`: the entry point (routing, brief, Style precedence, design rules, QA report)
   - `pages/<type>/`: 8 page skills; `sections/<name>/`: 10 section skills
   - `shared/`: the four style files (`visual-style.md` = Minimal, `visual-style-{business,colorful,editorial}.md`) and the craft files (product visuals, signature moves, copy, atmosphere, motion)
@@ -41,7 +41,7 @@ A change is done when all of the following pass. Report each result; don't summa
 
 | Change touches | Required |
 | --- | --- |
-| Anything in `skills/` | `python3 skills/product-design/scripts/check_page.py --selftest` and the smoke set: `python3 evals/run_evals.py` |
+| Anything in `skills/` | `python3 skills/proof/scripts/check_page.py --selftest` and the smoke set: `python3 evals/run_evals.py` |
 | A style file, `shared/` craft files, or hero/section layouts | Also the style matrix with the screenshot judge: `python3 evals/run_evals.py --cases 13,14,15,16 --judge opus`. Open the desktop and mobile screenshots and look at them. |
 | A page skill | Also that page's cases in `evals.json`, including at least one non-Minimal style in dark mode |
 | A reported bad output | First add a case to `evals/evals.json` that reproduces it and fails, then fix, then show it passes |

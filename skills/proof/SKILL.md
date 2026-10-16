@@ -1,12 +1,14 @@
 ---
-name: product-design
-description: Design and build marketing website pages — landing page, homepage, pricing, about, contact, product/features, blog index, 404, downloads — or a single section (hero, features, social proof, CTA, FAQ, how it works, comparison table, contact form, navigation, footer). Decides page structure from a short brief (audience, goal, barriers, available evidence), then renders it in one of 4 visual styles (Minimal, Business, Colorful, Editorial), light or dark. Use when the user asks to design, build, mock up, or redesign a product website, marketing site, landing page, homepage, features page, or a section of one — including requests to make a page look less generic or less AI-generated.
+name: proof
+description: Proof — a product design skill. Design and build marketing website pages — landing page, homepage, pricing, about, contact, product/features, blog index, 404, downloads — or a single section (hero, features, social proof, CTA, FAQ, how it works, comparison table, contact form, navigation, footer). Decides page structure from a short brief (audience, goal, barriers, available evidence), then renders it in one of 4 visual styles (Minimal, Business, Colorful, Editorial), light or dark. Use when the user asks to design, build, mock up, or redesign a product website, marketing site, landing page, homepage, features page, or a section of one — including requests to make a page look less generic or less AI-generated.
 argument-hint: "[page-or-section] [minimal|business|colorful|editorial] [light|dark]"
 user-invocable: true
 allowed-tools: Read, Write, Edit, Glob, Bash(open:*), Bash(python3:*)
 ---
 
-# Product Design
+# Proof
+
+A product design skill. A *proof* is the first copy off the press: good enough to ship, then adjusted by hand.
 
 The goal: a first draft that looks like a shipped product page, not an AI template.
 
@@ -21,10 +23,10 @@ Scope: **marketing website pages** (8 page types, 10 standalone sections). Not a
 ## Quick Start
 
 ```
-/product-design                          → short design conversation, then a page
-/product-design landing                  → generates right away (Minimal, light)
-/product-design pricing editorial dark   → page type + style + theme
-/product-design hero colorful            → a single section
+/proof                          → short design conversation, then a page
+/proof landing                  → generates right away (Minimal, light)
+/proof pricing editorial dark   → page type + style + theme
+/proof hero colorful            → a single section
 ```
 
 Arguments can come in any order. Accepted values:
@@ -44,7 +46,7 @@ Never ask for more than the current level needs. Each level uses everything the 
 
 | Level | User gives | What happens |
 |---|---|---|
-| 0 | Just a page type (`/product-design landing`) | Page generated immediately with the default archetype, full sections, and tagged sample content |
+| 0 | Just a page type (`/proof landing`) | Page generated immediately with the default archetype, full sections, and tagged sample content |
 | 1 | A sentence about the product ("landing page for a scheduling tool for clinics") | Archetype, style, and copy inferred from it |
 | 2 | A brief — audience, goal, barriers, evidence, brand (or a pasted PRD / brand guideline) | Full structural decisions from the Step 2 signal table: sections added, skipped, reordered |
 | 3 | Expert controls (below) | Applied as given; the skill fills in everything else |

@@ -1,11 +1,11 @@
 {
-  "skill_name": "product-design",
+  "skill_name": "proof",
   "evals": [
     {
       "id": 1,
       "name": "landing-minimal-dark-developers",
       "smoke": false,
-      "prompt": "/product-design landing minimal dark\nPipewise — a data pipeline tool. Visitors are developers who already know the category and just want to try it. Goal: start a free trial. We have no customer quotes, logos, or usage numbers yet.",
+      "prompt": "/proof landing minimal dark\nPipewise — a data pipeline tool. Visitors are developers who already know the category and just want to try it. Goal: start a free trial. We have no customer quotes, logos, or usage numbers yet.",
       "expected_output": "A short developer-focused landing page in Minimal dark: hero with a product visual, features, a direct trial CTA. No testimonials, customer logos, or stats.",
       "files": [],
       "expectations": [
@@ -44,7 +44,7 @@
       "id": 2,
       "name": "landing-minimal-light-it-directors",
       "smoke": true,
-      "prompt": "/product-design landing minimal\nPipewise — a data pipeline tool. Visitors are IT directors who have never heard of this category and worry about security. Goal: book a demo. We have no customer testimonials yet.",
+      "prompt": "/proof landing minimal\nPipewise — a data pipeline tool. Visitors are IT directors who have never heard of this category and worry about security. Goal: book a demo. We have no customer testimonials yet.",
       "expected_output": "Same product as case 1, different visitors: the page explains the problem, shows how it works, addresses security, answers questions, and asks for a demo. No testimonials.",
       "files": [],
       "expectations": [
@@ -91,7 +91,7 @@
       "id": 3,
       "name": "pricing-business-dark-agency",
       "smoke": true,
-      "prompt": "/product-design pricing business dark\nIt's for Ledgerline, invoice automation for small creative agencies. Audience: agency owners, not finance people. Main barrier: they worry it'll be complicated to switch from spreadsheets. We have no customer testimonials yet. Plans: Starter $19/mo, Studio $49/mo, Agency $129/mo.",
+      "prompt": "/proof pricing business dark\nIt's for Ledgerline, invoice automation for small creative agencies. Audience: agency owners, not finance people. Main barrier: they worry it'll be complicated to switch from spreadsheets. We have no customer testimonials yet. Plans: Starter $19/mo, Studio $49/mo, Agency $129/mo.",
       "expected_output": "A Business-style dark pricing page with three tiers at the given prices, something that answers the switching worry, and no invented proof, annual discounts, or 'Most Popular' claims.",
       "files": [],
       "expectations": [
@@ -143,7 +143,7 @@
       "id": 4,
       "name": "blog-editorial-dark-expert",
       "smoke": false,
-      "prompt": "/product-design blog editorial dark\nBlog index for Fieldnotes, the research publication of a small applied-AI lab. Use archetype B (Editorial). No newsletter section. Six articles: \"Why retrieval beats fine-tuning for most teams\" (Research), \"Evaluating agents without a leaderboard\" (Research), \"What we got wrong about context windows\" (Essays), \"A field guide to prompt caching\" (Engineering), \"Notes from shipping a voice agent\" (Engineering), \"The case for boring infrastructure\" (Essays). Featured: the retrieval article.",
+      "prompt": "/proof blog editorial dark\nBlog index for Fieldnotes, the research publication of a small applied-AI lab. Use archetype B (Editorial). No newsletter section. Six articles: \"Why retrieval beats fine-tuning for most teams\" (Research), \"Evaluating agents without a leaderboard\" (Research), \"What we got wrong about context windows\" (Essays), \"A field guide to prompt caching\" (Engineering), \"Notes from shipping a voice agent\" (Engineering), \"The case for boring infrastructure\" (Essays). Featured: the retrieval article.",
       "expected_output": "An Editorial dark blog index in archetype B: the retrieval article featured, the other five in a mixed grid, category filters, no newsletter, no pagination for six articles.",
       "files": [],
       "expectations": [
@@ -181,7 +181,7 @@
       "id": 5,
       "name": "landing-colorful-dark-oneliner",
       "smoke": false,
-      "prompt": "/product-design landing colorful dark\nPatchwork — a shared moodboard app for small design studios.",
+      "prompt": "/proof landing colorful dark\nPatchwork — a shared moodboard app for small design studios.",
       "expected_output": "A Colorful dark landing page built from one sentence: no questions asked, a creative-tool layout, copy inferred from the sentence, missing proof filled with tagged sample content, nothing presented as a real fact.",
       "files": [],
       "expectations": [
@@ -228,7 +228,7 @@
       "id": 6,
       "name": "about-editorial-light-bare",
       "smoke": false,
-      "prompt": "/product-design about editorial",
+      "prompt": "/proof about editorial",
       "expected_output": "An Editorial About page generated with no information at all: default archetype, missing material filled with finished-looking sample content tagged data-sample and listed in the QA report.",
       "files": [],
       "expectations": [
@@ -269,7 +269,7 @@
       "id": 7,
       "name": "hero-business-section",
       "smoke": true,
-      "prompt": "/product-design hero business\nFor Relay, a shared inbox for customer-support teams of 5–50 people.",
+      "prompt": "/proof hero business\nFor Relay, a shared inbox for customer-support teams of 5–50 people.",
       "expected_output": "Just a hero section in Business style, standalone: no nav or footer, a product visual of a shared inbox, no customer logos.",
       "files": [],
       "expectations": [
@@ -301,7 +301,7 @@
       "id": 8,
       "name": "contact-business-light-sales",
       "smoke": false,
-      "prompt": "/product-design contact business\nNorthwind CRM. Most people who contact us want a sales demo; support questions go to our help center. Sales email: sales@northwind.example",
+      "prompt": "/proof contact business\nNorthwind CRM. Most people who contact us want a sales demo; support questions go to our help center. Sales email: sales@northwind.example",
       "expected_output": "A Business contact page leaning toward sales: a demo-request form, the sales email, a route to the help center for support, no invented office addresses or phone numbers.",
       "files": [],
       "expectations": [
@@ -341,7 +341,7 @@
       "id": 9,
       "name": "product-colorful-light-integrations",
       "smoke": false,
-      "prompt": "/product-design product colorful\nLoomcast — async video messages for remote teams. Capabilities: screen and camera recording, automatic transcripts, threaded replies, viewer analytics. Integrates with Slack, Notion, Linear, and Google Drive. Audience: team leads evaluating tools for a 20–200 person company. No customer logos or quotes we can use yet.",
+      "prompt": "/proof product colorful\nLoomcast — async video messages for remote teams. Capabilities: screen and camera recording, automatic transcripts, threaded replies, viewer analytics. Integrates with Slack, Notion, Linear, and Google Drive. Audience: team leads evaluating tools for a 20–200 person company. No customer logos or quotes we can use yet.",
       "expected_output": "A Colorful product page: the four capabilities shown in depth, an integrations section naming the four tools, a CTA, no invented customers.",
       "files": [],
       "expectations": [
@@ -391,7 +391,7 @@
       "id": 10,
       "name": "404-minimal-dark-bare",
       "smoke": true,
-      "prompt": "/product-design 404 minimal dark",
+      "prompt": "/proof 404 minimal dark",
       "expected_output": "A Minimal dark 404 page with the site nav kept, a clear message, and a way back. Nothing else.",
       "files": [],
       "expectations": [
@@ -425,7 +425,7 @@
       "id": 11,
       "name": "downloads-editorial-light-cli",
       "smoke": false,
-      "prompt": "/product-design downloads editorial\nTermite — an open-source terminal multiplexer. Install with `brew install termite` or `cargo install termite`. Binaries for macOS (Apple Silicon and Intel) and Linux. Audience: developers.",
+      "prompt": "/proof downloads editorial\nTermite — an open-source terminal multiplexer. Install with `brew install termite` or `cargo install termite`. Binaries for macOS (Apple Silicon and Intel) and Linux. Audience: developers.",
       "expected_output": "An Editorial downloads page for a developer tool: install commands with copy buttons, macOS and Linux binaries, no invented version numbers or file sizes.",
       "files": [],
       "expectations": [
@@ -472,7 +472,7 @@
       "id": 12,
       "name": "landing-business-light-brand",
       "smoke": false,
-      "prompt": "/product-design landing business — accent #E4572E, display font Manrope.\nBrightline — payroll for restaurants with hourly staff.",
+      "prompt": "/proof landing business — accent #E4572E, display font Manrope.\nBrightline — payroll for restaurants with hourly staff.",
       "expected_output": "A Business landing page carrying the user's brand: accent #E4572E and Manrope as the display font, everything else from Business.",
       "files": [],
       "expectations": [
@@ -507,7 +507,7 @@
       "id": 13,
       "name": "style-matrix-minimal",
       "smoke": false,
-      "prompt": "/product-design landing minimal\nRelay — a shared inbox for customer-support teams of 5–50 people.",
+      "prompt": "/proof landing minimal\nRelay — a shared inbox for customer-support teams of 5–50 people.",
       "expected_output": "A minimal landing page for the same brief as the other style-matrix cases; it must look unmistakably like the minimal style (hero showcase, signature details, motion personality).",
       "files": [],
       "expectations": [
@@ -534,7 +534,7 @@
       "id": 14,
       "name": "style-matrix-business",
       "smoke": false,
-      "prompt": "/product-design landing business\nRelay — a shared inbox for customer-support teams of 5–50 people.",
+      "prompt": "/proof landing business\nRelay — a shared inbox for customer-support teams of 5–50 people.",
       "expected_output": "A business landing page for the same brief as the other style-matrix cases; it must look unmistakably like the business style (hero showcase, signature details, motion personality).",
       "files": [],
       "expectations": [
@@ -561,7 +561,7 @@
       "id": 15,
       "name": "style-matrix-colorful",
       "smoke": false,
-      "prompt": "/product-design landing colorful\nRelay — a shared inbox for customer-support teams of 5–50 people.",
+      "prompt": "/proof landing colorful\nRelay — a shared inbox for customer-support teams of 5–50 people.",
       "expected_output": "A colorful landing page for the same brief as the other style-matrix cases; it must look unmistakably like the colorful style (hero showcase, signature details, motion personality).",
       "files": [],
       "expectations": [
@@ -588,7 +588,7 @@
       "id": 16,
       "name": "style-matrix-editorial",
       "smoke": false,
-      "prompt": "/product-design landing editorial\nRelay — a shared inbox for customer-support teams of 5–50 people.",
+      "prompt": "/proof landing editorial\nRelay — a shared inbox for customer-support teams of 5–50 people.",
       "expected_output": "A editorial landing page for the same brief as the other style-matrix cases; it must look unmistakably like the editorial style (hero showcase, signature details, motion personality).",
       "files": [],
       "expectations": [
@@ -615,7 +615,7 @@
       "id": 17,
       "name": "pricing-colorful-light-binary",
       "smoke": false,
-      "prompt": "/product-design pricing colorful\nPebble — a habit tracker for people who want to build one small habit at a time. Two plans: Free ($0) and Plus ($6/mo). Plus adds unlimited habits, reminders and a yearly review.",
+      "prompt": "/proof pricing colorful\nPebble — a habit tracker for people who want to build one small habit at a time. Two plans: Free ($0) and Plus ($6/mo). Plus adds unlimited habits, reminders and a yearly review.",
       "expected_output": "A Colorful light pricing page with two plans at the given prices, in the Colorful style's own character, with no invented discounts or 'Most Popular' label.",
       "files": [],
       "expectations": [
@@ -657,7 +657,7 @@
       "id": 18,
       "name": "about-business-light-team",
       "smoke": false,
-      "prompt": "/product-design about business\nHarbor makes payroll software for restaurants. Founded in 2019 in Lisbon. Mission: paying hourly staff should be as simple as closing the till. Team: Ana Duarte (CEO), Miguel Reis (CTO), Joana Lima (Head of Customer Success). We don't publish any company numbers.",
+      "prompt": "/proof about business\nHarbor makes payroll software for restaurants. Founded in 2019 in Lisbon. Mission: paying hourly staff should be as simple as closing the till. Team: Ana Duarte (CEO), Miguel Reis (CTO), Joana Lima (Head of Customer Success). We don't publish any company numbers.",
       "expected_output": "A Business light About page that tells Harbor's story with the given team and mission, in the Business style's own character, with no stats section.",
       "files": [],
       "expectations": [
@@ -703,7 +703,7 @@
       "id": 19,
       "name": "blog-minimal-dark-list",
       "smoke": false,
-      "prompt": "/product-design blog minimal dark\nPatchbay's engineering blog. Articles: \"Why we moved our queue to Postgres\" (Infrastructure), \"Debugging a 3 a.m. memory leak\" (Debugging), \"How we test database migrations\" (Infrastructure), \"Writing error messages people can act on\" (Product), \"Our on-call handbook, published\" (Culture).",
+      "prompt": "/proof blog minimal dark\nPatchbay's engineering blog. Articles: \"Why we moved our queue to Postgres\" (Infrastructure), \"Debugging a 3 a.m. memory leak\" (Debugging), \"How we test database migrations\" (Infrastructure), \"Writing error messages people can act on\" (Product), \"Our on-call handbook, published\" (Culture).",
       "expected_output": "A Minimal dark blog index listing exactly the five given articles, with the Minimal style's own character in the header, and no pagination.",
       "files": [],
       "expectations": [
