@@ -6,6 +6,7 @@
 
 ### 一个产品设计技能
 
+[![Website](https://img.shields.io/badge/Website-proofdesign.pages.dev-1F5EFF?style=flat-square)](https://proofdesign.pages.dev)
 [![Made for Claude Code](https://img.shields.io/badge/Made%20for-Claude%20Code-blueviolet?style=flat-square&logo=anthropic)](https://docs.anthropic.com/en/docs/claude-code)
 [![Made for Codex](https://img.shields.io/badge/Made%20for-Codex-000000?style=flat-square&logo=openai)](https://openai.com/index/introducing-codex/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
@@ -17,6 +18,8 @@
 **做出来的页面像真实上线的产品，不像 AI 生成的。所有做法都来自 400 多个真实产品页面。**
 
 Proof 是一个产品设计技能，可以在 Claude Code 和 Codex 里用。告诉它你要哪个页面，它就做出一个完整的响应式页面：首屏有真实感的产品展示，有鲜明的视觉风格，动效展示的是产品在工作的样子。第一稿看上去就像一个已经上线的产品，不像 AI 模板。
+
+**在线看效果 → [proofdesign.pages.dev](https://proofdesign.pages.dev)**：四种风格、九种页面配置、十类区块，每一个都是这个技能真实生成的页面，点开就能滚动、悬停、随手点点。
 
 ```bash
 /proof landing
@@ -58,13 +61,13 @@ Minimal、Business、Colorful、Editorial 都是完整的设计系统，每种�
 
 ## 风格
 
-*同一个需求（"Relay，给客服团队用的共享收件箱"）在四种风格下的首屏：*
+*同一个需求（"Relay，给客服团队用的共享收件箱"）在四种风格下的首屏（点图片可以打开在线页面）：*
 
 | Minimal | Business |
 | --- | --- |
-| ![Minimal](docs/images/style-minimal.png) | ![Business](docs/images/style-business.png) |
+| [![Minimal](docs/images/style-minimal.png)](https://proofdesign.pages.dev/style-minimal-relay) | [![Business](docs/images/style-business.png)](https://proofdesign.pages.dev/style-business-relay) |
 | **Colorful** | **Editorial** |
-| ![Colorful](docs/images/style-colorful.png) | ![Editorial](docs/images/style-editorial.png) |
+| [![Colorful](docs/images/style-colorful.png)](https://proofdesign.pages.dev/style-colorful-relay) | [![Editorial](docs/images/style-editorial.png)](https://proofdesign.pages.dev/style-editorial-relay) |
 
 | 风格 | 性格 | 招牌首屏 |
 | --- | --- | --- |
