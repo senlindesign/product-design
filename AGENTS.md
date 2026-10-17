@@ -15,7 +15,7 @@ Rules for anyone, human or agent, who changes the Proof skill. Each one comes fr
 Published files are only: `skills/`, `README*.md`, `LICENSE`, `AGENTS.md`, `.claude-plugin/`, `docs/images/`, `evals/` (scripts and cases). The maintainer keeps research notes, validation pages and internal docs locally; `.gitignore` excludes them (`CLAUDE.md`, `docs/*.md`, `research/`, `validation/`). Never commit those paths, and never link to them from published files. Before committing, run:
 
 ```bash
-grep -rnE "research/|validation/|docs/[A-Za-z-]+\.md|CLAUDE\.md" skills README*.md evals .claude-plugin
+git ls-files skills README.md README.zh-CN.md evals .claude-plugin | xargs grep -nE "research/|validation/|docs/[A-Za-z-]+\.md|CLAUDE\.md"
 ```
 
 The only acceptable hits are lines that explain the split, like this one.
