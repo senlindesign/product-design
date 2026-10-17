@@ -134,6 +134,16 @@ The plugin version updates with `/plugin update`.
 
 2. Type `/proof:proof`. Claude Code puts the plugin name before each plugin skill.
 
+### skills.sh
+
+One command with the [skills](https://skills.sh) CLI; it asks which agent to install to.
+
+```bash
+npx skills add senlindesign/proof
+```
+
+Then type `/proof` in your agent.
+
 ### Codex
 
 1. Clone the repository:

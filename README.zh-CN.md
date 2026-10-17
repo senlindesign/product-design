@@ -134,6 +134,16 @@ Minimal、Business、Colorful、Editorial 都是完整的设计系统，每种�
 
 2. 输入 `/proof:proof`。Claude Code 会在插件技能前面加上插件名。
 
+### skills.sh
+
+用 [skills](https://skills.sh) 命令行一行装好，它会问你装到哪个 Agent：
+
+```bash
+npx skills add senlindesign/proof
+```
+
+装好后在 Agent 里输入 `/proof`。
+
 ### Codex
 
 1. 克隆仓库：
