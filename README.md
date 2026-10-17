@@ -86,11 +86,11 @@ In printing, a *proof* is the first copy off the press: close enough to the fina
 
 ### Five layers of product design
 
-Most design skills decide only how a page looks. Proof works through all five layers of product design, from Jesse James Garrett's *The Elements of User Experience*.
+Most design skills decide only how a page looks. Proof also decides the layers underneath — what goes on the page and in what order — because it learned them from 400+ shipped product pages, patterns the market has already tested. The layers come from Jesse James Garrett's *The Elements of User Experience*.
 
 | Layer | What the skill decides |
 | --- | --- |
-| **Strategy** | Who the page is for, and what the page must get them to do |
+| **Strategy** *(inferred)* | Who the page is for, and what it must get them to do — read from your brief and matched to pages that already work. Proof does not do your strategy for you. |
 | **Scope** | Which sections to include, and which sections to omit |
 | **Structure** | The order of the sections, and how their layouts alternate |
 | **Skeleton** | The layout in each section |
